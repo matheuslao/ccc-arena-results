@@ -1,0 +1,6 @@
+{
+  "bestN": { "fraction": 0.75, "rounding": "ceil" },
+  "eligibility": { "minParticipationFraction": 0.5 },
+  "minTournamentsForChampion": 3,
+  "tieBreak": ["firstPlaces", "bestSingleScore", "tournamentsPlayed"]
+}
