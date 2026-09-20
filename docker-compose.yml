@@ -1,0 +1,17 @@
+x-service: &service
+  build: .
+  image: ccc-arena-results:local
+  working_dir: /app
+  volumes:
+    - ./src:/app/src
+    - ./tests:/app/tests
+    - ./config:/app/config
+
+services:
+  cli:
+    <<: *service
+    command: ["ccc-arena", "config", "check"]
+
+  test:
+    <<: *service
+    command: ["pytest", "-q"]

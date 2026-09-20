@@ -1,0 +1,78 @@
+# Arena dos Cavaleiros — Resultados
+
+Sistematiza o acompanhamento da **Arena dos Cavaleiros**, o torneio semanal (domingo, 19h) da comunidade **Cavaleiros do Centro** no Lichess: coleta o resultado de cada edição, arquiva e deriva o Ranking da Temporada e dos Recortes (mês e semestre), numa página pública.
+
+## Por que existe
+
+Cada domingo gera uma classificação que fica isolada dentro do próprio torneio. Responder "quem está ganhando a temporada?" exige abrir torneio por torneio e somar na mão — e ainda decidir sozinho como comparar quem jogou doze domingos com quem jogou quatro. Sem histórico consolidado e sem regra explícita, não há como premiar os primeiros colocados com justiça, transparência e reprodutibilidade.
+
+## Como funciona
+
+O Python é o motor inteiro, rodando como **CLI** — não há servidor, banco de dados nem login (ver [ADR-0003](docs/adr/0003-sem-backend-no-mvp.md)).
+
+1. **Coleta** — descobre os Torneios Válidos pela API do Lichess.
+2. **Arquiva** — grava a Classificação final e os PGN no repositório.
+3. **Deriva** — calcula o Ranking da Temporada, dos meses e dos semestres.
+4. **Publica** — gera uma página estática a partir dos dados derivados.
+
+O Lichess é a nascente; **este repositório é a fonte da verdade** (ver [ADR-0001](docs/adr/0001-arquivo-canonico-no-repositorio.md)).
+
+## Estado atual
+
+| Parte | Situação |
+| --- | --- |
+| Validação de configuração (`ccc-arena config check`) | pronto |
+| Coleta e arquivamento | em desenvolvimento |
+| Ranking — Temporada, Recortes e Aliases | planejado |
+| Site estático | planejado |
+| Automação semanal | planejado |
+
+## Como rodar
+
+Tudo roda em Docker.
+
+```bash
+make build   # constrói a imagem
+make check   # valida os arquivos de configuração
+make test    # roda a suíte de testes
+make shell   # abre um shell no container
+```
+
+Sem o `make`:
+
+```bash
+docker compose run --rm cli    # ccc-arena config check
+docker compose run --rm test   # pytest
+```
+
+## As regras do Ranking
+
+- Só entram **Torneios Válidos**: arena do time, restrita a membros, com 1 hora de duração e nome no padrão "Arena dos Cavaleiros".
+- **Melhores N**: conta apenas os melhores 75% dos Resultados do período.
+- **Elegibilidade a prêmio**: presença em pelo menos 50% dos Torneios Válidos do período.
+- **Recorte com menos de 3 torneios** não elege campeão.
+- Desempate: mais primeiros lugares → melhor Resultado individual → mais torneios jogados.
+
+Todos esses valores são **configuração, não código** — veja [`config/`](config/).
+
+## Estrutura
+
+```
+config/                 as regras, como dado
+src/ccc_arena_results/  o motor (CLI)
+tests/                  a suíte de testes
+docs/adr/               decisões de arquitetura
+```
+
+## Documentação
+
+- [`CONTEXT.md`](CONTEXT.md) — o glossário do domínio. Todo mundo usa esses termos.
+- [`docs/adr/`](docs/adr/) — as decisões que não são óbvias pelo código.
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — como contribuir.
+- [`CHANGELOG.md`](CHANGELOG.md) — o que mudou.
+
+## Licença
+
+[MIT](LICENSE) — use, copie e modifique à vontade.
+
+Ao participar, você concorda com o [Código de Conduta](CODE_OF_CONDUCT.md).
