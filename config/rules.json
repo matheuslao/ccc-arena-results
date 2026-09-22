@@ -1,7 +1,7 @@
 {
   "team": "cavaleiros-do-centro",
   "namePattern": "^Arena dos Cavaleiros",
-  "editionPattern": "(\\d+)\\s*[aª]?\\s*(?:ed|edição)",
+  "editionPattern": "(?i)(\\d+)\\s*[aª]?\\s*(?:ed|edição)",
   "minutes": 60,
   "requireMembersOnly": true,
   "allowedVariants": ["standard"],

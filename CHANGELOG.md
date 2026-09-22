@@ -9,11 +9,21 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 ### Adicionado
 
 - Pacote Python instalável, com o comando de linha de comando `ccc-arena`.
+- Descoberta e classificação de candidatos a Torneio Válido (`ccc-arena discover`), varrendo as arenas do time e as arenas criadas pelos organizadores configurados.
+- Porta única de acesso ao Lichess, com adaptador HTTP de produção (uma requisição por vez e recuo exponencial em `429`) e adaptador de fixtures gravadas da API real nos testes.
+- Classificação pura de Torneio Válido, com as oito checagens do spec e a evidência das que passaram e falharam.
+- Arquivamento dos Torneios Válidos (`ccc-arena collect`): Classificação final, PGN e metadados no arquivo canônico do [ADR-0001](docs/adr/0001-arquivo-canonico-no-repositorio.md), com a contagem de partidas derivada do `sheet`.
+- Relatório de pendências versionado (`archive/pendencias.json`): candidatos que falham checagens, Torneios Válidos fora de Temporada e anomalias de Edição.
+- Janela de Temporada no fuso de referência (módulo `season`), com o início e o fim inclusivos.
 - Validação dos quatro arquivos de configuração, acumulando todos os problemas e apontando o arquivo e o campo de cada um.
 - Arquivos de configuração com os padrões da Temporada 2026: fuso `America/Sao_Paulo`, time `cavaleiros-do-centro`, melhores 75%, presença mínima de 50% e mínimo de 3 torneios para eleger campeão.
-- Ambiente reprodutível em Docker, com `Dockerfile`, `docker-compose.yml` e alvos `make` para `build`, `check`, `test` e `shell`.
+- Ambiente reprodutível em Docker, com `Dockerfile`, `docker-compose.yml` e alvos `make` para `build`, `check`, `collect`, `test` e `shell`.
 - Suíte de testes do validador de configuração.
 - Licença MIT e Código de Conduta.
+
+### Corrigido
+
+- O `editionPattern` padrão passou a ignorar caixa, para reconhecer os nomes reais das edições antigas ("Ed", "ed", "Edição") e não só os novos.
 
 ### Notas
 

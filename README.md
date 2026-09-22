@@ -22,7 +22,8 @@ O Lichess é a nascente; **este repositório é a fonte da verdade** (ver [ADR-0
 | Parte | Situação |
 | --- | --- |
 | Validação de configuração (`ccc-arena config check`) | pronto |
-| Coleta e arquivamento | em desenvolvimento |
+| Descoberta e classificação de candidatos (`ccc-arena discover`) | pronto |
+| Arquivamento dos Torneios Válidos (`ccc-arena collect`) | pronto |
 | Ranking — Temporada, Recortes e Aliases | planejado |
 | Site estático | planejado |
 | Automação semanal | planejado |
@@ -32,17 +33,20 @@ O Lichess é a nascente; **este repositório é a fonte da verdade** (ver [ADR-0
 Tudo roda em Docker.
 
 ```bash
-make build   # constrói a imagem
-make check   # valida os arquivos de configuração
-make test    # roda a suíte de testes
-make shell   # abre um shell no container
+make build    # constrói a imagem
+make check    # valida os arquivos de configuração
+make collect  # arquiva os Torneios Válidos ainda não arquivados
+make test     # roda a suíte de testes
+make shell    # abre um shell no container
 ```
 
 Sem o `make`:
 
 ```bash
-docker compose run --rm cli    # ccc-arena config check
-docker compose run --rm test   # pytest
+docker compose run --rm cli                       # ccc-arena config check
+docker compose run --rm cli ccc-arena discover    # candidatos a Torneio Válido (usa a API do Lichess)
+docker compose run --rm cli ccc-arena collect     # arquiva os Torneios Válidos em ./archive
+docker compose run --rm test                      # pytest
 ```
 
 ## As regras do Ranking

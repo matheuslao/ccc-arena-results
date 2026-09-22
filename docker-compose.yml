@@ -6,6 +6,7 @@ x-service: &service
     - ./src:/app/src
     - ./tests:/app/tests
     - ./config:/app/config
+    - ./archive:/app/archive
 
 services:
   cli:
