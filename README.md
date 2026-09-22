@@ -26,7 +26,8 @@ O Lichess é a nascente; **este repositório é a fonte da verdade** (ver [ADR-0
 | Arquivamento dos Torneios Válidos (`ccc-arena collect`) | pronto |
 | Atualização e correções de escopo (`ccc-arena refresh`/`refresh-all`) | pronto |
 | Ranking da Temporada (`ccc-arena rank`) | pronto |
-| Ranking — Recortes (mês e semestre) e Aliases | planejado |
+| Ranking — Recortes (mês e semestre) | pronto |
+| Aliases no Ranking | planejado |
 | Site estático | planejado |
 | Automação semanal | planejado |
 
@@ -50,6 +51,7 @@ docker compose run --rm cli ccc-arena discover    # candidatos a Torneio Válido
 docker compose run --rm cli ccc-arena collect     # arquiva os Torneios Válidos em ./archive
 docker compose run --rm cli ccc-arena refresh-all # rebaixa os torneios arquivados
 docker compose run --rm cli ccc-arena rank        # Ranking da Temporada
+docker compose run --rm cli ccc-arena rank --month 2026-09   # Ranking de um Recorte
 docker compose run --rm test                      # pytest
 ```
 

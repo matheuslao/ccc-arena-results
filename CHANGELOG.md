@@ -17,6 +17,7 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 - Correções manuais de escopo: `exclude` tira um torneio que casaria com as regras; `include` arquiva um que falharia, marcando `validation.override`.
 - Atualização explícita (`ccc-arena refresh <id>` e `ccc-arena refresh-all`): rebaixa e reescreve torneios arquivados; sem pedido explícito, a coleta de rotina não altera o que já existe.
 - Ranking da Temporada (`ccc-arena rank`): soma dos melhores N proporcionais, elegibilidade por presença e os três desempates na ordem, com os valores que tornam a ordem explicável.
+- Recortes de mês e semestre (`ccc-arena rank --month`/`--semester`), recortados pela janela da Temporada e ancorados no fuso de referência.
 - Janela de Temporada no fuso de referência (módulo `season`), com o início e o fim inclusivos.
 - Validação dos quatro arquivos de configuração, acumulando todos os problemas e apontando o arquivo e o campo de cada um.
 - Arquivos de configuração com os padrões da Temporada 2026: fuso `America/Sao_Paulo`, time `cavaleiros-do-centro`, melhores 75%, presença mínima de 50% e mínimo de 3 torneios para eleger campeão.

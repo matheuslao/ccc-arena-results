@@ -10,22 +10,19 @@ melhor Resultado individual), para a página mostrar o porquê, não só o núme
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from math import ceil, floor
 from typing import Any
 
 from .archive import ArchivedStanding, ArchivedTournament
-from .config import Config, Season
-from .season import local_date
+from .config import Config
+from .season import Scope, local_date
 
 __all__ = [
     "BreakdownEntry",
     "Ranking",
     "RankingRow",
-    "Scope",
     "build",
-    "resolve_season",
-    "season_scope",
 ]
 
 _ROUNDINGS = {"ceil": ceil, "floor": floor, "round": round}
@@ -35,17 +32,6 @@ _TIE_ATTRIBUTES = {
     "bestSingleScore": "best_single_score",
     "tournamentsPlayed": "played",
 }
-
-
-@dataclass(frozen=True)
-class Scope:
-    """A janela sobre a qual o Ranking é calculado."""
-
-    kind: str
-    value: str
-    season: str
-    starts_at: date
-    ends_at: date
 
 
 @dataclass(frozen=True)
@@ -138,31 +124,6 @@ class Ranking:
             if row.eligible:
                 return row
         return None
-
-
-def resolve_season(config: Config, label: str | None) -> Season:
-    """A Temporada pedida; sem rótulo, a única configurada."""
-    seasons = config.seasons.seasons
-    if label is None:
-        if len(seasons) == 1:
-            return seasons[0]
-        labels = ", ".join(season.label for season in seasons)
-        raise ValueError(f"mais de uma Temporada configurada; use --season ({labels})")
-    for season in seasons:
-        if season.label == label:
-            return season
-    raise ValueError(f"Temporada desconhecida: {label}")
-
-
-def season_scope(season: Season) -> Scope:
-    """A janela de uma Temporada."""
-    return Scope(
-        kind="season",
-        value=season.label,
-        season=season.label,
-        starts_at=season.starts_at,
-        ends_at=season.ends_at,
-    )
 
 
 def build(

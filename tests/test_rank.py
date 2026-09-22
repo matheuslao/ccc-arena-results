@@ -12,7 +12,13 @@ import ccc_arena_results.cli as cli
 from ccc_arena_results.archive import ArchivedStanding, ArchivedTournament, read_tournaments
 from ccc_arena_results.config import Config, Season, SeasonsConfig, load
 from ccc_arena_results.ingest import collect
-from ccc_arena_results.rank import build, resolve_season, season_scope
+from ccc_arena_results.rank import build
+from ccc_arena_results.season import (
+    month_scope,
+    resolve_season,
+    scope_for,
+    semester_scope,
+)
 from lichess_fixtures import FIXTURES, FixtureLichess
 
 SHIPPED = Path(__file__).resolve().parents[1] / "config"
@@ -33,7 +39,7 @@ def test_ranking_da_temporada_ponta_a_ponta(tmp_path, config, client) -> None:
     collect(config, client, tmp_path, now=NOW)
     tournaments = tuple(read_tournaments(tmp_path).values())
 
-    ranking = build(config, tournaments, season_scope(resolve_season(config, None)), now=NOW)
+    ranking = build(config, tournaments, scope_for(config), now=NOW)
 
     assert ranking.tournaments_considered == 1
     assert ranking.best_n == 1
@@ -60,7 +66,7 @@ def test_empate_oficial_divide_a_posicao(tmp_path, config, client) -> None:
     collect(config, client, tmp_path, now=NOW)
     tournaments = tuple(read_tournaments(tmp_path).values())
 
-    ranking = build(config, tournaments, season_scope(resolve_season(config, None)), now=NOW)
+    ranking = build(config, tournaments, scope_for(config), now=NOW)
     ranks = {row.person: row.rank for row in ranking.rows}
 
     assert ranks["joabeuriel"] == ranks["joatan32"] == 4
@@ -71,7 +77,7 @@ def test_payload_do_ranking(tmp_path, config, client) -> None:
     tournaments = tuple(read_tournaments(tmp_path).values())
 
     payload = build(
-        config, tournaments, season_scope(resolve_season(config, None)), now=NOW
+        config, tournaments, scope_for(config), now=NOW
     ).to_payload()
 
     assert payload["season"] == "2026"
@@ -99,7 +105,7 @@ def test_melhores_n_e_desempates(config) -> None:
     scenario = _scenario_config(config)
     tournaments = _scenario_tournaments()
 
-    ranking = build(scenario, tournaments, season_scope(resolve_season(scenario, None)), now=NOW)
+    ranking = build(scenario, tournaments, scope_for(scenario), now=NOW)
 
     assert ranking.tournaments_considered == 4
     assert ranking.best_n == 2
@@ -124,7 +130,7 @@ def test_melhores_n_e_desempates(config) -> None:
 def test_campeao_exige_elegivel(config) -> None:
     scenario = _scenario_config(config)
 
-    ranking = build(scenario, _scenario_tournaments(), season_scope(resolve_season(scenario, None)), now=NOW)
+    ranking = build(scenario, _scenario_tournaments(), scope_for(scenario), now=NOW)
 
     assert ranking.champion_elected is True
     assert ranking.champion is not None
@@ -135,7 +141,7 @@ def test_campeao_nao_eleito_com_poucos_torneios(tmp_path, config, client) -> Non
     collect(config, client, tmp_path, now=NOW)
     tournaments = tuple(read_tournaments(tmp_path).values())
 
-    ranking = build(config, tournaments, season_scope(resolve_season(config, None)), now=NOW)
+    ranking = build(config, tournaments, scope_for(config), now=NOW)
 
     assert ranking.champion_elected is False
     assert ranking.champion is None
@@ -146,6 +152,47 @@ def test_resolve_season(config) -> None:
     assert resolve_season(config, "2026").label == "2026"
     with pytest.raises(ValueError):
         resolve_season(config, "9999")
+
+
+def test_mesmo_jogador_em_recortes_diferentes(config) -> None:
+    scenario = _scope_config(config)
+    tournaments = _scope_tournaments()
+    season = resolve_season(scenario, None)
+
+    september = build(scenario, tournaments, month_scope(season, "2026-09"), now=NOW)
+    october = build(scenario, tournaments, month_scope(season, "2026-10"), now=NOW)
+    semester = build(scenario, tournaments, semester_scope(season, "2026-H2"), now=NOW)
+
+    assert (september.tournaments_considered, september.best_n) == (3, 3)
+    assert (october.tournaments_considered, october.best_n) == (1, 1)
+    assert (semester.tournaments_considered, semester.best_n) == (5, 4)
+
+    assert september.champion_elected and september.champion.person == "A"
+    assert october.champion_elected is False
+    assert semester.champion_elected is True
+
+    assert _row(september, "A").counted == 3
+    assert _row(october, "A").counted == 1
+    assert _row(semester, "A").counted == 4
+
+
+def test_recorte_no_fuso_de_referencia_na_virada_do_ano(config) -> None:
+    season = Season(label="virada", starts_at=date(2026, 12, 1), ends_at=date(2027, 2, 28))
+    scenario = dataclasses.replace(
+        config,
+        seasons=SeasonsConfig(timezone="America/Sao_Paulo", seasons=[season]),
+    )
+    # 2027-01-01T02:00Z ainda é 2026-12-31 23:00 em São Paulo.
+    tournament = _tournament("NY", 1, [("A", 1, 5)], month=1)
+    tournament = dataclasses.replace(
+        tournament, starts_at=datetime(2027, 1, 1, 2, 0, tzinfo=timezone.utc)
+    )
+
+    december = build(scenario, (tournament,), month_scope(season, "2026-12"), now=NOW)
+    january = build(scenario, (tournament,), month_scope(season, "2027-01"), now=NOW)
+
+    assert december.tournaments_considered == 1
+    assert january.tournaments_considered == 0
 
 
 def test_cli_rank(tmp_path, monkeypatch, capsys) -> None:
@@ -161,6 +208,33 @@ def test_cli_rank(tmp_path, monkeypatch, capsys) -> None:
     assert "Temporada 2026" in out
     assert "melhores N = 1" in out
     assert "kleberbios" in out
+
+
+def test_cli_rank_de_um_mes(tmp_path, monkeypatch, capsys) -> None:
+    monkeypatch.setattr(cli, "HttpLichess", lambda: FixtureLichess(FIXTURES))
+    archive = tmp_path / "archive"
+    cli.main(["collect", "--config-dir", str(SHIPPED), "--archive-dir", str(archive)])
+    capsys.readouterr()
+
+    code = cli.main(
+        ["rank", "--month", "2026-09", "--config-dir", str(SHIPPED), "--archive-dir", str(archive)]
+    )
+    out = capsys.readouterr().out
+
+    assert code == 0
+    assert "Recorte 2026-09" in out
+    assert "2026-09-20 a 2026-09-30" in out
+
+
+def test_cli_rank_recusa_recorte_fora_da_temporada(tmp_path, monkeypatch, capsys) -> None:
+    monkeypatch.setattr(cli, "HttpLichess", lambda: FixtureLichess(FIXTURES))
+
+    code = cli.main(
+        ["rank", "--month", "2026-08", "--config-dir", str(SHIPPED), "--archive-dir", str(tmp_path)]
+    )
+
+    assert code == 1
+    assert "fora da Temporada" in capsys.readouterr().err
 
 
 def _row(ranking, person: str):
@@ -199,6 +273,24 @@ def _scenario_tournaments() -> tuple[ArchivedTournament, ...]:
         _tournament("T4", 27, [("A", 1, 1)]),
         _tournament("T5", 28, [("Excluido", 1, 99)]),
         _tournament("TOUT", 31, [("Zed", 1, 50)], month=8),
+    )
+
+
+def _scope_config(config: Config) -> Config:
+    seasons = SeasonsConfig(
+        timezone="America/Sao_Paulo",
+        seasons=[Season(label="h2", starts_at=date(2026, 7, 1), ends_at=date(2026, 12, 31))],
+    )
+    return dataclasses.replace(config, seasons=seasons)
+
+
+def _scope_tournaments() -> tuple[ArchivedTournament, ...]:
+    return (
+        _tournament("TJ", 5, [("A", 1, 10), ("B", 2, 5)], month=7),
+        _tournament("TS1", 6, [("A", 1, 8), ("C", 2, 4)]),
+        _tournament("TS2", 13, [("A", 1, 6), ("B", 2, 3)]),
+        _tournament("TS3", 20, [("A", 1, 4), ("C", 2, 2)]),
+        _tournament("TO", 4, [("A", 1, 2), ("B", 2, 1)], month=10),
     )
 
 

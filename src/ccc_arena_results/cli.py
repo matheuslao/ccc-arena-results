@@ -11,8 +11,9 @@ from .archive import read_tournaments
 from .config import Config, ConfigError, check, load
 from .ingest import Candidate, collect, discover, refresh, refresh_all
 from .lichess import HttpLichess
-from .rank import Ranking, build, resolve_season, season_scope
+from .rank import Ranking, build
 from .rules import EXCLUDE, INCLUDE
+from .season import scope_for
 
 DEFAULT_CONFIG_DIR = Path("config")
 DEFAULT_ARCHIVE_DIR = Path("archive")
@@ -98,12 +99,15 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     rank_command = commands.add_parser(
-        "rank", help="calcula e imprime o Ranking de uma Temporada"
+        "rank", help="calcula e imprime o Ranking de uma janela"
     )
-    rank_command.add_argument(
+    window = rank_command.add_mutually_exclusive_group()
+    window.add_argument(
         "--season",
         help="rótulo da Temporada (padrão: a única configurada)",
     )
+    window.add_argument("--month", help="Recorte de um mês (AAAA-MM)")
+    window.add_argument("--semester", help="Recorte de um semestre (AAAA-H1 ou AAAA-H2)")
     rank_command.add_argument(
         "--config-dir",
         type=Path,
@@ -180,12 +184,17 @@ def main(argv: list[str] | None = None) -> int:
         if config is None:
             return 1
         try:
-            season = resolve_season(config, args.season)
+            scope = scope_for(
+                config,
+                season_label=args.season,
+                month=args.month,
+                semester=args.semester,
+            )
         except ValueError as error:
             print(error, file=sys.stderr)
             return 1
         tournaments = tuple(read_tournaments(args.archive_dir).values())
-        ranking = build(config, tournaments, season_scope(season))
+        ranking = build(config, tournaments, scope)
         _print_ranking(ranking, config)
         return 0
 
@@ -226,9 +235,15 @@ def _print_candidates(candidates: list[Candidate]) -> None:
 
 
 def _print_ranking(ranking: Ranking, config: Config) -> None:
+    scope = ranking.scope
+    if scope.kind == "season":
+        title = f"Temporada {scope.value}"
+    else:
+        title = f"Recorte {scope.value} (Temporada {scope.season})"
+    print(f"{title} — {scope.starts_at} a {scope.ends_at}")
     print(
-        f"Temporada {ranking.season} — {ranking.tournaments_considered} torneio(s) "
-        f"considerado(s), melhores N = {ranking.best_n}"
+        f"{ranking.tournaments_considered} torneio(s) considerado(s), "
+        f"melhores N = {ranking.best_n}"
     )
     minimum = config.ranking.min_tournaments_for_champion
     champion = ranking.champion
