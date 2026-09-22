@@ -1,0 +1,246 @@
+"""Testes do Ranking da Temporada — melhores N, elegibilidade e desempates."""
+
+from __future__ import annotations
+
+import dataclasses
+from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
+
+import pytest
+
+import ccc_arena_results.cli as cli
+from ccc_arena_results.archive import ArchivedStanding, ArchivedTournament, read_tournaments
+from ccc_arena_results.config import Config, Season, SeasonsConfig, load
+from ccc_arena_results.ingest import collect
+from ccc_arena_results.rank import build, resolve_season, season_scope
+from lichess_fixtures import FIXTURES, FixtureLichess
+
+SHIPPED = Path(__file__).resolve().parents[1] / "config"
+NOW = datetime(2026, 9, 22, 12, 0, tzinfo=timezone.utc)
+
+
+@pytest.fixture
+def config() -> Config:
+    return load(SHIPPED)
+
+
+@pytest.fixture
+def client() -> FixtureLichess:
+    return FixtureLichess(FIXTURES)
+
+
+def test_ranking_da_temporada_ponta_a_ponta(tmp_path, config, client) -> None:
+    collect(config, client, tmp_path, now=NOW)
+    tournaments = tuple(read_tournaments(tmp_path).values())
+
+    ranking = build(config, tournaments, season_scope(resolve_season(config, None)), now=NOW)
+
+    assert ranking.tournaments_considered == 1
+    assert ranking.best_n == 1
+    assert not ranking.champion_elected
+    assert len(ranking.rows) == 12
+
+    leader = ranking.rows[0]
+    assert leader.person == "kleberbios"
+    assert leader.total == 19
+    assert leader.counted == 1
+    assert leader.played == 1
+    assert leader.participation == 1.0
+    assert leader.eligible is True
+    assert leader.first_places == 1
+    assert leader.best_single_score == 19
+    assert leader.breakdown[0].tournament_id == "BvMsByPD"
+    assert leader.breakdown[0].counted is True
+
+    # Um torneio fora da Temporada (15ª ed., 2026-09-13) não entra.
+    assert "Luffytaro" not in {row.person for row in ranking.rows}
+
+
+def test_empate_oficial_divide_a_posicao(tmp_path, config, client) -> None:
+    collect(config, client, tmp_path, now=NOW)
+    tournaments = tuple(read_tournaments(tmp_path).values())
+
+    ranking = build(config, tournaments, season_scope(resolve_season(config, None)), now=NOW)
+    ranks = {row.person: row.rank for row in ranking.rows}
+
+    assert ranks["joabeuriel"] == ranks["joatan32"] == 4
+
+
+def test_payload_do_ranking(tmp_path, config, client) -> None:
+    collect(config, client, tmp_path, now=NOW)
+    tournaments = tuple(read_tournaments(tmp_path).values())
+
+    payload = build(
+        config, tournaments, season_scope(resolve_season(config, None)), now=NOW
+    ).to_payload()
+
+    assert payload["season"] == "2026"
+    assert payload["scope"] == {"kind": "season", "value": "2026"}
+    assert payload["period"] == {"startsAt": "2026-09-20", "endsAt": "2026-12-31"}
+    assert payload["bestN"] == 1
+    assert payload["championElected"] is False
+    assert payload["generatedAt"] == "2026-09-22T12:00:00Z"
+    assert set(payload["rows"][0]) == {
+        "rank",
+        "person",
+        "usernames",
+        "total",
+        "counted",
+        "played",
+        "participation",
+        "eligible",
+        "firstPlaces",
+        "bestSingleScore",
+        "breakdown",
+    }
+
+
+def test_melhores_n_e_desempates(config) -> None:
+    scenario = _scenario_config(config)
+    tournaments = _scenario_tournaments()
+
+    ranking = build(scenario, tournaments, season_scope(resolve_season(scenario, None)), now=NOW)
+
+    assert ranking.tournaments_considered == 4
+    assert ranking.best_n == 2
+    assert [row.person for row in ranking.rows] == ["A", "D", "F", "G", "B", "C", "H", "I"]
+    assert [row.rank for row in ranking.rows] == [1, 2, 3, 4, 5, 6, 7, 7]
+
+    a = _row(ranking, "A")
+    assert (a.total, a.counted, a.played, a.participation) == (18, 2, 4, 1.0)
+    assert (a.first_places, a.best_single_score, a.eligible) == (4, 10, True)
+
+    # Jogou menos que N: conta tudo o que jogou.
+    c = _row(ranking, "C")
+    assert (c.total, c.counted, c.played, c.participation, c.eligible) == (3, 1, 1, 0.25, False)
+
+    # Fora de escopo: um torneio excluído e um fora da janela não entram.
+    persons = {row.person for row in ranking.rows}
+    assert "Excluido" not in persons
+    assert "Zed" not in persons
+    assert "T5" not in {entry.tournament_id for row in ranking.rows for entry in row.breakdown}
+
+
+def test_campeao_exige_elegivel(config) -> None:
+    scenario = _scenario_config(config)
+
+    ranking = build(scenario, _scenario_tournaments(), season_scope(resolve_season(scenario, None)), now=NOW)
+
+    assert ranking.champion_elected is True
+    assert ranking.champion is not None
+    assert ranking.champion.person == "A"
+
+
+def test_campeao_nao_eleito_com_poucos_torneios(tmp_path, config, client) -> None:
+    collect(config, client, tmp_path, now=NOW)
+    tournaments = tuple(read_tournaments(tmp_path).values())
+
+    ranking = build(config, tournaments, season_scope(resolve_season(config, None)), now=NOW)
+
+    assert ranking.champion_elected is False
+    assert ranking.champion is None
+
+
+def test_resolve_season(config) -> None:
+    assert resolve_season(config, None).label == "2026"
+    assert resolve_season(config, "2026").label == "2026"
+    with pytest.raises(ValueError):
+        resolve_season(config, "9999")
+
+
+def test_cli_rank(tmp_path, monkeypatch, capsys) -> None:
+    monkeypatch.setattr(cli, "HttpLichess", lambda: FixtureLichess(FIXTURES))
+    archive = tmp_path / "archive"
+    cli.main(["collect", "--config-dir", str(SHIPPED), "--archive-dir", str(archive)])
+    capsys.readouterr()
+
+    code = cli.main(["rank", "--config-dir", str(SHIPPED), "--archive-dir", str(archive)])
+    out = capsys.readouterr().out
+
+    assert code == 0
+    assert "Temporada 2026" in out
+    assert "melhores N = 1" in out
+    assert "kleberbios" in out
+
+
+def _row(ranking, person: str):
+    return next(row for row in ranking.rows if row.person == person)
+
+
+def _scenario_config(config: Config) -> Config:
+    seasons = SeasonsConfig(
+        timezone="America/Sao_Paulo",
+        seasons=[Season(label="t", starts_at=date(2026, 9, 1), ends_at=date(2026, 9, 30))],
+    )
+    best_n = config.ranking.best_n.model_copy(update={"fraction": 0.5})
+    ranking = config.ranking.model_copy(update={"best_n": best_n})
+    rules = config.rules.model_copy(update={"exclude": ["T5"]})
+    return dataclasses.replace(config, seasons=seasons, ranking=ranking, rules=rules)
+
+
+def _scenario_tournaments() -> tuple[ArchivedTournament, ...]:
+    return (
+        _tournament(
+            "T1",
+            6,
+            [
+                ("A", 1, 10),
+                ("D", 2, 8),
+                ("F", 3, 6),
+                ("G", 4, 5),
+                ("B", 5, 4),
+                ("C", 6, 3),
+                ("H", 7, 2),
+                ("I", 8, 2),
+            ],
+        ),
+        _tournament("T2", 13, [("A", 1, 8), ("B", 2, 5), ("G", 3, 4), ("F", 4, 3), ("D", 5, 1)]),
+        _tournament("T3", 20, [("A", 1, 6), ("G", 2, 1)]),
+        _tournament("T4", 27, [("A", 1, 1)]),
+        _tournament("T5", 28, [("Excluido", 1, 99)]),
+        _tournament("TOUT", 31, [("Zed", 1, 50)], month=8),
+    )
+
+
+def _tournament(
+    arena_id: str,
+    day: int,
+    standings: list[tuple[str, int, int]],
+    *,
+    month: int = 9,
+) -> ArchivedTournament:
+    starts_at = datetime(2026, month, day, 22, 0, tzinfo=timezone.utc)
+    return ArchivedTournament(
+        id=arena_id,
+        name=arena_id,
+        edition=1,
+        starts_at=starts_at,
+        finishes_at=starts_at + timedelta(hours=1),
+        minutes=60,
+        clock_initial=300,
+        clock_increment=2,
+        perf="blitz",
+        variant="standard",
+        rated=True,
+        created_by="organizador",
+        team_member="cavaleiros-do-centro",
+        nb_players=len(standings),
+        games=1,
+        checks=(),
+        override=None,
+        fetched_at=starts_at,
+        standings=tuple(_standing(username, rank, score) for username, rank, score in standings),
+    )
+
+
+def _standing(username: str, rank: int, score: int) -> ArchivedStanding:
+    return ArchivedStanding(
+        username=username,
+        rank=rank,
+        score=score,
+        rating=1500,
+        performance=1500,
+        games=1,
+        title=None,
+        sheet="",
+    )

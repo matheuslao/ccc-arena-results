@@ -7,9 +7,11 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .archive import read_tournaments
 from .config import Config, ConfigError, check, load
 from .ingest import Candidate, collect, discover, refresh, refresh_all
 from .lichess import HttpLichess
+from .rank import Ranking, build, resolve_season, season_scope
 from .rules import EXCLUDE, INCLUDE
 
 DEFAULT_CONFIG_DIR = Path("config")
@@ -94,6 +96,26 @@ def build_parser() -> argparse.ArgumentParser:
         default=DEFAULT_ARCHIVE_DIR,
         help="diretório do arquivo canônico (padrão: archive)",
     )
+
+    rank_command = commands.add_parser(
+        "rank", help="calcula e imprime o Ranking de uma Temporada"
+    )
+    rank_command.add_argument(
+        "--season",
+        help="rótulo da Temporada (padrão: a única configurada)",
+    )
+    rank_command.add_argument(
+        "--config-dir",
+        type=Path,
+        default=DEFAULT_CONFIG_DIR,
+        help="diretório dos arquivos de configuração (padrão: config)",
+    )
+    rank_command.add_argument(
+        "--archive-dir",
+        type=Path,
+        default=DEFAULT_ARCHIVE_DIR,
+        help="diretório do arquivo canônico (padrão: archive)",
+    )
     return parser
 
 
@@ -153,6 +175,20 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  - {arena_id}")
         return 0
 
+    if args.command == "rank":
+        config = _load(args.config_dir)
+        if config is None:
+            return 1
+        try:
+            season = resolve_season(config, args.season)
+        except ValueError as error:
+            print(error, file=sys.stderr)
+            return 1
+        tournaments = tuple(read_tournaments(args.archive_dir).values())
+        ranking = build(config, tournaments, season_scope(season))
+        _print_ranking(ranking, config)
+        return 0
+
     return 2
 
 
@@ -187,6 +223,30 @@ def _print_candidates(candidates: list[Candidate]) -> None:
         elif candidate.verdict.failed:
             line += f"  — falhou: {', '.join(candidate.verdict.failed)}"
         print(line)
+
+
+def _print_ranking(ranking: Ranking, config: Config) -> None:
+    print(
+        f"Temporada {ranking.season} — {ranking.tournaments_considered} torneio(s) "
+        f"considerado(s), melhores N = {ranking.best_n}"
+    )
+    minimum = config.ranking.min_tournaments_for_champion
+    champion = ranking.champion
+    if champion is not None:
+        print(f"Campeão: {champion.person}")
+    elif ranking.tournaments_considered < minimum:
+        print(f"Campeão: não eleito (mínimo de {minimum} torneios)")
+    else:
+        print("Campeão: não eleito (nenhum jogador elegível)")
+    print(f"{'#':>3}  {'Jogador':<20}{'Total':>7}{'Contados':>10}{'Part.':>7}  "
+          f"{'1º':>3}{'Melhor':>8}  Elegível")
+    for row in ranking.rows:
+        print(
+            f"{row.rank:>3}  {row.person:<20}{row.total:>7}"
+            f"{f'{row.counted}/{row.played}':>10}{f'{row.participation:.0%}':>7}  "
+            f"{row.first_places:>3}{row.best_single_score:>8}  "
+            f"{'sim' if row.eligible else 'não'}"
+        )
 
 
 def _timestamp(instant: datetime) -> str:
