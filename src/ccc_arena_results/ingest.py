@@ -4,8 +4,10 @@ Descobre os candidatos a Torneio Válido nas **duas fontes** — as arenas do ti
 e as arenas criadas pelos organizadores configurados —, classifica cada um e
 arquiva os válidos: Classificação final, PGN e metadados no schema do spec. Cada
 torneio é gravado uma vez; a coleta de rotina nunca sobrescreve o que já existe.
-O que não entra — candidato que falha, torneio fora de Temporada, anomalia de
-Edição — vai para o relatório de pendências, nunca para o esquecimento.
+Só um pedido explícito de atualização (``refresh``) rebaixa e reescreve um
+torneio. O que não entra — candidato que falha, torneio fora de Temporada,
+anomalia de Edição — vai para o relatório de pendências, nunca para o
+esquecimento.
 """
 
 from __future__ import annotations
@@ -19,22 +21,26 @@ from .archive import (
     ArchivedStanding,
     ArchivedTournament,
     read_tournaments,
+    remove_tournament,
     write_pgn,
     write_report,
     write_tournament,
 )
 from .config import Config
 from .lichess import Arena, Lichess, Standing
-from .rules import Verdict, classify
+from .rules import EXCLUDE, Verdict, classify
 from .season import season_of
 
 __all__ = [
     "Candidate",
     "CollectResult",
     "EditionEntry",
+    "RefreshResult",
     "assign_editions",
     "collect",
     "discover",
+    "refresh",
+    "refresh_all",
 ]
 
 
@@ -181,6 +187,78 @@ def collect(
     return CollectResult(archived=tuple(archived), skipped=skipped, report_entries=len(entries))
 
 
+@dataclass(frozen=True)
+class RefreshResult:
+    """O que uma atualização explícita fez."""
+
+    updated: tuple[str, ...]
+    removed: tuple[str, ...]
+    missing: tuple[str, ...]
+
+
+def refresh(
+    config: Config,
+    lichess: Lichess,
+    archive_dir: Path,
+    arena_id: str,
+    *,
+    now: datetime | None = None,
+) -> RefreshResult:
+    """Reprocessa um torneio arquivado sob demanda.
+
+    Rebaixa os dados de novo e reescreve o arquivo daquele torneio. Um torneio
+    que deixou de ser válido — em geral por ter entrado em ``exclude`` — sai do
+    arquivo. A Edição é preservada, para uma correção de dados não renumerar a
+    série.
+    """
+    moment = now or datetime.now(timezone.utc)
+    existing = read_tournaments(archive_dir)
+    if arena_id not in existing:
+        return RefreshResult(updated=(), removed=(), missing=(arena_id,))
+    if _refresh_one(config, lichess, archive_dir, arena_id, existing[arena_id], moment):
+        return RefreshResult(updated=(arena_id,), removed=(), missing=())
+    return RefreshResult(updated=(), removed=(arena_id,), missing=())
+
+
+def refresh_all(
+    config: Config, lichess: Lichess, archive_dir: Path, *, now: datetime | None = None
+) -> RefreshResult:
+    """Reprocessa todos os torneios arquivados."""
+    moment = now or datetime.now(timezone.utc)
+    existing = read_tournaments(archive_dir)
+    updated: list[str] = []
+    removed: list[str] = []
+    for arena_id, tournament in sorted(existing.items()):
+        if _refresh_one(config, lichess, archive_dir, arena_id, tournament, moment):
+            updated.append(arena_id)
+        else:
+            removed.append(arena_id)
+    return RefreshResult(updated=tuple(updated), removed=tuple(removed), missing=())
+
+
+def _refresh_one(
+    config: Config,
+    lichess: Lichess,
+    archive_dir: Path,
+    arena_id: str,
+    existing: ArchivedTournament,
+    moment: datetime,
+) -> bool:
+    """Atualiza um torneio arquivado; devolve ``True`` se ele ficou no arquivo."""
+    arena = lichess.arena(arena_id)
+    verdict = classify(arena, config.rules)
+    if not verdict.valid:
+        remove_tournament(archive_dir, arena_id)
+        return False
+    standings = lichess.standings(arena_id)
+    pgn = lichess.games_pgn(arena_id)
+    write_tournament(
+        archive_dir, _archive(arena, verdict, existing.edition, standings, moment)
+    )
+    write_pgn(archive_dir, arena_id, pgn)
+    return True
+
+
 def _edition_entries(
     valid: list[Candidate], existing: dict[str, ArchivedTournament]
 ) -> list[EditionEntry]:
@@ -222,7 +300,7 @@ def _archive(
         nb_players=arena.nb_players,
         games=arena.games,
         checks=verdict.passed,
-        override=None,
+        override=verdict.override,
         fetched_at=now,
         standings=tuple(
             ArchivedStanding(
@@ -250,7 +328,7 @@ def _report_entries(
     entries: list[dict[str, object]] = []
 
     for candidate in sorted(candidates, key=lambda item: item.arena.id):
-        if candidate.verdict.valid:
+        if candidate.verdict.valid or candidate.verdict.override == EXCLUDE:
             continue
         entries.append(
             {

@@ -28,6 +28,7 @@ __all__ = [
     "ArchivedTournament",
     "read_report",
     "read_tournaments",
+    "remove_tournament",
     "write_pgn",
     "write_report",
     "write_tournament",
@@ -176,6 +177,20 @@ def write_pgn(archive_dir: Path, arena_id: str, pgn: str) -> bool:
     """Grava as partidas; devolve ``True`` se o arquivo mudou."""
     path = Path(archive_dir) / PGN_DIR / f"{arena_id}.pgn"
     return _write_if_changed(path, pgn)
+
+
+def remove_tournament(archive_dir: Path, arena_id: str) -> bool:
+    """Tira o torneio e o PGN do arquivo; devolve ``True`` se algo saiu."""
+    directory = Path(archive_dir)
+    changed = False
+    for path in (
+        directory / TOURNAMENTS_DIR / f"{arena_id}.json",
+        directory / PGN_DIR / f"{arena_id}.pgn",
+    ):
+        if path.is_file():
+            path.unlink()
+            changed = True
+    return changed
 
 
 def read_report(archive_dir: Path) -> dict[str, Any] | None:

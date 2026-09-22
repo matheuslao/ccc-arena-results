@@ -4,6 +4,10 @@ Não faz rede, não lê disco. Recebe um :class:`~ccc_arena_results.lichess.Aren
 já normalizado e a configuração, e devolve o veredito com as checagens que
 passaram e as que falharam. Nenhuma checagem interrompe as outras: o
 organizador enxerga, de uma vez, tudo o que fez o candidato não casar.
+
+As listas ``include`` e ``exclude`` sobrepõem as checagens: ``exclude`` tira um
+torneio que casaria com as regras; ``include`` traz um que falharia. Ficam na
+configuração, não no arquivo, para que uma recoleta não desfaça a correção.
 """
 
 from __future__ import annotations
@@ -27,16 +31,29 @@ CHECK_ORDER = (
     "games",
 )
 
+INCLUDE = "include"
+EXCLUDE = "exclude"
+
 
 @dataclass(frozen=True)
 class Verdict:
-    """O resultado da classificação, com a evidência de cada checagem."""
+    """O resultado da classificação, com a evidência de cada checagem.
+
+    ``override`` é ``"include"`` quando o torneio entrou por lista manual,
+    ``"exclude"`` quando foi tirado por ela, e ``None`` quando as checagens
+    decidiram sozinhas.
+    """
 
     passed: tuple[str, ...]
     failed: tuple[str, ...]
+    override: str | None = None
 
     @property
     def valid(self) -> bool:
+        if self.override == EXCLUDE:
+            return False
+        if self.override == INCLUDE:
+            return True
         return not self.failed
 
 
@@ -54,4 +71,11 @@ def classify(arena: Arena, rules: RulesConfig) -> Verdict:
     ]
     passed = tuple(name for name, ok in results if ok)
     failed = tuple(name for name, ok in results if not ok)
-    return Verdict(passed=passed, failed=failed)
+
+    override = None
+    if arena.id in rules.exclude:
+        override = EXCLUDE
+    elif arena.id in rules.include:
+        override = INCLUDE
+    return Verdict(passed=passed, failed=failed, override=override)
+

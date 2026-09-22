@@ -24,6 +24,7 @@ O Lichess é a nascente; **este repositório é a fonte da verdade** (ver [ADR-0
 | Validação de configuração (`ccc-arena config check`) | pronto |
 | Descoberta e classificação de candidatos (`ccc-arena discover`) | pronto |
 | Arquivamento dos Torneios Válidos (`ccc-arena collect`) | pronto |
+| Atualização e correções de escopo (`ccc-arena refresh`/`refresh-all`) | pronto |
 | Ranking — Temporada, Recortes e Aliases | planejado |
 | Site estático | planejado |
 | Automação semanal | planejado |
@@ -46,6 +47,7 @@ Sem o `make`:
 docker compose run --rm cli                       # ccc-arena config check
 docker compose run --rm cli ccc-arena discover    # candidatos a Torneio Válido (usa a API do Lichess)
 docker compose run --rm cli ccc-arena collect     # arquiva os Torneios Válidos em ./archive
+docker compose run --rm cli ccc-arena refresh-all # rebaixa os torneios arquivados
 docker compose run --rm test                      # pytest
 ```
 
@@ -56,6 +58,7 @@ docker compose run --rm test                      # pytest
 - **Elegibilidade a prêmio**: presença em pelo menos 50% dos Torneios Válidos do período.
 - **Recorte com menos de 3 torneios** não elege campeão.
 - Desempate: mais primeiros lugares → melhor Resultado individual → mais torneios jogados.
+- Correções manuais de escopo (`include`/`exclude`) vivem na configuração, não no arquivo.
 
 Todos esses valores são **configuração, não código** — veja [`config/`](config/).
 

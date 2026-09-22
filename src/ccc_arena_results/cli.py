@@ -8,8 +8,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .config import Config, ConfigError, check, load
-from .ingest import Candidate, collect, discover
+from .ingest import Candidate, collect, discover, refresh, refresh_all
 from .lichess import HttpLichess
+from .rules import EXCLUDE, INCLUDE
 
 DEFAULT_CONFIG_DIR = Path("config")
 DEFAULT_ARCHIVE_DIR = Path("archive")
@@ -60,6 +61,39 @@ def build_parser() -> argparse.ArgumentParser:
         default=DEFAULT_ARCHIVE_DIR,
         help="diretório do arquivo canônico (padrão: archive)",
     )
+
+    refresh_command = commands.add_parser(
+        "refresh", help="rebaixa e reescreve um torneio arquivado"
+    )
+    refresh_command.add_argument("tournament_id", help="id do torneio no Lichess")
+    refresh_command.add_argument(
+        "--config-dir",
+        type=Path,
+        default=DEFAULT_CONFIG_DIR,
+        help="diretório dos arquivos de configuração (padrão: config)",
+    )
+    refresh_command.add_argument(
+        "--archive-dir",
+        type=Path,
+        default=DEFAULT_ARCHIVE_DIR,
+        help="diretório do arquivo canônico (padrão: archive)",
+    )
+
+    refresh_all_command = commands.add_parser(
+        "refresh-all", help="reprocessa todos os torneios arquivados"
+    )
+    refresh_all_command.add_argument(
+        "--config-dir",
+        type=Path,
+        default=DEFAULT_CONFIG_DIR,
+        help="diretório dos arquivos de configuração (padrão: config)",
+    )
+    refresh_all_command.add_argument(
+        "--archive-dir",
+        type=Path,
+        default=DEFAULT_ARCHIVE_DIR,
+        help="diretório do arquivo canônico (padrão: archive)",
+    )
     return parser
 
 
@@ -95,6 +129,30 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Pendências: {result.report_entries}")
         return 0
 
+    if args.command == "refresh":
+        config = _load(args.config_dir)
+        if config is None:
+            return 1
+        result = refresh(config, HttpLichess(), args.archive_dir, args.tournament_id)
+        if result.missing:
+            print(f"Torneio não arquivado: {result.missing[0]}", file=sys.stderr)
+            return 1
+        if result.removed:
+            print(f"Removido: {result.removed[0]} (não é mais um Torneio Válido)")
+        else:
+            print(f"Atualizado: {result.updated[0]}")
+        return 0
+
+    if args.command == "refresh-all":
+        config = _load(args.config_dir)
+        if config is None:
+            return 1
+        result = refresh_all(config, HttpLichess(), args.archive_dir)
+        print(f"Atualizados: {len(result.updated)}; Removidos: {len(result.removed)}")
+        for arena_id in result.removed:
+            print(f"  - {arena_id}")
+        return 0
+
     return 2
 
 
@@ -122,7 +180,11 @@ def _print_candidates(candidates: list[Candidate]) -> None:
             f"{status:<9}{candidate.arena.id:<9}"
             f"{_timestamp(candidate.arena.starts_at)}  {candidate.arena.full_name}"
         )
-        if candidate.verdict.failed:
+        if candidate.verdict.override == INCLUDE:
+            line += "  — incluído manualmente"
+        elif candidate.verdict.override == EXCLUDE:
+            line += "  — excluído manualmente"
+        elif candidate.verdict.failed:
             line += f"  — falhou: {', '.join(candidate.verdict.failed)}"
         print(line)
 
