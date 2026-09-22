@@ -11,7 +11,7 @@ from .archive import read_tournaments
 from .config import Config, ConfigError, check, load
 from .ingest import Candidate, collect, discover, refresh, refresh_all
 from .lichess import HttpLichess
-from .rank import Ranking, build
+from .rank import Ranking, RankingRow, build
 from .rules import EXCLUDE, INCLUDE
 from .season import scope_for
 
@@ -256,12 +256,20 @@ def _print_ranking(ranking: Ranking, config: Config) -> None:
     print(f"{'#':>3}  {'Jogador':<20}{'Total':>7}{'Contados':>10}{'Part.':>7}  "
           f"{'1º':>3}{'Melhor':>8}  Elegível")
     for row in ranking.rows:
+        label = _person_label(row)
         print(
-            f"{row.rank:>3}  {row.person:<20}{row.total:>7}"
+            f"{row.rank:>3}  {label:<20}{row.total:>7}"
             f"{f'{row.counted}/{row.played}':>10}{f'{row.participation:.0%}':>7}  "
             f"{row.first_places:>3}{row.best_single_score:>8}  "
             f"{'sim' if row.eligible else 'não'}"
         )
+
+
+def _person_label(row: RankingRow) -> str:
+    """A pessoa, com as usernames entre parênteses quando houver alias."""
+    if len(row.usernames) > 1:
+        return f"{row.person} ({', '.join(row.usernames)})"
+    return row.person
 
 
 def _timestamp(instant: datetime) -> str:

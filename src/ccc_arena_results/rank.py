@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from math import ceil, floor
 from typing import Any
 
+from .aliases import Resolver
 from .archive import ArchivedStanding, ArchivedTournament
 from .config import Config
 from .season import Scope, local_date
@@ -143,11 +144,12 @@ def build(
 
     total_tournaments = len(considered)
     best_n = _best_n(config, total_tournaments)
-    players = _results_by_person(considered)
+    aliases = Resolver(config.aliases)
+    players = _results_by_person(considered, aliases)
 
     rows = [
-        _row(username, results, total_tournaments, best_n, config)
-        for username, results in players.items()
+        _row(person, results, total_tournaments, best_n, config, aliases)
+        for person, results in players.items()
     ]
     rows.sort(key=lambda row: _order_key(row, config))
     rows = _assign_ranks(rows, config)
@@ -184,11 +186,13 @@ def _best_n(config: Config, total_tournaments: int) -> int:
 
 def _results_by_person(
     tournaments: list[ArchivedTournament],
+    aliases: Resolver,
 ) -> dict[str, list[tuple[ArchivedTournament, ArchivedStanding]]]:
     players: dict[str, list[tuple[ArchivedTournament, ArchivedStanding]]] = {}
     for tournament in tournaments:
         for standing in tournament.standings:
-            players.setdefault(standing.username, []).append((tournament, standing))
+            person = aliases.person(standing.username)
+            players.setdefault(person, []).append((tournament, standing))
     return players
 
 
@@ -198,6 +202,7 @@ def _row(
     total_tournaments: int,
     best_n: int,
     config: Config,
+    aliases: Resolver,
 ) -> RankingRow:
     ordered = sorted(
         results, key=lambda item: (-item[1].score, item[0].starts_at, item[0].id)
@@ -211,7 +216,7 @@ def _row(
     return RankingRow(
         rank=0,
         person=person,
-        usernames=(person,),
+        usernames=aliases.usernames(person),
         total=total,
         counted=counted,
         played=played,

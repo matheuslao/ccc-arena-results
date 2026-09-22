@@ -27,7 +27,7 @@ O Lichess é a nascente; **este repositório é a fonte da verdade** (ver [ADR-0
 | Atualização e correções de escopo (`ccc-arena refresh`/`refresh-all`) | pronto |
 | Ranking da Temporada (`ccc-arena rank`) | pronto |
 | Ranking — Recortes (mês e semestre) | pronto |
-| Aliases no Ranking | planejado |
+| Aliases no Ranking | pronto |
 | Site estático | planejado |
 | Automação semanal | planejado |
 
