@@ -28,7 +28,8 @@ O Lichess é a nascente; **este repositório é a fonte da verdade** (ver [ADR-0
 | Ranking da Temporada (`ccc-arena rank`) | pronto |
 | Ranking — Recortes (mês e semestre) | pronto |
 | Aliases no Ranking | pronto |
-| Site estático | planejado |
+| Site — Ranking da Temporada (`ccc-arena site`) | pronto |
+| Site — Torneios e Jogadores | planejado |
 | Automação semanal | planejado |
 
 ## Como rodar
@@ -39,6 +40,7 @@ Tudo roda em Docker.
 make build    # constrói a imagem
 make check    # valida os arquivos de configuração
 make collect  # arquiva os Torneios Válidos ainda não arquivados
+make site     # gera a página estática em ./site
 make test     # roda a suíte de testes
 make shell    # abre um shell no container
 ```
@@ -52,6 +54,7 @@ docker compose run --rm cli ccc-arena collect     # arquiva os Torneios Válidos
 docker compose run --rm cli ccc-arena refresh-all # rebaixa os torneios arquivados
 docker compose run --rm cli ccc-arena rank        # Ranking da Temporada
 docker compose run --rm cli ccc-arena rank --month 2026-09   # Ranking de um Recorte
+docker compose run --rm cli ccc-arena site        # gera a página estática em ./site
 docker compose run --rm test                      # pytest
 ```
 

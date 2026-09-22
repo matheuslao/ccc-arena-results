@@ -14,9 +14,11 @@ from .lichess import HttpLichess
 from .rank import Ranking, RankingRow, build
 from .rules import EXCLUDE, INCLUDE
 from .season import scope_for
+from .site import build as build_site
 
 DEFAULT_CONFIG_DIR = Path("config")
 DEFAULT_ARCHIVE_DIR = Path("archive")
+DEFAULT_SITE_DIR = Path("site")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -120,6 +122,32 @@ def build_parser() -> argparse.ArgumentParser:
         default=DEFAULT_ARCHIVE_DIR,
         help="diretório do arquivo canônico (padrão: archive)",
     )
+
+    site_command = commands.add_parser(
+        "site", help="gera a página estática a partir dos dados derivados"
+    )
+    site_command.add_argument(
+        "--season",
+        help="rótulo da Temporada (padrão: a única configurada)",
+    )
+    site_command.add_argument(
+        "--config-dir",
+        type=Path,
+        default=DEFAULT_CONFIG_DIR,
+        help="diretório dos arquivos de configuração (padrão: config)",
+    )
+    site_command.add_argument(
+        "--archive-dir",
+        type=Path,
+        default=DEFAULT_ARCHIVE_DIR,
+        help="diretório do arquivo canônico (padrão: archive)",
+    )
+    site_command.add_argument(
+        "--output-dir",
+        type=Path,
+        default=DEFAULT_SITE_DIR,
+        help="diretório de saída do site (padrão: site)",
+    )
     return parser
 
 
@@ -196,6 +224,26 @@ def main(argv: list[str] | None = None) -> int:
         tournaments = tuple(read_tournaments(args.archive_dir).values())
         ranking = build(config, tournaments, scope)
         _print_ranking(ranking, config)
+        return 0
+
+    if args.command == "site":
+        config = _load(args.config_dir)
+        if config is None:
+            return 1
+        try:
+            tournaments = tuple(read_tournaments(args.archive_dir).values())
+            result = build_site(
+                config,
+                tournaments,
+                args.output_dir,
+                season_label=args.season,
+            )
+        except ValueError as error:
+            print(error, file=sys.stderr)
+            return 1
+        print(f"Site gerado em {result.output_dir}")
+        for path in result.written:
+            print(f"  + {path}")
         return 0
 
     return 2
