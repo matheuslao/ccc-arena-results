@@ -1,0 +1,174 @@
+{
+  "id": "KPfmJoD9",
+  "source": "lichess",
+  "name": "Cavaleiros e convidados Arena",
+  "edition": 9,
+  "startsAt": "2026-04-12T22:00:00Z",
+  "finishesAt": "2026-04-12T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 5
+  },
+  "perf": "rapid",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "vifranca",
+  "teamMember": null,
+  "nbPlayers": 14,
+  "games": 19,
+  "validation": {
+    "checks": [
+      "system",
+      "variant",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": "include"
+  },
+  "fetchedAt": "2026-09-23T00:22:57.521038Z",
+  "standings": [
+    {
+      "username": "Gevezo",
+      "rank": 1,
+      "score": 8,
+      "rating": 1578,
+      "performance": 1827,
+      "games": 4,
+      "title": null,
+      "sheet": "4220"
+    },
+    {
+      "username": "joacijc",
+      "rank": 2,
+      "score": 6,
+      "rating": 1853,
+      "performance": 1944,
+      "games": 4,
+      "title": null,
+      "sheet": "2022"
+    },
+    {
+      "username": "emaheu",
+      "rank": 3,
+      "score": 6,
+      "rating": 1780,
+      "performance": 1826,
+      "games": 4,
+      "title": null,
+      "sheet": "2022"
+    },
+    {
+      "username": "Mittchelll",
+      "rank": 4,
+      "score": 6,
+      "rating": 1784,
+      "performance": 1795,
+      "games": 3,
+      "title": null,
+      "sheet": "033"
+    },
+    {
+      "username": "Geraldosilva",
+      "rank": 5,
+      "score": 4,
+      "rating": 2060,
+      "performance": 1915,
+      "games": 2,
+      "title": null,
+      "sheet": "22"
+    },
+    {
+      "username": "Broly9",
+      "rank": 6,
+      "score": 4,
+      "rating": 1487,
+      "performance": 1732,
+      "games": 3,
+      "title": null,
+      "sheet": "022"
+    },
+    {
+      "username": "Pacha2023",
+      "rank": 7,
+      "score": 3,
+      "rating": 1741,
+      "performance": 1968,
+      "games": 1,
+      "title": null,
+      "sheet": "3"
+    },
+    {
+      "username": "prayavelin",
+      "rank": 8,
+      "score": 2,
+      "rating": 1775,
+      "performance": 1613,
+      "games": 2,
+      "title": null,
+      "sheet": "20"
+    },
+    {
+      "username": "vifranca",
+      "rank": 9,
+      "score": 2,
+      "rating": 1450,
+      "performance": 1444,
+      "games": 3,
+      "title": null,
+      "sheet": "020"
+    },
+    {
+      "username": "Piornaguerra",
+      "rank": 10,
+      "score": 2,
+      "rating": 1659,
+      "performance": 1411,
+      "games": 3,
+      "title": null,
+      "sheet": "002"
+    },
+    {
+      "username": "vivoangelo",
+      "rank": 11,
+      "score": 0,
+      "rating": 1462,
+      "performance": 1289,
+      "games": 4,
+      "title": null,
+      "sheet": "0000"
+    },
+    {
+      "username": "PauloRMAlmeida",
+      "rank": 12,
+      "score": 0,
+      "rating": 948,
+      "performance": 1106,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "Reiseth",
+      "rank": 13,
+      "score": 0,
+      "rating": 1212,
+      "performance": 1067,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "Daniel9203",
+      "rank": 14,
+      "score": 0,
+      "rating": 1413,
+      "performance": 752,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    }
+  ]
+}

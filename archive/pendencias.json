@@ -1,0 +1,37 @@
+{
+  "generatedAt": "2026-09-23T00:22:57.521038Z",
+  "entries": [
+    {
+      "kind": "near-miss",
+      "tournamentId": "7jbpAKca",
+      "name": "Arena dos Cavaleiros 17a ed. Arena",
+      "failedChecks": [
+        "finished",
+        "players",
+        "games"
+      ],
+      "detail": "torneio não finalizado; menos de 2 jogadores; sem partidas"
+    },
+    {
+      "kind": "outside-season",
+      "tournamentId": "IXh40MfO",
+      "name": "Arena dos Cavaleiros - 07ª Ed Arena",
+      "startsAt": "2025-11-30T22:00:00Z",
+      "detail": "Torneio Válido fora de qualquer Temporada configurada"
+    },
+    {
+      "kind": "outside-season",
+      "tournamentId": "KRHH63Yz",
+      "name": "Torneio Semanal - 04ª Edição Arena",
+      "startsAt": "2025-11-02T22:00:00Z",
+      "detail": "Torneio Válido fora de qualquer Temporada configurada"
+    },
+    {
+      "kind": "outside-season",
+      "tournamentId": "gJhPbAJk",
+      "name": "Arena dos Cavaleiros - 06ª Ed Arena",
+      "startsAt": "2025-11-16T22:00:00Z",
+      "detail": "Torneio Válido fora de qualquer Temporada configurada"
+    }
+  ]
+}

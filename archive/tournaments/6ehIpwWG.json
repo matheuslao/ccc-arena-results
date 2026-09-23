@@ -1,0 +1,204 @@
+{
+  "id": "6ehIpwWG",
+  "source": "lichess",
+  "name": "Cavaleiros do Centro Arena",
+  "edition": 10,
+  "startsAt": "2026-04-19T20:00:00Z",
+  "finishesAt": "2026-04-19T21:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 0
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "vifranca",
+  "teamMember": null,
+  "nbPlayers": 17,
+  "games": 55,
+  "validation": {
+    "checks": [
+      "system",
+      "variant",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": "include"
+  },
+  "fetchedAt": "2026-09-23T00:22:57.521038Z",
+  "standings": [
+    {
+      "username": "Freitasjr",
+      "rank": 1,
+      "score": 23,
+      "rating": 2039,
+      "performance": 2042,
+      "games": 7,
+      "title": null,
+      "sheet": "3325532"
+    },
+    {
+      "username": "jocsjunior",
+      "rank": 2,
+      "score": 16,
+      "rating": 1895,
+      "performance": 1961,
+      "games": 7,
+      "title": null,
+      "sheet": "4423021"
+    },
+    {
+      "username": "fcranio",
+      "rank": 3,
+      "score": 15,
+      "rating": 1730,
+      "performance": 1921,
+      "games": 8,
+      "title": null,
+      "sheet": "03243300"
+    },
+    {
+      "username": "Mittchelll",
+      "rank": 4,
+      "score": 15,
+      "rating": 1677,
+      "performance": 1797,
+      "games": 8,
+      "title": null,
+      "sheet": "00532023"
+    },
+    {
+      "username": "KaritoX",
+      "rank": 5,
+      "score": 14,
+      "rating": 1704,
+      "performance": 1706,
+      "games": 8,
+      "title": null,
+      "sheet": "53303000"
+    },
+    {
+      "username": "kmt_74",
+      "rank": 6,
+      "score": 10,
+      "rating": 1778,
+      "performance": 1822,
+      "games": 7,
+      "title": null,
+      "sheet": "2000422"
+    },
+    {
+      "username": "joacijc",
+      "rank": 7,
+      "score": 8,
+      "rating": 1741,
+      "performance": 1669,
+      "games": 7,
+      "title": null,
+      "sheet": "0004220"
+    },
+    {
+      "username": "FelipEnPassant",
+      "rank": 8,
+      "score": 8,
+      "rating": 1338,
+      "performance": 1525,
+      "games": 8,
+      "title": null,
+      "sheet": "20022002"
+    },
+    {
+      "username": "vivoangelo",
+      "rank": 9,
+      "score": 8,
+      "rating": 1564,
+      "performance": 1334,
+      "games": 9,
+      "title": null,
+      "sheet": "022200020"
+    },
+    {
+      "username": "Mateus10010",
+      "rank": 10,
+      "score": 7,
+      "rating": 1657,
+      "performance": 1574,
+      "games": 9,
+      "title": null,
+      "sheet": "210000202"
+    },
+    {
+      "username": "Geraldosilva",
+      "rank": 11,
+      "score": 6,
+      "rating": 1908,
+      "performance": 1905,
+      "games": 5,
+      "title": null,
+      "sheet": "20022"
+    },
+    {
+      "username": "oTalDiogo",
+      "rank": 12,
+      "score": 6,
+      "rating": 1732,
+      "performance": 1617,
+      "games": 7,
+      "title": null,
+      "sheet": "2000022"
+    },
+    {
+      "username": "Eduardo-Lucad",
+      "rank": 13,
+      "score": 5,
+      "rating": 1749,
+      "performance": 1612,
+      "games": 7,
+      "title": null,
+      "sheet": "0020021"
+    },
+    {
+      "username": "asra_il",
+      "rank": 14,
+      "score": 4,
+      "rating": 1225,
+      "performance": 1328,
+      "games": 6,
+      "title": null,
+      "sheet": "220000"
+    },
+    {
+      "username": "RIKOVISK",
+      "rank": 15,
+      "score": 2,
+      "rating": 1258,
+      "performance": 1392,
+      "games": 3,
+      "title": null,
+      "sheet": "020"
+    },
+    {
+      "username": "JUNIOR1981",
+      "rank": 16,
+      "score": 0,
+      "rating": 1775,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "vifranca",
+      "rank": 17,
+      "score": 0,
+      "rating": 1049,
+      "performance": 934,
+      "games": 4,
+      "title": null,
+      "sheet": "0000"
+    }
+  ]
+}

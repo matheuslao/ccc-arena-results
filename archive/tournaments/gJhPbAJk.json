@@ -1,0 +1,146 @@
+{
+  "id": "gJhPbAJk",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros - 06ª Ed Arena",
+  "edition": 6,
+  "startsAt": "2025-11-16T22:00:00Z",
+  "finishesAt": "2025-11-16T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 0
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": false,
+  "createdBy": "matheuslao",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 11,
+  "games": 32,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-09-22T23:51:56.328607Z",
+  "standings": [
+    {
+      "username": "oTalDiogo",
+      "rank": 1,
+      "score": 20,
+      "rating": 1858,
+      "performance": 2008,
+      "games": 6,
+      "title": null,
+      "sheet": "444422"
+    },
+    {
+      "username": "JANDINHO123",
+      "rank": 2,
+      "score": 9,
+      "rating": 1480,
+      "performance": 1649,
+      "games": 7,
+      "title": null,
+      "sheet": "0202212"
+    },
+    {
+      "username": "Mystictrix",
+      "rank": 3,
+      "score": 8,
+      "rating": 1500,
+      "performance": 1468,
+      "games": 6,
+      "title": null,
+      "sheet": "220022"
+    },
+    {
+      "username": "LayinRcerqueira",
+      "rank": 4,
+      "score": 7,
+      "rating": 986,
+      "performance": 1480,
+      "games": 7,
+      "title": null,
+      "sheet": "2002102"
+    },
+    {
+      "username": "vivoangelo",
+      "rank": 5,
+      "score": 7,
+      "rating": 1531,
+      "performance": 1222,
+      "games": 7,
+      "title": null,
+      "sheet": "2202100"
+    },
+    {
+      "username": "santiael",
+      "rank": 6,
+      "score": 6,
+      "rating": 1437,
+      "performance": 1445,
+      "games": 7,
+      "title": null,
+      "sheet": "0202002"
+    },
+    {
+      "username": "luandson",
+      "rank": 7,
+      "score": 6,
+      "rating": 1980,
+      "performance": 1402,
+      "games": 6,
+      "title": null,
+      "sheet": "202020"
+    },
+    {
+      "username": "Adybenji",
+      "rank": 8,
+      "score": 5,
+      "rating": 1179,
+      "performance": 1271,
+      "games": 8,
+      "title": null,
+      "sheet": "00002012"
+    },
+    {
+      "username": "matheuslao",
+      "rank": 9,
+      "score": 2,
+      "rating": 1041,
+      "performance": 1268,
+      "games": 5,
+      "title": null,
+      "sheet": "00020"
+    },
+    {
+      "username": "FelipEnPassant",
+      "rank": 10,
+      "score": 2,
+      "rating": 1260,
+      "performance": 935,
+      "games": 5,
+      "title": null,
+      "sheet": "01100"
+    },
+    {
+      "username": "HMMY_JRFA",
+      "rank": 11,
+      "score": 0,
+      "rating": 1700,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    }
+  ]
+}

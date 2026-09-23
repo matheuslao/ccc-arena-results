@@ -1,0 +1,116 @@
+{
+  "id": "5lfbFgwG",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros - 08ª Ed. Arena",
+  "edition": 8,
+  "startsAt": "2026-01-11T22:00:00Z",
+  "finishesAt": "2026-01-11T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 0
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": false,
+  "createdBy": "matheuslao",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 8,
+  "games": 11,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-09-22T23:51:56.328607Z",
+  "standings": [
+    {
+      "username": "danielbrigida",
+      "rank": 1,
+      "score": 8,
+      "rating": 1500,
+      "performance": 1626,
+      "games": 5,
+      "title": null,
+      "sheet": "42200"
+    },
+    {
+      "username": "magal100",
+      "rank": 2,
+      "score": 8,
+      "rating": 1840,
+      "performance": 1601,
+      "games": 5,
+      "title": null,
+      "sheet": "00422"
+    },
+    {
+      "username": "luandson",
+      "rank": 3,
+      "score": 4,
+      "rating": 1982,
+      "performance": 2078,
+      "games": 2,
+      "title": null,
+      "sheet": "22"
+    },
+    {
+      "username": "vifranca",
+      "rank": 4,
+      "score": 2,
+      "rating": 1104,
+      "performance": 1816,
+      "games": 1,
+      "title": null,
+      "sheet": "2"
+    },
+    {
+      "username": "Adybenji",
+      "rank": 5,
+      "score": 2,
+      "rating": 1205,
+      "performance": 1512,
+      "games": 2,
+      "title": null,
+      "sheet": "20"
+    },
+    {
+      "username": "Andy1458",
+      "rank": 6,
+      "score": 2,
+      "rating": 1316,
+      "performance": 1238,
+      "games": 6,
+      "title": null,
+      "sheet": "000002"
+    },
+    {
+      "username": "matheuslao",
+      "rank": 7,
+      "score": 0,
+      "rating": 1083,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "asra_il",
+      "rank": 8,
+      "score": 0,
+      "rating": 1184,
+      "performance": 705,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    }
+  ]
+}

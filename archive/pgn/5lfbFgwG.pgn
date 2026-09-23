@@ -1,0 +1,209 @@
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/AjacCJXd"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "luandson"]
+[Black "magal100"]
+[Result "1-0"]
+[GameId "AjacCJXd"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:48:15"]
+[WhiteElo "1982"]
+[BlackElo "1840"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Time forfeit"]
+
+1. e4 c6 2. d4 a6 3. Nf3 d6 4. c4 Bg4 5. h3 Bxf3 6. Qxf3 Nd7 7. Bd3 Qb6 8. Qe3 g6 9. Nc3 Bh6 10. Qe2 Bxc1 11. Rxc1 Qxd4 12. O-O Ne5 13. Rfd1 Qa7 14. Bb1 Nf6 15. b3 O-O-O 16. Na4 Nfd7 17. Rc3 Kb8 18. b4 b5 19. cxb5 axb5 20. Nb2 Nb6 21. Kh2 Nbc4 22. f4 Nxb2 23. Qxb2 Nc4 24. Qc1 Rhe8 25. Bd3 d5 26. exd5 cxd5 27. Re1 Qxa2 28. Re2 Qa7 29. Qb1 Qc7 30. g3 h6 31. Ra2 Kc8 32. Qa1 Qb6 33. Ra6 Qf2+ 34. Kh1 Qf3+ 35. Kg1 Qxg3+ 36. Kf1 Qxf4+ 37. Kg2 Qd2+ 38. Kg3 Qe3+ 39. Kh2 Qf2+ 40. Kh1 Qf3+ 41. Kg1 Qg3+ 42. Kf1 Qxh3+ 43. Ke2 Qg2+ 44. Kd1 Qg1+ 45. Kc2 1-0
+
+
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/pRPSltYj"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "danielbrigida"]
+[Black "Andy1458"]
+[Result "1-0"]
+[GameId "pRPSltYj"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:48:15"]
+[WhiteElo "1500"]
+[BlackElo "1316"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nd4 5. Nxd4 exd4 6. d3 c6 7. O-O d5 8. exd5 Qxd5 9. Bb3 Qd7 10. Qf3 Nf6 11. Re1+ Be7 12. Bg5 O-O 13. Nd2 Re8 14. Bxf6 Bxf6 15. Ne4 Be7 16. Bxf7+ Kf8 17. Be6+ 1-0
+
+
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/9NJXs7sU"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "Andy1458"]
+[Black "luandson"]
+[Result "0-1"]
+[GameId "9NJXs7sU"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:38:44"]
+[WhiteElo "1316"]
+[BlackElo "1982"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Time forfeit"]
+
+1. d4 d5 2. Nf3 c6 3. e3 e6 4. Bd3 Nf6 5. Nbd2 Bd6 6. O-O h6 7. Qe2 O-O 8. e4 dxe4 9. Nxe4 Nxe4 10. Qxe4 f5 11. Qe2 Qf6 12. c3 Nd7 13. Re1 Nb6 14. c4 Bc7 15. Ne5 Nd7 16. Bf4 Nxe5 17. dxe5 Qg6 18. h3 Bd7 19. c5 Rad8 20. Bc4 Bc8 21. Qc2 Rd4 22. Be3 Re4 23. Bd2 Rxe5 24. Rxe5 Bxe5 25. f4 Bd4+ 26. Kh1 Re8 27. Re1 Bxc5 28. Qb3 Bb6 29. a4 Bf2 30. Re2 Qg3 31. Be3 Bxe3 32. Rxe3 Qxf4 33. Bxe6+ Kh8 34. Rf3 Bxe6 35. Qxb7 Qc1+ 36. Kh2 Qc2 37. Rg3 Rg8 38. Rg6 Bd5 39. Qxa7 f4 40. Qd7 Qxg6 0-1
+
+
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/Uhv7dzzy"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "magal100"]
+[Black "danielbrigida"]
+[Result "0-1"]
+[GameId "Uhv7dzzy"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:38:44"]
+[WhiteElo "1840"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. g3 d5 2. Bg2 Nf6 3. Nf3 Nc6 4. O-O e5 5. b3 Bg4 6. Bb2 Bxf3 7. Bxf3 e4 8. Bg2 Be7 9. d3 O-O 10. Nd2 Re8 11. d4 Bd6 12. e3 Qd7 13. c4 Ne7 14. c5 Bxc5 15. dxc5 c6 16. b4 Qf5 17. h3 Ng6 18. g4 Qg5 19. Bxf6 Qxf6 20. f4 exf3 21. Rxf3 Qc3 22. e4 Qxb4 23. exd5 Qxc5+ 24. Kh2 Nh4 25. Rg3 Nxg2 26. Rxg2 Qxd5 27. Nb3 Qe5+ 28. Kh1 Rad8 29. Qf1 c5 30. Rc1 b6 31. Rcc2 Qd5 32. Rd2 Qc6 33. Rxd8 Rxd8 34. Nd2 Rxd2 35. h4 c4 36. Kh2 Rxg2+ 37. Qxg2 Qxg2+ 38. Kxg2 c3 39. Kf3 c2 40. Ke2 c1=Q 41. g5 Qc2+ 42. Ke3 Qxa2 43. Ke4 Qc4+ 44. Ke5 b5 45. h5 b4 46. g6 hxg6 47. hxg6 f6+ 48. Kf5 Qd3+ 49. Ke6 Qe4+ 50. Kd6 b3 51. Kc5 b2 52. Kb5 b1=Q+ 53. Kc5 Qbb4# 0-1
+
+
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/SZ6AadYv"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "danielbrigida"]
+[Black "Andy1458"]
+[Result "1-0"]
+[GameId "SZ6AadYv"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:31:18"]
+[WhiteElo "1500"]
+[BlackElo "1316"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 Nd4 4. Nxd4 exd4 5. d3 c6 6. Bc4 d5 7. exd5 cxd5 8. Bb3 Nf6 9. O-O Be7 10. Re1 O-O 11. Bg5 h6 12. Bh4 g5 13. Bg3 Ng4 14. h3 Nf6 15. Be5 Be6 16. Qf3 Nd7 17. Bxd4 b6 18. Bxd5 Nc5 19. Bxc5 Bxd5 20. Bxe7 Bxf3 21. Bxd8 Rfxd8 22. gxf3 h5 23. Re5 g4 24. fxg4 hxg4 25. Rg5+ Kf8 26. Rxg4 f5 27. Rf4 Rd5 28. Nc3 Rc5 29. Re1 Re8 30. Rxe8+ Kxe8 31. Kg2 b5 32. Kf3 a5 33. a3 Ke7 34. Rh4 Ke6 35. Rh6+ Kf7 36. Kf4 b4 37. axb4 axb4 38. Na4 Rxc2 39. Kxf5 Rxf2+ 40. Ke4 Kg7 41. Rb6 Rh2 42. Rxb4 Rxh3 43. Rd4 Kf6 44. Kd5 Rh5+ 45. Kc4 Ke6 46. Nc5+ Ke7 47. Re4+ Kd6 48. Re6+ Kc7 49. d4 Rh2 50. b4 Rc2+ 51. Kb5 Ra2 52. d5 Kb8 53. Kb6 Rb2 54. Re8# 1-0
+
+
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/fA8kw3ex"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "Andy1458"]
+[Black "magal100"]
+[Result "0-1"]
+[GameId "fA8kw3ex"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:21:02"]
+[WhiteElo "1316"]
+[BlackElo "1840"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Time forfeit"]
+
+1. d4 c6 2. Nf3 a6 3. e3 d6 4. Bd3 g6 5. O-O Bg7 6. Nbd2 Bg4 7. h3 Bxf3 8. Qxf3 Nd7 9. c4 Nh6 10. e4 Bxd4 11. Nb3 Bg7 12. Be3 O-O 13. Rab1 a5 14. Bg5 a4 15. Nd2 f6 16. Bf4 g5 17. Be3 Ne5 18. Qe2 Qd7 19. Bc2 Qe6 20. f4 gxf4 21. Rxf4 Nhf7 22. Qh5 h6 23. Rh4 Nxc4 24. Bxh6 Nxh6 25. Nf3 Ne3 26. Bd3 Qxa2 27. Nh2 b6 28. Ng4 Nexg4 29. hxg4 Ra5 30. Qg6 Rg5 31. Rxh6 Rxg6 32. Rxg6 Kf7 33. e5 dxe5 34. g5 Rd8 35. gxf6 exf6 36. Rd1 Qxb2 37. Bc4+ Kxg6 38. Rxd8 Qc1+ 39. Kh2 Qxc4 0-1
+
+
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/hvNO1fiS"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "Adybenji"]
+[Black "asra_il"]
+[Result "1-0"]
+[GameId "hvNO1fiS"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:14:52"]
+[WhiteElo "1205"]
+[BlackElo "1184"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. d4 c5 2. c3 cxd4 3. cxd4 Nf6 4. Bf4 Nc6 5. e3 g6 6. a3 Bg7 7. Nf3 O-O 8. Bd3 b6 9. Nbd2 Bb7 10. Ne5 Rc8 11. Rg1 d6 12. Nxc6 Bxc6 13. h4 Qd7 14. Qe2 Rfd8 15. g4 Rc7 16. h5 Rdc8 17. f3 Bb7 18. hxg6 Rc1+ 19. Kf2 Rxg1 20. Rxg1 hxg6 21. Rh1 Nd5 22. Kg1 Rc1+ 23. Kg2 Nxf4+ 24. exf4 Rxh1 25. Kxh1 Bxd4 26. Nb3 Bg7 27. g5 Qh3+ 28. Kg1 Qg3+ 29. Qg2 Qxf4 30. Nd2 Bxb2 31. Ne4 Bxa3 32. Qg4 Qc1+ 33. Kg2 Qd2+ 34. Nxd2 Bc5 35. Ne4 1-0
+
+
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/RweL7z3L"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "magal100"]
+[Black "danielbrigida"]
+[Result "1-0"]
+[GameId "RweL7z3L"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:11:16"]
+[WhiteElo "1840"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. g3 d5 2. Bg2 Nf6 3. Nc3 d4 4. Nb5 Nc6 5. b3 a6 6. Na3 e5 7. Bxc6+ bxc6 8. Nc4 Qd5 9. f3 Bf5 10. e4 dxe3 11. Nxe3 Qd7 12. g4 Bg6 13. h4 h6 14. Bb2 e4 15. Bxf6 gxf6 16. f4 Rd8 17. Nc4 Bb4 18. c3 Bc5 19. f5 Bh7 20. Nh3 O-O 21. Qe2 Rfe8 22. O-O-O Ba7 23. Nf4 a5 24. Nh5 Qe7 25. Nxa5 Qa3+ 26. Kb1 Qxa5 27. Nxf6+ Kg7 28. Nxe8+ Rxe8 29. Qc4 Qb6 30. Rhg1 f6 31. Rge1 Bg8 32. Qb4 Qf2 33. g5 hxg5 34. hxg5 Qxf5 35. gxf6+ Qxf6 36. Rg1+ Kh8 37. Rdf1 Qd6 38. Qa5 Bxg1 39. Rxg1 Qxd2 40. Qh5+ Bh7 41. Qxe8+ Bg8 42. Qxg8# 1-0
+
+
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/Nuke1snh"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "Andy1458"]
+[Black "vifranca"]
+[Result "0-1"]
+[GameId "Nuke1snh"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:09:28"]
+[WhiteElo "1316"]
+[BlackElo "1104"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. d4 d5 2. Nf3 c5 3. e3 Nc6 4. c3 e5 5. dxe5 Bg4 6. h3 Bxf3 7. Qxf3 Nxe5 8. Qd1 Nf6 9. Bb5+ Ned7 10. O-O Bd6 11. Re1 O-O 12. c4 Qa5 13. Bd2 Qb6 14. Bc3 Ne4 15. Bxd7 Nxc3 16. bxc3 dxc4 17. Qd5 Rad8 18. Bg4 Bh2+ 19. Kxh2 Rxd5 20. e4 Rdd8 21. Na3 Rfe8 22. Nxc4 Qg6 23. Bf5 Qc6 24. f3 b5 25. Na5 Qc7+ 26. g3 Qxa5 27. c4 Rd2+ 28. Kg1 Qc3 29. cxb5 Qxf3 30. Bg4 Rg2+ 31. Kh1 Qf2 32. Re2 Rh2# 0-1
+
+
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/SthQQfrn"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "magal100"]
+[Black "Adybenji"]
+[Result "1-0"]
+[GameId "SthQQfrn"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:04:20"]
+[WhiteElo "1840"]
+[BlackElo "1205"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. g3 e6 2. Bg2 d5 3. Nf3 Bd6 4. O-O Nf6 5. d3 O-O 6. Bg5 Nc6 7. c3 Be7 8. Qa4 Bd7 9. d4 Ne5 10. Qb3 Nxf3+ 11. Bxf3 b6 12. Nd2 h6 13. Bxf6 Bxf6 14. e4 c6 15. e5 Bg5 16. Qc2 Rc8 17. Bg2 c5 18. Nf3 Be7 19. Qd3 f6 20. Rae1 fxe5 21. Rxe5 c4 22. Qc2 Bf6 23. Re3 Qc7 24. Rfe1 Bg5 25. Nxg5 hxg5 26. Bh3 Rf7 27. Re5 Rcf8 28. Rxe6 Bxe6 29. Bxe6 Qe7 30. Bxf7+ Qxf7 31. Re5 Qf6 32. Qe2 b5 33. Qe3 a5 34. Rxg5 b4 35. Rg4 bxc3 36. bxc3 Qb6 37. Kg2 Qc6 38. h4 Re8 39. Qg5 Qf6 40. Qxf6 1-0
+
+
+[Event "Arena dos Cavaleiros - 08ª Ed. Arena"]
+[Site "https://lichess.org/IEuNZX7X"]
+[Date "2026.01.11"]
+[Round "-"]
+[White "danielbrigida"]
+[Black "Andy1458"]
+[Result "0-1"]
+[GameId "IEuNZX7X"]
+[UTCDate "2026.01.11"]
+[UTCTime "22:00:14"]
+[WhiteElo "1500"]
+[BlackElo "1316"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 d6 4. d4 a6 5. Bxc6+ bxc6 6. dxe5 Bg4 7. Nc3 Ne7 8. O-O Ng6 9. Bg5 f6 10. exf6 gxf6 11. Be3 Qd7 12. Bd4 Bg7 13. Be3 f5 14. exf5 Qxf5 15. Re1 O-O-O 16. Qd4 Bxd4 17. Bxd4 Qxc2 18. Re2 Qd3 19. Rd1 Qc4 20. Nd2 Qxd4 21. Nde4 Qc4 22. f3 Nf4 23. Red2 Bf5 24. Rd4 Qe6 25. Ng5 Qe3+ 26. Kf1 Bd3+ 27. R4xd3 Nxd3 28. Nh3 Rde8 0-1
+
+

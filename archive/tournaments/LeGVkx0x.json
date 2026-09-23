@@ -1,0 +1,236 @@
+{
+  "id": "LeGVkx0x",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros 15a ed. Arena",
+  "edition": 15,
+  "startsAt": "2026-09-13T22:00:00Z",
+  "finishesAt": "2026-09-13T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 2
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "vifranca",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 20,
+  "games": 42,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-09-22T23:51:56.328607Z",
+  "standings": [
+    {
+      "username": "Luffytaro",
+      "rank": 1,
+      "score": 24,
+      "rating": 2004,
+      "performance": 2146,
+      "games": 7,
+      "title": null,
+      "sheet": "4444422"
+    },
+    {
+      "username": "joabeuriel",
+      "rank": 2,
+      "score": 11,
+      "rating": 1854,
+      "performance": 1758,
+      "games": 7,
+      "title": null,
+      "sheet": "4221200"
+    },
+    {
+      "username": "vivoangelo",
+      "rank": 3,
+      "score": 10,
+      "rating": 1579,
+      "performance": 1759,
+      "games": 9,
+      "title": null,
+      "sheet": "220200202"
+    },
+    {
+      "username": "magal100",
+      "rank": 4,
+      "score": 9,
+      "rating": 1760,
+      "performance": 1884,
+      "games": 5,
+      "title": null,
+      "sheet": "04221"
+    },
+    {
+      "username": "emaheu",
+      "rank": 5,
+      "score": 9,
+      "rating": 1812,
+      "performance": 1571,
+      "games": 9,
+      "title": null,
+      "sheet": "003030030"
+    },
+    {
+      "username": "jocsjunior",
+      "rank": 6,
+      "score": 8,
+      "rating": 1930,
+      "performance": 1944,
+      "games": 4,
+      "title": null,
+      "sheet": "0422"
+    },
+    {
+      "username": "Mateus09_xd",
+      "rank": 7,
+      "score": 8,
+      "rating": 1398,
+      "performance": 1389,
+      "games": 11,
+      "title": null,
+      "sheet": "02020000220"
+    },
+    {
+      "username": "mateusbaiano",
+      "rank": 8,
+      "score": 7,
+      "rating": 1633,
+      "performance": 1670,
+      "games": 7,
+      "title": null,
+      "sheet": "2000221"
+    },
+    {
+      "username": "luandson",
+      "rank": 9,
+      "score": 6,
+      "rating": 1955,
+      "performance": 1755,
+      "games": 4,
+      "title": null,
+      "sheet": "2202"
+    },
+    {
+      "username": "Lucasestrella",
+      "rank": 10,
+      "score": 4,
+      "rating": 1446,
+      "performance": 1616,
+      "games": 5,
+      "title": null,
+      "sheet": "01201"
+    },
+    {
+      "username": "Alegamecrow",
+      "rank": 11,
+      "score": 3,
+      "rating": 1221,
+      "performance": 1276,
+      "games": 6,
+      "title": null,
+      "sheet": "002001"
+    },
+    {
+      "username": "felipemago13",
+      "rank": 12,
+      "score": 2,
+      "rating": 1831,
+      "performance": 1907,
+      "games": 2,
+      "title": null,
+      "sheet": "02"
+    },
+    {
+      "username": "matheuslao",
+      "rank": 13,
+      "score": 1,
+      "rating": 1151,
+      "performance": 1267,
+      "games": 2,
+      "title": null,
+      "sheet": "10"
+    },
+    {
+      "username": "ADRIBARATA",
+      "rank": 14,
+      "score": 0,
+      "rating": 1912,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "paulo713",
+      "rank": 15,
+      "score": 0,
+      "rating": 1656,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "Davi700",
+      "rank": 16,
+      "score": 0,
+      "rating": 1360,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "joatan32",
+      "rank": 17,
+      "score": 0,
+      "rating": 1320,
+      "performance": 1310,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "vifranca",
+      "rank": 18,
+      "score": 0,
+      "rating": 1057,
+      "performance": 1255,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    },
+    {
+      "username": "Neysid",
+      "rank": 19,
+      "score": 0,
+      "rating": 1603,
+      "performance": 955,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "RIKOVISK",
+      "rank": 20,
+      "score": 0,
+      "rating": 1292,
+      "performance": 807,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    }
+  ]
+}

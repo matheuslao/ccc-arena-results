@@ -1,0 +1,276 @@
+{
+  "id": "09bNmh19",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros - 12a ed. Arena",
+  "edition": 12,
+  "startsAt": "2026-08-23T22:00:00Z",
+  "finishesAt": "2026-08-23T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 2
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "vifranca",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 24,
+  "games": 45,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-09-22T23:51:56.328607Z",
+  "standings": [
+    {
+      "username": "jocsjunior",
+      "rank": 1,
+      "score": 12,
+      "rating": 1922,
+      "performance": 1986,
+      "games": 4,
+      "title": null,
+      "sheet": "4422"
+    },
+    {
+      "username": "mateusbaiano",
+      "rank": 2,
+      "score": 12,
+      "rating": 1849,
+      "performance": 1953,
+      "games": 6,
+      "title": null,
+      "sheet": "220422"
+    },
+    {
+      "username": "Neysid",
+      "rank": 3,
+      "score": 10,
+      "rating": 1593,
+      "performance": 1708,
+      "games": 7,
+      "title": null,
+      "sheet": "2021212"
+    },
+    {
+      "username": "Malicheski",
+      "rank": 4,
+      "score": 9,
+      "rating": 1590,
+      "performance": 1853,
+      "games": 4,
+      "title": null,
+      "sheet": "4221"
+    },
+    {
+      "username": "joacijc",
+      "rank": 5,
+      "score": 9,
+      "rating": 1614,
+      "performance": 1687,
+      "games": 4,
+      "title": null,
+      "sheet": "4221"
+    },
+    {
+      "username": "Jorgeheyjoe",
+      "rank": 6,
+      "score": 6,
+      "rating": 1475,
+      "performance": 1801,
+      "games": 5,
+      "title": null,
+      "sheet": "22020"
+    },
+    {
+      "username": "asra_il",
+      "rank": 7,
+      "score": 6,
+      "rating": 1266,
+      "performance": 1340,
+      "games": 6,
+      "title": null,
+      "sheet": "202200"
+    },
+    {
+      "username": "Geraldosilva",
+      "rank": 8,
+      "score": 5,
+      "rating": 1914,
+      "performance": 1629,
+      "games": 4,
+      "title": null,
+      "sheet": "1202"
+    },
+    {
+      "username": "kleberbios",
+      "rank": 9,
+      "score": 5,
+      "rating": 1899,
+      "performance": 1572,
+      "games": 3,
+      "title": null,
+      "sheet": "032"
+    },
+    {
+      "username": "vivoangelo",
+      "rank": 10,
+      "score": 5,
+      "rating": 1548,
+      "performance": 1488,
+      "games": 6,
+      "title": null,
+      "sheet": "020102"
+    },
+    {
+      "username": "LorenzoBustamante",
+      "rank": 11,
+      "score": 4,
+      "rating": 1310,
+      "performance": 1366,
+      "games": 4,
+      "title": null,
+      "sheet": "2002"
+    },
+    {
+      "username": "quequell",
+      "rank": 12,
+      "score": 4,
+      "rating": 1339,
+      "performance": 1303,
+      "games": 4,
+      "title": null,
+      "sheet": "0220"
+    },
+    {
+      "username": "Alegamecrow",
+      "rank": 13,
+      "score": 4,
+      "rating": 1324,
+      "performance": 1241,
+      "games": 5,
+      "title": null,
+      "sheet": "02200"
+    },
+    {
+      "username": "magal100",
+      "rank": 14,
+      "score": 3,
+      "rating": 1776,
+      "performance": 1487,
+      "games": 4,
+      "title": null,
+      "sheet": "1020"
+    },
+    {
+      "username": "FelipEnPassant",
+      "rank": 15,
+      "score": 3,
+      "rating": 1237,
+      "performance": 1342,
+      "games": 5,
+      "title": null,
+      "sheet": "00201"
+    },
+    {
+      "username": "matheuslao",
+      "rank": 16,
+      "score": 2,
+      "rating": 1191,
+      "performance": 1291,
+      "games": 4,
+      "title": null,
+      "sheet": "0002"
+    },
+    {
+      "username": "galaxyhitchhiker",
+      "rank": 17,
+      "score": 2,
+      "rating": 1087,
+      "performance": 1126,
+      "games": 8,
+      "title": null,
+      "sheet": "00002000"
+    },
+    {
+      "username": "JUNIOR1981",
+      "rank": 18,
+      "score": 0,
+      "rating": 1805,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "EspancadordePixote",
+      "rank": 19,
+      "score": 0,
+      "rating": 1747,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "AlessandraMartz",
+      "rank": 20,
+      "score": 0,
+      "rating": 1500,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "Streptococus",
+      "rank": 21,
+      "score": 0,
+      "rating": 1250,
+      "performance": 1323,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    },
+    {
+      "username": "Zeferino001",
+      "rank": 22,
+      "score": 0,
+      "rating": 1135,
+      "performance": 1148,
+      "games": 4,
+      "title": null,
+      "sheet": "0000"
+    },
+    {
+      "username": "vifranca",
+      "rank": 23,
+      "score": 0,
+      "rating": 1062,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "RIKOVISK",
+      "rank": 24,
+      "score": 0,
+      "rating": 1313,
+      "performance": 599,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    }
+  ]
+}

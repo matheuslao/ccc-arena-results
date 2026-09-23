@@ -1,0 +1,86 @@
+{
+  "id": "IXh40MfO",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros - 07ª Ed Arena",
+  "edition": 7,
+  "startsAt": "2025-11-30T22:00:00Z",
+  "finishesAt": "2025-11-30T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 0
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": false,
+  "createdBy": "matheuslao",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 5,
+  "games": 13,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-09-22T23:51:56.328607Z",
+  "standings": [
+    {
+      "username": "luandson",
+      "rank": 1,
+      "score": 14,
+      "rating": 2016,
+      "performance": 2060,
+      "games": 6,
+      "title": null,
+      "sheet": "204422"
+    },
+    {
+      "username": "Luffytaro",
+      "rank": 2,
+      "score": 7,
+      "rating": 2036,
+      "performance": 1851,
+      "games": 6,
+      "title": null,
+      "sheet": "221002"
+    },
+    {
+      "username": "Mystictrix",
+      "rank": 3,
+      "score": 5,
+      "rating": 1500,
+      "performance": 1813,
+      "games": 7,
+      "title": null,
+      "sheet": "0201020"
+    },
+    {
+      "username": "magal100",
+      "rank": 4,
+      "score": 4,
+      "rating": 1788,
+      "performance": 1513,
+      "games": 6,
+      "title": null,
+      "sheet": "000202"
+    },
+    {
+      "username": "LayinRcerqueira",
+      "rank": 5,
+      "score": 0,
+      "rating": 986,
+      "performance": 1288,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    }
+  ]
+}

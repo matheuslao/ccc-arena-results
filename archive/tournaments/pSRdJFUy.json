@@ -1,0 +1,136 @@
+{
+  "id": "pSRdJFUy",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros - 9a ed. Arena",
+  "edition": 9,
+  "startsAt": "2026-04-26T19:30:00Z",
+  "finishesAt": "2026-04-26T20:30:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 0
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "vifranca",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 10,
+  "games": 27,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-09-22T23:51:56.328607Z",
+  "standings": [
+    {
+      "username": "milailda",
+      "rank": 1,
+      "score": 18,
+      "rating": 1970,
+      "performance": 1778,
+      "games": 8,
+      "title": null,
+      "sheet": "22204422"
+    },
+    {
+      "username": "Mystictrix",
+      "rank": 2,
+      "score": 10,
+      "rating": 1602,
+      "performance": 1615,
+      "games": 7,
+      "title": null,
+      "sheet": "0042202"
+    },
+    {
+      "username": "ggduarte",
+      "rank": 3,
+      "score": 9,
+      "rating": 1295,
+      "performance": 1667,
+      "games": 9,
+      "title": null,
+      "sheet": "120202020"
+    },
+    {
+      "username": "vivoangelo",
+      "rank": 4,
+      "score": 7,
+      "rating": 1535,
+      "performance": 1359,
+      "games": 7,
+      "title": null,
+      "sheet": "0212002"
+    },
+    {
+      "username": "Mateus10010",
+      "rank": 5,
+      "score": 5,
+      "rating": 1651,
+      "performance": 1553,
+      "games": 6,
+      "title": null,
+      "sheet": "002102"
+    },
+    {
+      "username": "magal100",
+      "rank": 6,
+      "score": 4,
+      "rating": 1749,
+      "performance": 2138,
+      "games": 2,
+      "title": null,
+      "sheet": "22"
+    },
+    {
+      "username": "RIKOVISK",
+      "rank": 7,
+      "score": 4,
+      "rating": 1300,
+      "performance": 1976,
+      "games": 2,
+      "title": null,
+      "sheet": "22"
+    },
+    {
+      "username": "Eduardo-Lucad",
+      "rank": 8,
+      "score": 4,
+      "rating": 1670,
+      "performance": 1174,
+      "games": 7,
+      "title": null,
+      "sheet": "0000202"
+    },
+    {
+      "username": "carlosmaia",
+      "rank": 9,
+      "score": 0,
+      "rating": 1934,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "vifranca",
+      "rank": 10,
+      "score": 0,
+      "rating": 1034,
+      "performance": 1171,
+      "games": 6,
+      "title": null,
+      "sheet": "000000"
+    }
+  ]
+}

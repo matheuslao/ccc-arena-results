@@ -1,0 +1,247 @@
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/EOtIU6rb"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "Mystictrix"]
+[Black "luandson"]
+[Result "0-1"]
+[GameId "EOtIU6rb"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:53:32"]
+[WhiteElo "1500"]
+[BlackElo "2016"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. d4 c5 2. e3 cxd4 3. exd4 d5 4. c3 Bd7 5. Nf3 e6 6. Bf4 Nf6 7. Nbd2 Nc6 8. Be2 Be7 9. O-O O-O 10. Ne5 Nxe5 11. dxe5 Ne8 12. Be3 f6 13. f4 fxe5 14. fxe5 Rxf1+ 15. Qxf1 Qc7 16. Bd4 Bc5 17. Qf4 Bxd4+ 18. Qxd4 Qb6 19. Nb3 Nc7 20. Qxb6 axb6 21. a3 Rf8 22. Rf1 Rxf1+ 23. Bxf1 Na6 24. Bxa6 bxa6 25. Nd4 Kf7 26. Kf2 Kg6 27. Kf3 h6 28. h4 Kh5 29. Kg3 g5 30. hxg5 Kxg5 31. Nf3+ Kf5 32. Nd2 Kxe5 33. Kh4 Kf6 34. Kh5 Kg7 35. g4 e5 36. Nf3 e4 37. Ne5 Be8+ 38. Kh4 Kf6 0-1
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/xVdfsK0w"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "luandson"]
+[Black "Luffytaro"]
+[Result "0-1"]
+[GameId "xVdfsK0w"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:44:48"]
+[WhiteElo "2016"]
+[BlackElo "2036"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. Nf3 d5 2. d4 Nf6 3. Nc3 e6 4. Bg5 Be7 5. Qd2 a6 6. a3 b5 7. O-O-O Bb7 8. Bxf6 Bxf6 9. e3 Nd7 10. Bd3 c5 11. dxc5 Nxc5 12. g4 Nxd3+ 13. Qxd3 Rc8 14. Nd4 h6 15. h4 Qb6 16. g5 Bxd4 17. exd4 Rc4 18. g6 b4 19. gxf7+ Kxf7 20. axb4 Qxb4 21. Rhg1 Kf8 22. Qg6 Qe7 23. Rd3 Qf6 24. Rf3 Qxf3 25. Qxg7+ Ke8 26. Qxh8+ Kd7 27. Rg7+ Kc6 28. Qe8+ Kb6 29. Qd8+ Ka7 30. Nb5+ axb5 31. Qa5+ Kb8 32. Rg8+ Rc8 33. Rxc8+ Kxc8 34. Qxb5 Qf4+ 35. Kb1 Qxf2 36. Qe8+ Kc7 37. Qe7+ Kb6 38. Qc5+ Ka6 39. Qd6+ Ka7 40. Qc5+ Kb8 41. Qd6+ Kc8 42. Qc5+ Kd7 43. Qb6 Qf1+ 44. Ka2 Qa6+ 45. Qxa6 Bxa6 46. Ka3 Kd6 47. Kb4 e5 48. Ka5 e4 49. Kxa6 e3 50. b4 e2 51. b5 e1=Q 52. b6 Kc6 53. b7 Qa1# 0-1
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/cE6FgNtf"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "magal100"]
+[Black "Mystictrix"]
+[Result "0-1"]
+[GameId "cE6FgNtf"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:44:48"]
+[WhiteElo "1788"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. g3 Nf6 2. Bg2 c5 3. c3 e6 4. Qb3 d5 5. d3 Nc6 6. Bg5 Be7 7. Bxf6 Bxf6 8. Nd2 b6 9. Rd1 Bb7 10. e4 Na5 11. Qc2 O-O 12. f4 dxe4 13. Nxe4 Rc8 14. Nxf6+ Qxf6 15. Bxb7 Nxb7 16. Nf3 e5 17. Nxe5 Rfe8 18. Qa4 Nd8 19. Ke2 Nc6 20. Kd2 Nxe5 21. fxe5 Qxe5 22. Rde1 Qg5+ 23. Kc2 Red8 24. Rhf1 Qh6 25. Qxa7 Qxh2+ 26. Kb3 Qh5 27. g4 Qd5+ 28. Kc2 c4 29. Kc1 cxd3 30. Rd1 d2+ 31. Kc2 Ra8 32. Qxb6 Qe4+ 33. Kb3 Rdb8 34. Qxb8+ Rxb8+ 35. Ka3 Qa8# 0-1
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/9Od2Hhpg"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "luandson"]
+[Black "Mystictrix"]
+[Result "1-0"]
+[GameId "9Od2Hhpg"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:36:51"]
+[WhiteElo "2016"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. Nf3 c5 2. g3 e6 3. Bg2 Nf6 4. O-O d5 5. c4 d4 6. e3 d3 7. Nc3 Nc6 8. Ne1 Ne5 9. f4 Nxc4 10. Qa4+ Bd7 11. Qxc4 Qc7 12. Nb5 Qb6 13. a4 Be7 14. Nxd3 O-O 15. Ne5 Bxb5 16. axb5 Rfd8 17. b3 h6 18. Bb2 Qd6 19. Rfd1 Nd5 20. Bxd5 exd5 21. Qe2 f6 22. Ng6 Re8 23. Qg4 Rad8 24. Rxa7 d4 25. Nh4 dxe3 26. Nf5 Qb6 27. Qxg7# 1-0
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/ndULCwRx"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "Luffytaro"]
+[Black "magal100"]
+[Result "1-0"]
+[GameId "ndULCwRx"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:36:51"]
+[WhiteElo "2036"]
+[BlackElo "1788"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. d4 c6 2. e4 a6 3. e5 d6 4. Bd3 d5 5. Nd2 Qb6 6. Nb3 a5 7. a4 h5 8. h3 g5 9. Bxg5 Nd7 10. Nf3 e6 11. c3 f5 12. Qc2 Bh6 13. h4 Bxg5 14. hxg5 Qd8 15. g3 Nf8 16. Qd2 Ng6 17. Nh4 N8e7 18. f4 b6 19. c4 Ba6 20. cxd5 Bxd3 21. Qxd3 Qxd5 22. Kf2 c5 23. Qb5+ Kf7 24. dxc5 Nxh4 25. Rxh4 Qe4 26. Re1 Qc2+ 27. Re2 Qb1 28. Rh2 Rad8 29. Rg2 Rd1 30. Nd2 Rd8 31. Nxb1 Rxb1 32. Rg1 Rxg1 33. Kxg1 bxc5 34. Qxa5 c4 35. Qxd8 Nd5 36. Qd7+ Ne7 37. Rh2 c3 38. bxc3 Kf8 39. Rxh5 Ng6 40. Rh7 Nxe5 41. Qd8# 1-0
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/ppxVMAPg"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "magal100"]
+[Black "luandson"]
+[Result "0-1"]
+[GameId "ppxVMAPg"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:30:26"]
+[WhiteElo "1788"]
+[BlackElo "2016"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. g3 d5 2. Bg2 c6 3. c3 e5 4. d3 Nd7 5. Bh3 Ngf6 6. Bxd7+ Qxd7 7. Bg5 Be7 8. Bxf6 Bxf6 9. Nd2 O-O 10. Qb3 Re8 11. Rd1 Qf5 12. e4 dxe4 13. dxe4 Qh5 14. Ndf3 Bg4 15. Rd3 Rad8 16. Qd1 Rxd3 17. Qxd3 Rd8 18. Qe3 h6 19. h3 Be6 20. Ne2 b6 21. Rh2 Bxa2 22. g4 Qg6 23. Nd2 Bg5 24. f4 exf4 25. Nxf4 Qd6 26. Rf2 Bh4 27. Nd3 Qxd3 28. Qxd3 Rxd3 29. Ke2 Rxd2+ 30. Kxd2 Bxf2 31. Kc2 Be6 32. Kd3 b5 33. Ke2 Bb6 34. Kd3 Bc4+ 35. Kc2 a5 36. b3 Bf1 37. h4 Bg2 38. e5 Bf3 39. g5 hxg5 40. hxg5 Bc7 41. c4 b4 42. Kd3 Bxe5 43. Ke3 Bd1 44. Ke4 Bc7 45. Kd4 Bxb3 46. Kc5 a4 47. Kxb4 c5+ 48. Ka3 Be5 49. g6 Bd6 50. gxf7+ Kxf7 51. Kb2 g5 52. Ka3 g4 53. Kb2 g3 54. Ka3 g2 55. Kb2 g1=Q 56. Kc3 Qe3+ 57. Kb2 Qd2+ 58. Ka3 Qc1# 0-1
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/Rj0pRtOG"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "Mystictrix"]
+[Black "Luffytaro"]
+[Result "1/2-1/2"]
+[GameId "Rj0pRtOG"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:30:26"]
+[WhiteElo "1500"]
+[BlackElo "2036"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. e4 e5 2. Nf3 Nc6 3. c3 d5 4. exd5 Qxd5 5. d4 exd4 6. Nxd4 Nf6 7. Nxc6 Qxd1+ 8. Kxd1 bxc6 9. Bf4 Bd6 10. Bg3 Bg4+ 11. f3 Bf5 12. Nd2 O-O-O 13. Kc1 h6 14. Bf2 Kb7 15. Bc4 Bf4 16. Rd1 Rd7 17. g3 Bxd2+ 18. Rxd2 Rhd8 19. Rxd7 Rxd7 20. Be3 Nd5 21. Bxd5 cxd5 22. Bd4 f6 23. Kd2 Re7 24. b4 Re6 25. Re1 Rxe1 26. Kxe1 Bb1 27. a4 a6 28. a5 Kc6 29. Bc5 g6 30. Ke2 Kd7 31. Ke3 Ke6 32. f4 g5 33. fxg5 fxg5 34. h4 gxh4 35. gxh4 h5 36. Bd4 Bf5 37. Kf4 Bg4 38. Kg5 c6 39. Kf4 Be2 40. Bf2 Kf6 41. Be3 Ke6 42. Kg5 Bd1 43. Kf4 Bg4 44. Bd4 Be2 45. Bc5 Bg4 1/2-1/2
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/wckeuvii"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "luandson"]
+[Black "Mystictrix"]
+[Result "1-0"]
+[GameId "wckeuvii"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:20:25"]
+[WhiteElo "2016"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. e4 c5 2. c3 e5 3. Nf3 Nc6 4. d3 Nf6 5. Be2 d6 6. h3 Be7 7. Nbd2 O-O 8. Nf1 b6 9. Ng3 Bb7 10. Be3 Nd7 11. Nf5 Bf6 12. Qd2 g6 13. Nh6+ Kg7 14. Ng4 Be7 15. O-O-O Re8 16. Bh6+ Kg8 17. Ng5 Nf6 18. Kb1 Bc8 19. Rdg1 Bd7 20. f3 a5 21. g3 b5 22. d4 cxd4 23. Bxb5 Rb8 24. Bc4 dxc3 25. Bxf7+ Kh8 26. Qxc3 Ng8 27. Bxg8 Kxg8 28. Qc4+ d5 29. Qxd5+ Be6 30. Qxe6+ Kh8 31. Qf7 Rxb2+ 32. Ka1 Rxa2+ 33. Qxa2 Qd4+ 34. Qb2 Qa4+ 35. Qa2 Qd4+ 36. Kb1 Rb8+ 37. Kc1 Qc3+ 38. Qc2 Ba3+ 39. Kd1 Qd4+ 40. Ke2 Rb2 41. Qxb2 Qxb2+ 42. Kf1 Qc1+ 43. Kg2 Qd2+ 44. Nf2 Bc5 45. Nf7+ Kg8 46. Bxd2 Kxf7 47. Nd3 Nd4 48. Nxc5 1-0
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/C7oYmzdP"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "Luffytaro"]
+[Black "magal100"]
+[Result "0-1"]
+[GameId "C7oYmzdP"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:20:25"]
+[WhiteElo "2036"]
+[BlackElo "1788"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. d4 c6 2. c4 a6 3. Nf3 d6 4. e4 g6 5. Nc3 Bg4 6. Be2 Bxf3 7. Bxf3 Nd7 8. Be3 Bg7 9. Qd2 Qb6 10. O-O h5 11. b4 Bh6 12. c5 Qc7 13. a3 Bxe3 14. Qxe3 Nh6 15. Rfe1 Ng4 16. Qf4 e5 17. dxe5 Ndxe5 18. Bxg4 hxg4 19. Qg3 dxc5 20. bxc5 O-O-O 21. Na4 Rd3 22. Re3 Rxe3 23. fxe3 Rd8 24. Nb6+ Kb8 25. Rf1 Rf8 26. h3 f5 27. hxg4 Nxg4 28. Qxc7+ Kxc7 29. exf5 Rxf5 30. Rxf5 gxf5 31. Nc4 Kd7 32. g3 Ke6 33. Kg2 Kd5 34. Na5 Kxc5 35. Nxb7+ Kd5 36. Kf3 Ne5+ 37. Kf4 Ke6 38. Nc5+ Kf6 39. e4 Ng6+ 40. Kf3 fxe4+ 41. Kxe4 Ne5 42. Nxa6 Ke6 43. Nc5+ Kd6 44. Nd3 Nc4 45. a4 Nb6 46. a5 Nc4 47. a6 Kc7 48. Nc5 Kb6 49. Kd4 Nd6 50. g4 Nb5+ 51. Ke5 Kxc5 52. a7 Nxa7 53. Ke6 Nc8 54. Kd7 Nd6 55. g5 Kd5 56. Ke7 c5 57. Kf6 c4 58. g6 c3 59. Ke7 Nf5+ 60. Kf6 Ke4 0-1
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/Yj1kQc58"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "magal100"]
+[Black "Mystictrix"]
+[Result "0-1"]
+[GameId "Yj1kQc58"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:12:12"]
+[WhiteElo "1788"]
+[BlackElo "1500"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. g3 c5 2. Bg2 e6 3. c3 Nf6 4. d3 Be7 5. Bg5 O-O 6. Bxf6 Bxf6 7. Nd2 d5 8. Qb3 Nc6 9. Ngf3 b6 10. O-O Bb7 11. c4 d4 12. Rae1 Qc7 13. e4 dxe3 14. Rxe3 Nd4 15. Nxd4 Bxg2 16. Kxg2 Bxd4 17. Re2 Qc6+ 18. Nf3 e5 19. Re4 Rae8 20. Kg1 f5 21. Nxe5 Rxe5 22. Rxe5 Bxe5 23. Re1 Bd4 24. Qc2 f4 25. g4 f3 26. b3 Qd7 27. Re4 h5 28. h3 hxg4 29. Rxg4 Qe6 30. Qd2 Re8 31. Kh2 Qe5+ 32. Qf4 Qe2 33. Qg3 Qxf2+ 34. Qxf2 Bxf2 35. Rf4 Re3 36. d4 cxd4 37. Rxd4 Re2 38. Rd8+ Kh7 39. Rd5 Bh4+ 40. Kg1 f2+ 41. Kg2 Re1 42. Rh5+ Kg6 43. Rxh4 f1=Q+ 44. Kg3 Qd3+ 45. Kf2 Re2+ 46. Kf1 Qd1# 0-1
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/FC3cGScs"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "Luffytaro"]
+[Black "luandson"]
+[Result "0-1"]
+[GameId "FC3cGScs"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:10:09"]
+[WhiteElo "2036"]
+[BlackElo "2016"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. d4 e5 2. dxe5 d6 3. e4 Nc6 4. Nf3 dxe5 5. Qxd8+ Kxd8 6. Bc4 f6 7. c3 Nge7 8. Be3 Ng6 9. g3 Bd6 10. Nbd2 Ke7 11. h4 Be6 12. h5 Nf8 13. Ke2 a6 14. a4 Na5 15. Bxe6 Nxe6 16. b4 Nc6 17. Nc4 Rad8 18. Rad1 Rd7 19. Nxd6 cxd6 20. Bb6 Rc8 21. Rd3 Ncd8 22. Rhd1 Nf7 23. Nh4 g5 24. Nf5+ Kf8 25. Nxd6 Nxd6 26. Rxd6 Rxd6 27. Rxd6 Ke7 28. Rd3 h6 29. a5 Rc4 30. f3 g4 31. fxg4 Rxe4+ 32. Kf3 Ng5+ 33. Kf2 Rxg4 34. Bc5+ Ke6 35. Rd6+ Kf5 36. Rd7 Ne4+ 37. Ke1 Rxg3 38. Rxb7 Rg2 39. c4 Rc2 40. b5 Nxc5 41. Rc7 Nd3+ 42. Kd1 Ra2 43. b6 Ke4 44. b7 Ke3 45. b8=Q Rd2# 0-1
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/rp3wCwAS"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "LayinRcerqueira"]
+[Black "magal100"]
+[Result "0-1"]
+[GameId "rp3wCwAS"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:01:41"]
+[WhiteElo "986"]
+[BlackElo "1788"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. e4 c6 2. Nf3 a6 3. Bc4 d6 4. c3 g6 5. O-O Bg7 6. d4 b5 7. Bb3 a5 8. h3 a4 9. Bc2 Qb6 10. a3 Bh6 11. Bxh6 Nxh6 12. g4 O-O 13. Re1 Kh8 14. Nbd2 f6 15. Nf1 g5 16. Ng3 Nf7 17. Nh5 Na6 18. Qd3 e5 19. dxe5 Nxe5 20. Nxe5 dxe5 21. Qd6 Qc7 22. Rad1 Bb7 23. Nxf6 Qf7 24. Rf1 Qxf6 25. Qxf6+ Rxf6 26. Rd7 Bc8 27. Re7 Be6 28. Rd1 Rg8 29. Rd6 Rgg6 30. Rd8+ Rg8 31. Rdd7 Rh6 32. Ra7 Nc5 33. Bd1 Nxe4 34. h4 gxh4 35. f3 Nd2 36. g5 Rxg5+ 37. Kf2 e4 38. Bc2 e3+ 39. Ke2 Rg2+ 40. Kxe3 Nc4+ 41. Kd3 Bf5+ 42. Kd4 Rd6+ 43. Kc5 Rg5 44. Ra8+ Bc8+ 45. Kb4 Rd8 46. Rxh7+ Kg8 47. Raa7 Nb6 48. Rag7+ Rxg7 49. Bb3+ Kxh7 0-1
+
+
+[Event "Arena dos Cavaleiros - 07ª Ed Arena"]
+[Site "https://lichess.org/B9sCU6EL"]
+[Date "2025.11.30"]
+[Round "-"]
+[White "Mystictrix"]
+[Black "Luffytaro"]
+[Result "0-1"]
+[GameId "B9sCU6EL"]
+[UTCDate "2025.11.30"]
+[UTCTime "22:00:09"]
+[WhiteElo "1500"]
+[BlackElo "2036"]
+[Variant "Standard"]
+[TimeControl "300+0"]
+[Termination "Normal"]
+
+1. e4 e5 2. Nf3 Nc6 3. d4 exd4 4. Bc4 Nf6 5. e5 d5 6. Bb3 Ne4 7. Nxd4 Bc5 8. Nxc6 Bxf2+ 9. Kf1 bxc6 10. Ba4 Ba6+ 11. c4 Bxc4+ 0-1
+
+

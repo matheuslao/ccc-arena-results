@@ -1,0 +1,175 @@
+{
+  "id": "KRHH63Yz",
+  "source": "lichess",
+  "name": "Torneio Semanal - 04ª Edição Arena",
+  "edition": 4,
+  "startsAt": "2025-11-02T22:00:00Z",
+  "finishesAt": "2025-11-02T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 0
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": false,
+  "createdBy": "matheuslao",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 14,
+  "games": 44,
+  "validation": {
+    "checks": [
+      "system",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": "include"
+  },
+  "fetchedAt": "2026-09-23T00:22:57.521038Z",
+  "standings": [
+    {
+      "username": "luandson",
+      "rank": 1,
+      "score": 24,
+      "rating": 2041,
+      "performance": 1808,
+      "games": 7,
+      "title": null,
+      "sheet": "4444422"
+    },
+    {
+      "username": "cassiossa",
+      "rank": 2,
+      "score": 18,
+      "rating": 1702,
+      "performance": 1842,
+      "games": 8,
+      "title": null,
+      "sheet": "20444220"
+    },
+    {
+      "username": "HMMY_JRFA",
+      "rank": 3,
+      "score": 14,
+      "rating": 1700,
+      "performance": 1788,
+      "games": 7,
+      "title": null,
+      "sheet": "0204422"
+    },
+    {
+      "username": "FelipEnPassant",
+      "rank": 4,
+      "score": 12,
+      "rating": 1260,
+      "performance": 1456,
+      "games": 8,
+      "title": null,
+      "sheet": "02222220"
+    },
+    {
+      "username": "artu_dias",
+      "rank": 5,
+      "score": 10,
+      "rating": 1265,
+      "performance": 1758,
+      "games": 7,
+      "title": null,
+      "sheet": "2202022"
+    },
+    {
+      "username": "vivoangelo",
+      "rank": 6,
+      "score": 8,
+      "rating": 1416,
+      "performance": 1573,
+      "games": 9,
+      "title": null,
+      "sheet": "220020002"
+    },
+    {
+      "username": "matheuslao",
+      "rank": 7,
+      "score": 6,
+      "rating": 1036,
+      "performance": 1491,
+      "games": 5,
+      "title": null,
+      "sheet": "00222"
+    },
+    {
+      "username": "UizGT",
+      "rank": 8,
+      "score": 5,
+      "rating": 1500,
+      "performance": 1325,
+      "games": 7,
+      "title": null,
+      "sheet": "0210002"
+    },
+    {
+      "username": "MrGasparzinho",
+      "rank": 9,
+      "score": 4,
+      "rating": 1802,
+      "performance": 1282,
+      "games": 7,
+      "title": null,
+      "sheet": "2000200"
+    },
+    {
+      "username": "magal100",
+      "rank": 10,
+      "score": 4,
+      "rating": 1769,
+      "performance": 1273,
+      "games": 6,
+      "title": null,
+      "sheet": "002200"
+    },
+    {
+      "username": "LayinRcerqueira",
+      "rank": 11,
+      "score": 3,
+      "rating": 950,
+      "performance": 1294,
+      "games": 7,
+      "title": null,
+      "sheet": "0010200"
+    },
+    {
+      "username": "JANDINHO123",
+      "rank": 12,
+      "score": 3,
+      "rating": 1414,
+      "performance": 1094,
+      "games": 7,
+      "title": null,
+      "sheet": "0102000"
+    },
+    {
+      "username": "Geijineana",
+      "rank": 13,
+      "score": 0,
+      "rating": 1319,
+      "performance": 1371,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "tucanrojo23",
+      "rank": 14,
+      "score": 0,
+      "rating": 1990,
+      "performance": 765,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    }
+  ]
+}

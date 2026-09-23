@@ -1,0 +1,156 @@
+{
+  "id": "BvMsByPD",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros 16a ed. Arena",
+  "edition": 16,
+  "startsAt": "2026-09-20T22:00:00Z",
+  "finishesAt": "2026-09-20T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 2
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "matheuslao",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 12,
+  "games": 26,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-09-22T23:51:56.328607Z",
+  "standings": [
+    {
+      "username": "kleberbios",
+      "rank": 1,
+      "score": 19,
+      "rating": 1871,
+      "performance": 1918,
+      "games": 6,
+      "title": null,
+      "sheet": "555220"
+    },
+    {
+      "username": "emaheu",
+      "rank": 2,
+      "score": 12,
+      "rating": 1899,
+      "performance": 1879,
+      "games": 6,
+      "title": null,
+      "sheet": "030432"
+    },
+    {
+      "username": "joacijc",
+      "rank": 3,
+      "score": 10,
+      "rating": 1619,
+      "performance": 1908,
+      "games": 7,
+      "title": null,
+      "sheet": "2022022"
+    },
+    {
+      "username": "joabeuriel",
+      "rank": 4,
+      "score": 8,
+      "rating": 1856,
+      "performance": 1816,
+      "games": 5,
+      "title": null,
+      "sheet": "00422"
+    },
+    {
+      "username": "joatan32",
+      "rank": 5,
+      "score": 8,
+      "rating": 1654,
+      "performance": 1724,
+      "games": 7,
+      "title": null,
+      "sheet": "2200202"
+    },
+    {
+      "username": "magal100",
+      "rank": 6,
+      "score": 4,
+      "rating": 1726,
+      "performance": 1609,
+      "games": 6,
+      "title": null,
+      "sheet": "202000"
+    },
+    {
+      "username": "vivoangelo",
+      "rank": 7,
+      "score": 4,
+      "rating": 1573,
+      "performance": 1476,
+      "games": 6,
+      "title": null,
+      "sheet": "002020"
+    },
+    {
+      "username": "mateusbaiano",
+      "rank": 8,
+      "score": 2,
+      "rating": 1571,
+      "performance": 1392,
+      "games": 5,
+      "title": null,
+      "sheet": "00002"
+    },
+    {
+      "username": "Suzartt",
+      "rank": 9,
+      "score": 0,
+      "rating": 1867,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "paulo713",
+      "rank": 10,
+      "score": 0,
+      "rating": 1656,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "Mateus09_xd",
+      "rank": 11,
+      "score": 0,
+      "rating": 1281,
+      "performance": 1085,
+      "games": 3,
+      "title": null,
+      "sheet": "000"
+    },
+    {
+      "username": "felipemago13",
+      "rank": 12,
+      "score": 0,
+      "rating": 1811,
+      "performance": 1066,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "id": "UGo1qd8a",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros - 13a ed. Arena",
+  "edition": 13,
+  "startsAt": "2026-08-30T22:00:00Z",
+  "finishesAt": "2026-08-30T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 2
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "matheuslao",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 19,
+  "games": 43,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-09-22T23:51:56.328607Z",
+  "standings": [
+    {
+      "username": "Aprendiz_do_Chess",
+      "rank": 1,
+      "score": 24,
+      "rating": 2006,
+      "performance": 1938,
+      "games": 8,
+      "title": null,
+      "sheet": "44444220"
+    },
+    {
+      "username": "dik-wendson",
+      "rank": 2,
+      "score": 17,
+      "rating": 1878,
+      "performance": 1956,
+      "games": 10,
+      "title": null,
+      "sheet": "3202303202"
+    },
+    {
+      "username": "kleberbios",
+      "rank": 3,
+      "score": 17,
+      "rating": 1895,
+      "performance": 1876,
+      "games": 9,
+      "title": null,
+      "sheet": "330005330"
+    },
+    {
+      "username": "Luffytaro",
+      "rank": 4,
+      "score": 15,
+      "rating": 2007,
+      "performance": 1916,
+      "games": 6,
+      "title": null,
+      "sheet": "025422"
+    },
+    {
+      "username": "Geraldosilva",
+      "rank": 5,
+      "score": 14,
+      "rating": 1933,
+      "performance": 2250,
+      "games": 5,
+      "title": null,
+      "sheet": "24422"
+    },
+    {
+      "username": "magal100",
+      "rank": 6,
+      "score": 8,
+      "rating": 1803,
+      "performance": 1682,
+      "games": 5,
+      "title": null,
+      "sheet": "04220"
+    },
+    {
+      "username": "Mystictrix",
+      "rank": 7,
+      "score": 8,
+      "rating": 1643,
+      "performance": 1666,
+      "games": 7,
+      "title": null,
+      "sheet": "2002022"
+    },
+    {
+      "username": "Streptococus",
+      "rank": 8,
+      "score": 6,
+      "rating": 1317,
+      "performance": 1713,
+      "games": 6,
+      "title": null,
+      "sheet": "020202"
+    },
+    {
+      "username": "Neysid",
+      "rank": 9,
+      "score": 4,
+      "rating": 1588,
+      "performance": 1685,
+      "games": 4,
+      "title": null,
+      "sheet": "0202"
+    },
+    {
+      "username": "geredy",
+      "rank": 10,
+      "score": 4,
+      "rating": 1606,
+      "performance": 1475,
+      "games": 5,
+      "title": null,
+      "sheet": "00220"
+    },
+    {
+      "username": "emaheu",
+      "rank": 11,
+      "score": 2,
+      "rating": 1842,
+      "performance": 1453,
+      "games": 4,
+      "title": null,
+      "sheet": "0020"
+    },
+    {
+      "username": "danielbrigida",
+      "rank": 12,
+      "score": 0,
+      "rating": 1650,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "Alegamecrow",
+      "rank": 13,
+      "score": 0,
+      "rating": 1320,
+      "performance": 1492,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    },
+    {
+      "username": "vifranca",
+      "rank": 14,
+      "score": 0,
+      "rating": 1059,
+      "performance": 1343,
+      "games": 3,
+      "title": null,
+      "sheet": "000"
+    },
+    {
+      "username": "Relampago_Marquin",
+      "rank": 15,
+      "score": 0,
+      "rating": 974,
+      "performance": 1315,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "mateusbaiano",
+      "rank": 16,
+      "score": 0,
+      "rating": 1615,
+      "performance": 1269,
+      "games": 6,
+      "title": null,
+      "sheet": "000000"
+    },
+    {
+      "username": "matheuslao",
+      "rank": 17,
+      "score": 0,
+      "rating": 1187,
+      "performance": 1250,
+      "games": 3,
+      "title": null,
+      "sheet": "000"
+    },
+    {
+      "username": "RIKOVISK",
+      "rank": 18,
+      "score": 0,
+      "rating": 1281,
+      "performance": 946,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "crismaif",
+      "rank": 19,
+      "score": 0,
+      "rating": 700,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    }
+  ]
+}
