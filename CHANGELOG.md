@@ -36,4 +36,4 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 ### Notas
 
 - Nenhuma versão foi publicada ainda: tudo o que está listado acima está em desenvolvimento.
-- A apuração da Temporada 2026 começa na 16ª edição (2026-09-20). O histórico anterior não entra no Ranking (ver [ADR-0004](docs/adr/0004-temporada-com-janela-explicita.md)).
+- A Temporada 2026 apura o ano inteiro (2026-01-01 a 2026-12-31). Três torneios antigos que não casavam com as regras entram por `include` (`KRHH63Yz`, `KPfmJoD9`, `6ehIpwWG`), sem afrouxar as regras para os torneios futuros (ver [ADR-0004](docs/adr/0004-temporada-com-janela-explicita.md)).

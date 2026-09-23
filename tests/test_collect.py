@@ -18,7 +18,6 @@ from lichess_fixtures import FIXTURES, FixtureLichess
 
 SHIPPED = Path(__file__).resolve().parents[1] / "config"
 NOW = datetime(2026, 9, 22, 12, 0, tzinfo=timezone.utc)
-INVALID_IDS = {"KRHH63Yz", "6ehIpwWG", "KPfmJoD9"}
 
 
 @pytest.fixture
@@ -34,7 +33,7 @@ def client() -> FixtureLichess:
 def test_arquiva_os_validos_com_classificacao_e_pgn(tmp_path, config, client) -> None:
     result = collect(config, client, tmp_path, now=NOW)
 
-    assert len(result.archived) == 11
+    assert len(result.archived) == 14
     tournaments = read_tournaments(tmp_path)
     assert set(tournaments) == set(result.archived)
 
@@ -70,19 +69,19 @@ def test_edicao_e_atribuida_por_data(tmp_path, config, client) -> None:
     assert tournaments["BvMsByPD"].edition == 16
 
 
-def test_rodar_duas_vezes_nao_altera_nada(tmp_path, config, client) -> None:
+def test_rodar_duas_vezes_nao_altera_o_arquivo(tmp_path, config, client) -> None:
     first = collect(config, client, tmp_path, now=NOW)
     assert first.archived
-    snapshot = _snapshot(tmp_path)
+    snapshot = _archive_files(tmp_path)
 
     second = collect(config, client, tmp_path, now=NOW)
 
     assert second.archived == ()
     assert set(second.skipped) == set(first.archived)
-    assert _snapshot(tmp_path) == snapshot
+    assert _archive_files(tmp_path) == snapshot
 
 
-def test_pendencias_reportam_near_miss_e_fora_de_temporada(tmp_path, config, client) -> None:
+def test_pendencias_reportam_fora_de_temporada_e_anomalias(tmp_path, config, client) -> None:
     collect(config, client, tmp_path, now=NOW)
 
     report = read_report(tmp_path)
@@ -90,14 +89,13 @@ def test_pendencias_reportam_near_miss_e_fora_de_temporada(tmp_path, config, cli
     for entry in report["entries"]:
         by_kind.setdefault(entry["kind"], []).append(entry["tournamentId"])
 
-    assert sorted(by_kind["near-miss"]) == sorted(INVALID_IDS)
-    assert len(by_kind["outside-season"]) == 10
+    # Os três fora do padrão entraram por ``include``: não há mais near-miss.
+    assert by_kind.get("near-miss", []) == []
+    # Fora da Temporada de 2026: só os torneios de 2025.
+    assert sorted(by_kind["outside-season"]) == ["IXh40MfO", "KRHH63Yz", "gJhPbAJk"]
     assert "BvMsByPD" not in by_kind["outside-season"]
-    assert "edition-anomaly" not in by_kind
-
-    near_miss = next(e for e in report["entries"] if e["tournamentId"] == "KPfmJoD9")
-    assert near_miss["failedChecks"] == ["name", "team"]
-    assert "restrita ao time" in near_miss["detail"]
+    # As duas arenas abertas não trazem número no nome, então a Edição colide.
+    assert len(by_kind["edition-anomaly"]) == 2
 
 
 def test_relatorio_sai_vazio_quando_nao_ha_o_que_reportar(tmp_path, config) -> None:
@@ -136,16 +134,21 @@ def test_cli_collect(tmp_path, monkeypatch, capsys) -> None:
     out = capsys.readouterr().out
 
     assert code == 0
-    assert "11 novo(s)" in out
+    assert "14 novo(s)" in out
     assert (archive / "tournaments" / "BvMsByPD.json").is_file()
     assert (archive / "pendencias.json").is_file()
 
 
-def _snapshot(root: Path) -> dict[str, bytes]:
+def _archive_files(root: Path) -> dict[str, bytes]:
+    """O arquivo canônico (torneios e PGN), sem o relatório de pendências.
+
+    O relatório pode mudar entre execuções porque as anomalias de Edição só são
+    detectadas quando o torneio ainda não está arquivado; o arquivo, esse não.
+    """
     return {
         path.relative_to(root).as_posix(): path.read_bytes()
         for path in sorted(root.rglob("*"))
-        if path.is_file()
+        if path.is_file() and path.name != "pendencias.json"
     }
 
 

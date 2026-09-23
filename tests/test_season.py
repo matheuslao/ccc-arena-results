@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from ccc_arena_results.config import Config, Season, load
+from ccc_arena_results.config import Config, Season, SeasonsConfig, load
 from ccc_arena_results.season import (
     local_date,
     month_scope,
@@ -17,7 +17,12 @@ from ccc_arena_results.season import (
 )
 
 SHIPPED = Path(__file__).resolve().parents[1] / "config"
-SEASONS = load(SHIPPED).seasons
+
+# Janela fixa para exercitar o recorte e a borda sem depender da Temporada real.
+SEASONS = SeasonsConfig(
+    timezone="America/Sao_Paulo",
+    seasons=[Season(label="2026", starts_at=date(2026, 9, 20), ends_at=date(2026, 12, 31))],
+)
 
 
 @pytest.fixture

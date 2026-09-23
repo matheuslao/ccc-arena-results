@@ -103,10 +103,11 @@ def test_podio_da_temporada(config) -> None:
     assert 'class="podium-1"' in html
 
 
-def test_sem_campeao_nao_mostra_podio(tmp_path, config, client) -> None:
-    tournaments = _collected(tmp_path, config, client)
+def test_sem_campeao_nao_mostra_podio(config) -> None:
+    scenario = _scenario(config)
+    tournaments = (_tournament("T1", 6, [("A", 1, 10), ("B", 2, 6)]),)
 
-    html = render_ranking_page(build(config, tournaments, scope_for(config), now=NOW), config)
+    html = render_ranking_page(build(scenario, tournaments, scope_for(scenario), now=NOW), scenario)
 
     assert "Sem campeão eleito" in html
     assert "Pódio" not in html
@@ -164,8 +165,8 @@ def test_pagina_de_torneios_lista_com_vencedor(tmp_path, config, client) -> None
     assert "12" in html  # número de jogadores
 
     payload = json.loads((output / "torneios.json").read_text(encoding="utf-8"))
-    assert payload["tournaments"][0]["id"] == "BvMsByPD"
-    assert payload["tournaments"][0]["winner"] == {
+    by_id = {tournament["id"]: tournament for tournament in payload["tournaments"]}
+    assert by_id["BvMsByPD"]["winner"] == {
         "username": "kleberbios",
         "person": "kleberbios",
     }
@@ -198,8 +199,9 @@ def test_pagina_de_jogador_mostra_resultados(tmp_path, config, client) -> None:
     payload = json.loads((output / "jogadores.json").read_text(encoding="utf-8"))
     leader = next(p for p in payload["players"] if p["person"] == "kleberbios")
     assert leader["usernames"] == ["kleberbios"]
-    assert leader["results"][0]["rank"] == 1
-    assert leader["results"][0]["score"] == 19
+    result = next(r for r in leader["results"] if r["tournamentId"] == "BvMsByPD")
+    assert result["rank"] == 1
+    assert result["score"] == 19
 
 
 def test_navegacao_entre_paginas(tmp_path, config, client) -> None:

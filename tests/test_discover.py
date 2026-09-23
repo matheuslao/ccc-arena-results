@@ -9,6 +9,7 @@ import pytest
 import ccc_arena_results.cli as cli
 from ccc_arena_results.config import load
 from ccc_arena_results.ingest import discover
+from ccc_arena_results.rules import INCLUDE
 from lichess_fixtures import FIXTURES, FixtureLichess
 
 SHIPPED = Path(__file__).resolve().parents[1] / "config"
@@ -28,17 +29,18 @@ def test_descobre_as_duas_fontes_e_classifica(config, client) -> None:
     candidates = discover(config, client)
 
     assert len(candidates) == 14
-    failed = {
-        candidate.arena.id: candidate.verdict.failed
+    assert all(candidate.verdict.valid for candidate in candidates)
+
+    # Os três torneios fora do padrão entram por ``include``, com a falha registrada.
+    included = {
+        candidate.arena.id: candidate.verdict
         for candidate in candidates
-        if not candidate.verdict.valid
+        if candidate.verdict.override == INCLUDE
     }
-    assert failed == {
-        "KRHH63Yz": ("name",),
-        "6ehIpwWG": ("name", "team"),
-        "KPfmJoD9": ("name", "team"),
-    }
-    assert sum(1 for candidate in candidates if candidate.verdict.valid) == 11
+    assert set(included) == {"KRHH63Yz", "KPfmJoD9", "6ehIpwWG"}
+    assert included["KRHH63Yz"].failed == ("name",)
+    assert included["KPfmJoD9"].failed == ("name", "team")
+    assert included["6ehIpwWG"].failed == ("name", "team")
 
 
 def test_ordenacao_deterministica_por_data(config, client) -> None:
@@ -64,6 +66,6 @@ def test_cli_descobre_sem_tocar_a_rede(monkeypatch, capsys) -> None:
     out = capsys.readouterr().out
 
     assert code == 0
-    assert "14 candidatos (11 válidos, 3 inválidos)" in out
+    assert "14 candidatos (14 válidos, 0 inválidos)" in out
     assert "KPfmJoD9" in out
-    assert "falhou: name, team" in out
+    assert "incluído manualmente" in out

@@ -39,12 +39,12 @@ def test_a_configuracao_do_repositorio_e_valida() -> None:
     season = config.seasons.seasons[0]
 
     assert season.label == "2026"
-    assert season.starts_at.isoformat() == "2026-09-20"
+    assert season.starts_at.isoformat() == "2026-01-01"
     assert season.ends_at.isoformat() == "2026-12-31"
     assert config.seasons.timezone == "America/Sao_Paulo"
     assert config.rules.team == "cavaleiros-do-centro"
     assert config.rules.minutes == 60
-    assert config.rules.include == []
+    assert config.rules.include == ["KRHH63Yz", "KPfmJoD9", "6ehIpwWG"]
     assert config.rules.exclude == []
     assert config.ranking.best_n.fraction == 0.75
     assert config.ranking.eligibility.min_participation_fraction == 0.5

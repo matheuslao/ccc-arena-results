@@ -36,6 +36,7 @@ def client() -> FixtureLichess:
 
 
 def test_ranking_da_temporada_ponta_a_ponta(tmp_path, config, client) -> None:
+    config = _september(config)
     collect(config, client, tmp_path, now=NOW)
     tournaments = tuple(read_tournaments(tmp_path).values())
 
@@ -63,6 +64,7 @@ def test_ranking_da_temporada_ponta_a_ponta(tmp_path, config, client) -> None:
 
 
 def test_empate_oficial_divide_a_posicao(tmp_path, config, client) -> None:
+    config = _september(config)
     collect(config, client, tmp_path, now=NOW)
     tournaments = tuple(read_tournaments(tmp_path).values())
 
@@ -73,6 +75,7 @@ def test_empate_oficial_divide_a_posicao(tmp_path, config, client) -> None:
 
 
 def test_payload_do_ranking(tmp_path, config, client) -> None:
+    config = _september(config)
     collect(config, client, tmp_path, now=NOW)
     tournaments = tuple(read_tournaments(tmp_path).values())
 
@@ -138,6 +141,7 @@ def test_campeao_exige_elegivel(config) -> None:
 
 
 def test_campeao_nao_eleito_com_poucos_torneios(tmp_path, config, client) -> None:
+    config = _september(config)
     collect(config, client, tmp_path, now=NOW)
     tournaments = tuple(read_tournaments(tmp_path).values())
 
@@ -206,7 +210,7 @@ def test_cli_rank(tmp_path, monkeypatch, capsys) -> None:
 
     assert code == 0
     assert "Temporada 2026" in out
-    assert "melhores N = 1" in out
+    assert "melhores N = 9" in out
     assert "kleberbios" in out
 
 
@@ -223,14 +227,14 @@ def test_cli_rank_de_um_mes(tmp_path, monkeypatch, capsys) -> None:
 
     assert code == 0
     assert "Recorte 2026-09" in out
-    assert "2026-09-20 a 2026-09-30" in out
+    assert "2026-09-01 a 2026-09-30" in out
 
 
 def test_cli_rank_recusa_recorte_fora_da_temporada(tmp_path, monkeypatch, capsys) -> None:
     monkeypatch.setattr(cli, "HttpLichess", lambda: FixtureLichess(FIXTURES))
 
     code = cli.main(
-        ["rank", "--month", "2026-08", "--config-dir", str(SHIPPED), "--archive-dir", str(tmp_path)]
+        ["rank", "--month", "2025-08", "--config-dir", str(SHIPPED), "--archive-dir", str(tmp_path)]
     )
 
     assert code == 1
@@ -239,6 +243,15 @@ def test_cli_rank_recusa_recorte_fora_da_temporada(tmp_path, monkeypatch, capsys
 
 def _row(ranking, person: str):
     return next(row for row in ranking.rows if row.person == person)
+
+
+def _september(config: Config) -> Config:
+    """A config real com a Temporada restrita a setembro/2026."""
+    seasons = SeasonsConfig(
+        timezone="America/Sao_Paulo",
+        seasons=[Season(label="2026", starts_at=date(2026, 9, 20), ends_at=date(2026, 12, 31))],
+    )
+    return dataclasses.replace(config, seasons=seasons)
 
 
 def _scenario_config(config: Config) -> Config:

@@ -111,7 +111,7 @@ def test_refresh_all_reprocessa_todos_os_arquivados(tmp_path, config, client) ->
 
     result = refresh_all(config, client, tmp_path, now=later)
 
-    assert len(result.updated) == 11
+    assert len(result.updated) == 14
     assert result.removed == ()
     tournaments = read_tournaments(tmp_path)
     assert all(tournament.fetched_at == later for tournament in tournaments.values())
