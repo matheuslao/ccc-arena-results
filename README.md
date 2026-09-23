@@ -29,7 +29,8 @@ O Lichess é a nascente; **este repositório é a fonte da verdade** (ver [ADR-0
 | Ranking — Recortes (mês e semestre) | pronto |
 | Aliases no Ranking | pronto |
 | Site — Ranking da Temporada (`ccc-arena site`) | pronto |
-| Site — Torneios e Jogadores | planejado |
+| Site — Torneios e Jogadores | pronto |
+| Site — Recortes (mês e semestre) | pronto |
 | Automação semanal | planejado |
 
 ## Como rodar

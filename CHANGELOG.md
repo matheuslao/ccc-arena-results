@@ -20,6 +20,8 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 - Recortes de mês e semestre (`ccc-arena rank --month`/`--semester`), recortados pela janela da Temporada e ancorados no fuso de referência.
 - Aliases no Ranking: usernames da mesma pessoa somam um único jogador, numa única linha que exibe todas as usernames. A tabela vive em `aliases.json` e vale ao recalcular, sem recoletar.
 - Site estático (`ccc-arena site`): a página da Temporada, pré-renderizada a partir dos dados derivados, com o Ranking, o pódio, a decomposição de cada jogador (contados, descartados, total) e a explicação das regras com os valores correntes. Os dados derivados em JSON são publicados junto; a página lê só o arquivo e nunca a API do Lichess.
+- Páginas de Torneios e Jogadores: a lista de Torneios Válidos com data, jogadores e vencedor; a Classificação final de cada Torneio, com score e Performance; e a página de cada jogador com todos os seus Resultados. A navegação liga Ranking, Torneios e Jogadores nos dois sentidos, e o jogador com alias aparece consolidado.
+- Recortes no site: uma página e um JSON por mês e por semestre com ao menos um Torneio Válido na Temporada, com o N e a presença próprios de cada janela. A página da Temporada lista os Recortes, e cada Recorte volta para ela.
 - Janela de Temporada no fuso de referência (módulo `season`), com o início e o fim inclusivos.
 - Validação dos quatro arquivos de configuração, acumulando todos os problemas e apontando o arquivo e o campo de cada um.
 - Arquivos de configuração com os padrões da Temporada 2026: fuso `America/Sao_Paulo`, time `cavaleiros-do-centro`, melhores 75%, presença mínima de 50% e mínimo de 3 torneios para eleger campeão.

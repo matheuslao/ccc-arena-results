@@ -24,6 +24,7 @@ __all__ = [
     "Ranking",
     "RankingRow",
     "build",
+    "in_scope",
 ]
 
 _ROUNDINGS = {"ceil": ceil, "floor": floor, "round": round}
@@ -137,9 +138,7 @@ def build(
     """Calcula o Ranking de uma janela a partir dos torneios arquivados."""
     moment = now or datetime.now(timezone.utc)
     considered = [
-        tournament
-        for tournament in tournaments
-        if _in_scope(tournament, scope, config)
+        tournament for tournament in tournaments if in_scope(config, tournament, scope)
     ]
 
     total_tournaments = len(considered)
@@ -169,7 +168,8 @@ def build(
     )
 
 
-def _in_scope(tournament: ArchivedTournament, scope: Scope, config: Config) -> bool:
+def in_scope(config: Config, tournament: ArchivedTournament, scope: Scope) -> bool:
+    """Se o torneio entra na janela: dentro do período e fora de ``exclude``."""
     if tournament.id in config.rules.exclude:
         return False
     day = local_date(tournament.starts_at, config.seasons.timezone)

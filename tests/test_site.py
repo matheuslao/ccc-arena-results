@@ -12,7 +12,14 @@ import pytest
 
 import ccc_arena_results.cli as cli
 from ccc_arena_results.archive import ArchivedStanding, ArchivedTournament, read_tournaments
-from ccc_arena_results.config import Config, Season, SeasonsConfig, load
+from ccc_arena_results.config import (
+    AliasesConfig,
+    Config,
+    Person,
+    Season,
+    SeasonsConfig,
+    load,
+)
 from ccc_arena_results.ingest import collect
 from ccc_arena_results.rank import build
 from ccc_arena_results.season import scope_for
@@ -131,6 +138,169 @@ def test_site_nao_toca_a_rede(tmp_path, config, client, monkeypatch) -> None:
     assert (output / INDEX_FILE).is_file()
 
 
+def test_site_gera_paginas_de_torneios_e_jogadores(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    assert (output / "torneios.html").is_file()
+    assert (output / "torneios.json").is_file()
+    assert (output / "jogadores.json").is_file()
+    assert (output / "torneio" / "BvMsByPD.html").is_file()
+    assert (output / "jogador" / "kleberbios.html").is_file()
+
+
+def test_pagina_de_torneios_lista_com_vencedor(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    html = (output / "torneios.html").read_text(encoding="utf-8")
+    assert "Arena dos Cavaleiros 16a ed. Arena" in html
+    assert 'href="torneio/BvMsByPD.html"' in html
+    assert 'href="jogador/kleberbios.html"' in html
+    assert "12" in html  # número de jogadores
+
+    payload = json.loads((output / "torneios.json").read_text(encoding="utf-8"))
+    assert payload["tournaments"][0]["id"] == "BvMsByPD"
+    assert payload["tournaments"][0]["winner"] == {
+        "username": "kleberbios",
+        "person": "kleberbios",
+    }
+
+
+def test_pagina_de_torneio_mostra_classificacao(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    html = (output / "torneio" / "BvMsByPD.html").read_text(encoding="utf-8")
+    assert "Classificação final" in html
+    assert "kleberbios" in html
+    assert "Performance" in html
+    assert 'href="../jogador/kleberbios.html"' in html
+
+
+def test_pagina_de_jogador_mostra_resultados(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    html = (output / "jogador" / "kleberbios.html").read_text(encoding="utf-8")
+    assert "Resultados" in html
+    assert 'href="../torneio/BvMsByPD.html"' in html
+    assert ">19<" in html
+
+    payload = json.loads((output / "jogadores.json").read_text(encoding="utf-8"))
+    leader = next(p for p in payload["players"] if p["person"] == "kleberbios")
+    assert leader["usernames"] == ["kleberbios"]
+    assert leader["results"][0]["rank"] == 1
+    assert leader["results"][0]["score"] == 19
+
+
+def test_navegacao_entre_paginas(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    ranking = (output / "index.html").read_text(encoding="utf-8")
+    listing = (output / "torneios.html").read_text(encoding="utf-8")
+    tournament = (output / "torneio" / "BvMsByPD.html").read_text(encoding="utf-8")
+    player = (output / "jogador" / "kleberbios.html").read_text(encoding="utf-8")
+
+    assert 'href="torneios.html"' in ranking
+    assert 'href="jogador/kleberbios.html"' in ranking
+    assert 'href="torneio/BvMsByPD.html"' in listing
+    assert 'href="../index.html"' in tournament
+    assert 'href="../torneios.html"' in tournament
+    assert 'href="../jogador/kleberbios.html"' in tournament
+    assert 'href="../torneio/BvMsByPD.html"' in player
+
+
+def test_jogador_com_alias_aparece_consolidado(config, tmp_path) -> None:
+    scenario = _scenario(config, aliases=[("Fulano", ["antigo", "novo"])])
+    tournaments = (
+        _tournament("T1", 6, [("antigo", 1, 10), ("B", 2, 6)]),
+        _tournament("T2", 13, [("novo", 1, 8), ("B", 2, 5)]),
+    )
+    output = tmp_path / "site"
+
+    build_site(scenario, tournaments, output, now=NOW)
+
+    page = (output / "jogador" / "fulano.html").read_text(encoding="utf-8")
+    assert "Fulano" in page
+    assert "antigo" in page and "novo" in page
+    assert 'href="../torneio/T1.html"' in page
+    assert 'href="../torneio/T2.html"' in page
+
+    listing = (output / "torneios.html").read_text(encoding="utf-8")
+    assert listing.count('href="jogador/fulano.html"') == 2
+
+
+def test_site_publica_recortes_de_mes_e_semestre(config, tmp_path) -> None:
+    output = tmp_path / "site"
+
+    build_site(_wide_scenario(config), _recorte_tournaments(), output, now=NOW)
+
+    assert (output / "recorte" / "2026-09.html").is_file()
+    assert (output / "recorte" / "2026-09.json").is_file()
+    assert (output / "recorte" / "2026-10.html").is_file()
+    assert (output / "recorte" / "2026-H2.html").is_file()
+    assert (output / "recorte" / "2026-H2.json").is_file()
+
+
+def test_recorte_tem_n_e_janela_proprios(config, tmp_path) -> None:
+    output = tmp_path / "site"
+
+    build_site(_wide_scenario(config), _recorte_tournaments(), output, now=NOW)
+
+    september = json.loads((output / "recorte" / "2026-09.json").read_text(encoding="utf-8"))
+    october = json.loads((output / "recorte" / "2026-10.json").read_text(encoding="utf-8"))
+    semester = json.loads((output / "recorte" / "2026-H2.json").read_text(encoding="utf-8"))
+
+    assert september["scope"] == {"kind": "month", "value": "2026-09"}
+    assert (september["tournamentsConsidered"], september["bestN"]) == (3, 3)
+    assert (october["tournamentsConsidered"], october["bestN"]) == (1, 1)
+    assert semester["scope"] == {"kind": "semester", "value": "2026-H2"}
+    assert (semester["tournamentsConsidered"], semester["bestN"]) == (4, 3)
+
+
+def test_recorte_com_menos_de_tres_sem_podio(config, tmp_path) -> None:
+    output = tmp_path / "site"
+
+    build_site(_wide_scenario(config), _recorte_tournaments(), output, now=NOW)
+
+    september = (output / "recorte" / "2026-09.html").read_text(encoding="utf-8")
+    october = (output / "recorte" / "2026-10.html").read_text(encoding="utf-8")
+
+    assert "Pódio" in september
+    assert "Campeão" in september
+    assert "Descartados" in september
+
+    assert "Sem campeão eleito" in october
+    assert "Pódio" not in october
+
+
+def test_navegacao_entre_temporada_e_recortes(config, tmp_path) -> None:
+    output = tmp_path / "site"
+
+    build_site(_wide_scenario(config), _recorte_tournaments(), output, now=NOW)
+
+    season = (output / "index.html").read_text(encoding="utf-8")
+    recorte = (output / "recorte" / "2026-09.html").read_text(encoding="utf-8")
+
+    assert 'href="recorte/2026-09.html"' in season
+    assert 'href="recorte/2026-H2.html"' in season
+    assert "Mês 2026-09" in season
+    assert 'href="../index.html"' in recorte
+    assert 'href="../torneios.html"' in recorte
+
+
 def test_cli_site(tmp_path, monkeypatch, capsys) -> None:
     monkeypatch.setattr(cli, "HttpLichess", lambda: FixtureLichess(FIXTURES))
     archive = tmp_path / "archive"
@@ -175,12 +345,23 @@ def test_cli_site_recusa_temporada_desconhecida(tmp_path, capsys) -> None:
     assert "Temporada desconhecida" in capsys.readouterr().err
 
 
-def _scenario(config: Config) -> Config:
+def _scenario(config: Config, aliases: list[tuple[str, list[str]]] | None = None) -> Config:
     seasons = SeasonsConfig(
         timezone="America/Sao_Paulo",
         seasons=[Season(label="2026", starts_at=date(2026, 9, 1), ends_at=date(2026, 9, 30))],
     )
-    return dataclasses.replace(config, seasons=seasons)
+    scenario = dataclasses.replace(config, seasons=seasons)
+    if aliases is not None:
+        scenario = dataclasses.replace(
+            scenario,
+            aliases=AliasesConfig(
+                people=[
+                    Person(person=person, usernames=usernames)
+                    for person, usernames in aliases
+                ]
+            ),
+        )
+    return scenario
 
 
 def _tournaments() -> tuple[ArchivedTournament, ...]:
@@ -191,12 +372,31 @@ def _tournaments() -> tuple[ArchivedTournament, ...]:
     )
 
 
+def _wide_scenario(config: Config) -> Config:
+    seasons = SeasonsConfig(
+        timezone="America/Sao_Paulo",
+        seasons=[Season(label="2026", starts_at=date(2026, 9, 1), ends_at=date(2026, 12, 31))],
+    )
+    return dataclasses.replace(config, seasons=seasons)
+
+
+def _recorte_tournaments() -> tuple[ArchivedTournament, ...]:
+    return (
+        _tournament("T1", 6, [("A", 1, 10), ("B", 2, 6)]),
+        _tournament("T2", 13, [("A", 1, 8), ("B", 2, 5)]),
+        _tournament("T3", 20, [("A", 1, 6), ("B", 2, 4)]),
+        _tournament("T4", 4, [("A", 1, 9), ("B", 2, 3)], month=10),
+    )
+
+
 def _tournament(
     arena_id: str,
     day: int,
     standings: list[tuple[str, int, int]],
+    *,
+    month: int = 9,
 ) -> ArchivedTournament:
-    starts_at = datetime(2026, 9, day, 22, 0, tzinfo=timezone.utc)
+    starts_at = datetime(2026, month, day, 22, 0, tzinfo=timezone.utc)
     return ArchivedTournament(
         id=arena_id,
         name=arena_id,
