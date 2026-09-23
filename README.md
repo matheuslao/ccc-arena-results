@@ -4,7 +4,7 @@ Sistematiza o acompanhamento da **Arena dos Cavaleiros**, o torneio semanal (dom
 
 ## Por que existe
 
-Cada domingo gera uma classificação que fica isolada dentro do próprio torneio. Responder "quem está ganhando a temporada?" exige abrir torneio por torneio e somar na mão — e ainda decidir sozinho como comparar quem jogou doze domingos com quem jogou quatro. Sem histórico consolidado e sem regra explícita, não há como premiar os primeiros colocados com justiça, transparência e reprodutibilidade.
+Cada domingo gera uma classificação que fica isolada dentro do próprio torneio. Responder "quem está ganhando a temporada?" exige abrir torneio por torneio e somar na mão — e ainda decidir sozinho como comparar quem jogou doze domingos com quem jogou quatro. Sem histórico consolidado e sem regra explícita, não há como coroar os primeiros colocados com justiça, transparência e reprodutibilidade.
 
 ## Como funciona
 
@@ -74,7 +74,7 @@ Uma queda do Lichess não derruba a página: a coleta é tentada, mas o site é 
 
 - Só entram **Torneios Válidos**: arena do time, restrita a membros, com 1 hora de duração e nome no padrão "Arena dos Cavaleiros".
 - **Melhores N**: conta apenas os melhores 75% dos Resultados do período.
-- **Elegibilidade a prêmio**: presença em pelo menos 50% dos Torneios Válidos do período.
+- **Elegibilidade ao pódio**: presença em pelo menos 50% dos Torneios Válidos do período.
 - **Recorte com menos de 3 torneios** não elege campeão.
 - **Campeão** é o melhor jogador **elegível** — o título não vai para quem não tem presença suficiente.
 - Desempate: mais primeiros lugares → melhor Resultado individual → mais torneios jogados.

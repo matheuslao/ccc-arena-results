@@ -70,6 +70,35 @@ def test_site_gera_html_e_json(tmp_path, config, client) -> None:
     assert payload["rows"]
 
 
+def test_hero_identifica_a_janela_com_datas_humanas(config) -> None:
+    scenario = _scenario(config)
+
+    html = render_ranking_page(
+        build(scenario, _tournaments(), scope_for(scenario), now=NOW), scenario
+    )
+
+    assert "Ranking da temporada" in html
+    assert "Temporada 2026" in html
+    assert "1 a 30 de setembro de 2026" in html
+    assert "2026-09-01" not in html
+
+
+def test_hero_de_ano_inteiro_diz_todo_o_ano(config) -> None:
+    scenario = dataclasses.replace(
+        config,
+        seasons=SeasonsConfig(
+            timezone="America/Sao_Paulo",
+            seasons=[Season(label="2026", starts_at=date(2026, 1, 1), ends_at=date(2026, 12, 31))],
+        ),
+    )
+
+    html = render_ranking_page(
+        build(scenario, _tournaments(), scope_for(scenario), now=NOW), scenario
+    )
+
+    assert "todo o ano de 2026" in html
+
+
 def test_pagina_explica_as_regras(tmp_path, config, client) -> None:
     tournaments = _collected(tmp_path, config, client)
 
@@ -80,6 +109,10 @@ def test_pagina_explica_as_regras(tmp_path, config, client) -> None:
     assert "50%" in html
     assert "ao menos 3 Torneios Válidos" in html
     assert "Desempate" in html
+    # A explicação usa os números do período: 9 melhores de 11, com a barrinha.
+    assert "9 melhores" in html
+    assert "11</strong> torneios" in html
+    assert 'class="meter"' in html
 
 
 def test_pagina_mostra_a_decomposicao(tmp_path, config, client) -> None:
@@ -87,10 +120,13 @@ def test_pagina_mostra_a_decomposicao(tmp_path, config, client) -> None:
 
     html = render_ranking_page(build(config, tournaments, scope_for(config), now=NOW), config)
 
-    assert "Contados" in html
+    assert "Pontos" in html
+    assert "Contam" in html
     assert "Descartados" in html
+    assert "1ºs" in html
     assert "BvMsByPD: 19" in html
     assert 'class="counted"' in html
+    assert 'title="Soma dos Resultados que contam"' in html
 
 
 def test_podio_da_temporada(config) -> None:
@@ -101,6 +137,39 @@ def test_podio_da_temporada(config) -> None:
     assert "Pódio" in html
     assert "Campeão" in html
     assert 'class="podium-1"' in html
+
+
+def test_podio_mostra_so_quem_e_elegivel(config) -> None:
+    scenario = _scenario(config)
+    tournaments = (
+        _tournament("T1", 6, [("Lider", 1, 100), ("Presente", 2, 10)]),
+        _tournament("T2", 13, [("Presente", 1, 10)]),
+        _tournament("T3", 20, [("Presente", 1, 10)]),
+    )
+
+    html = render_ranking_page(build(scenario, tournaments, scope_for(scenario), now=NOW), scenario)
+    podium = html.split('<section class="podium">')[1].split("</section>")[0]
+
+    # O líder por total não tem presença suficiente; o pódio é o elegível.
+    assert "Presente" in podium
+    assert "Lider" not in podium
+    assert "Campeão" in podium
+
+
+def test_tabela_marca_o_campeao(config) -> None:
+    scenario = _scenario(config)
+    tournaments = (
+        _tournament("T1", 6, [("Lider", 1, 100), ("Presente", 2, 10)]),
+        _tournament("T2", 13, [("Presente", 1, 10)]),
+        _tournament("T3", 20, [("Presente", 1, 10)]),
+    )
+
+    html = render_ranking_page(build(scenario, tournaments, scope_for(scenario), now=NOW), scenario)
+    table = html.split('class="ranking-sec"')[1]
+
+    # O líder por total (inelegível) fica em 1º na tabela; o campeão é o elegível.
+    assert "Lider</a>" in table
+    assert 'Presente</a> <span class="badge">Campeão</span>' in table
 
 
 def test_sem_campeao_nao_mostra_podio(config) -> None:
@@ -162,6 +231,7 @@ def test_pagina_de_torneios_lista_com_vencedor(tmp_path, config, client) -> None
     assert "Arena dos Cavaleiros 16a ed. Arena" in html
     assert 'href="torneio/BvMsByPD.html"' in html
     assert 'href="jogador/kleberbios.html"' in html
+    assert 'href="https://lichess.org/tournament/BvMsByPD"' in html
     assert "12" in html  # número de jogadores
 
     payload = json.loads((output / "torneios.json").read_text(encoding="utf-8"))
@@ -170,6 +240,34 @@ def test_pagina_de_torneios_lista_com_vencedor(tmp_path, config, client) -> None
         "username": "kleberbios",
         "person": "kleberbios",
     }
+
+
+def test_pagina_de_torneios_abre_pelo_mais_recente(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    html = (output / "torneios.html").read_text(encoding="utf-8")
+    first_row = html.split("<tbody>", 1)[1].split("</tr>", 1)[0]
+
+    assert "BvMsByPD" in first_row  # 16ª ed., 2026-09-20
+
+    payload = json.loads((output / "torneios.json").read_text(encoding="utf-8"))
+    assert payload["tournaments"][0]["id"] == "BvMsByPD"
+
+
+def test_rodape_diz_que_os_dados_vem_do_lichess(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    ranking = (output / "index.html").read_text(encoding="utf-8")
+    listing = (output / "torneios.html").read_text(encoding="utf-8")
+
+    assert "Dados extraídos do Lichess" in ranking
+    assert "Dados extraídos do Lichess" in listing
 
 
 def test_pagina_de_torneio_mostra_classificacao(tmp_path, config, client) -> None:
@@ -202,6 +300,50 @@ def test_pagina_de_jogador_mostra_resultados(tmp_path, config, client) -> None:
     result = next(r for r in leader["results"] if r["tournamentId"] == "BvMsByPD")
     assert result["rank"] == 1
     assert result["score"] == 19
+
+
+def test_pagina_de_jogador_mostra_o_grafico_de_evolucao(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    html = (output / "jogador" / "kleberbios.html").read_text(encoding="utf-8")
+    assert 'class="chart-svg"' in html
+    assert "Evolução" in html
+
+
+def test_pagina_de_jogador_abre_pelo_resultado_mais_recente(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    html = (output / "jogador" / "kleberbios.html").read_text(encoding="utf-8")
+    first_row = html.split("<tbody>", 1)[1].split("</tr>", 1)[0]
+
+    assert "BvMsByPD" in first_row  # 16ª ed., 2026-09-20
+
+
+def test_pagina_de_jogador_mostra_a_posicao(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    html = (output / "jogador" / "kleberbios.html").read_text(encoding="utf-8")
+    assert "Posição por torneio" in html
+
+
+def test_pagina_de_torneio_mostra_o_grafico(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    html = (output / "torneio" / "BvMsByPD.html").read_text(encoding="utf-8")
+    assert 'class="bar"' in html
+    assert "Pontuação" in html
 
 
 def test_navegacao_entre_paginas(tmp_path, config, client) -> None:
@@ -298,7 +440,7 @@ def test_navegacao_entre_temporada_e_recortes(config, tmp_path) -> None:
 
     assert 'href="recorte/2026-09.html"' in season
     assert 'href="recorte/2026-H2.html"' in season
-    assert "Mês 2026-09" in season
+    assert "Setembro de 2026" in season
     assert 'href="../index.html"' in recorte
     assert 'href="../torneios.html"' in recorte
 

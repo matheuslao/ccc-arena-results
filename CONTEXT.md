@@ -1,6 +1,6 @@
 # Arena dos Cavaleiros — Resultados
 
-Contexto que transforma as arenas semanais do time **Cavaleiros do Centro** no Lichess em um histórico de resultados e em rankings de temporada que a comunidade possa consultar e premiar.
+Contexto que transforma as arenas semanais do time **Cavaleiros do Centro** no Lichess em um histórico de resultados e em rankings de temporada que a comunidade possa consultar e celebrar.
 
 ## Language
 
@@ -17,7 +17,7 @@ Um Torneio que satisfaz as condições da Temporada: arena do time Cavaleiros do
 _Avoid_: torneio oficial, competição
 
 **Temporada**:
-O período apurado, com início e fim explícitos e configuráveis. É a unidade oficial de premiação.
+O período apurado, com início e fim explícitos e configuráveis. É a unidade oficial do pódio.
 _Avoid_: ano, campeonato, liga, circuito
 
 **Recorte**:
@@ -48,9 +48,9 @@ _Avoid_: inscrição, presença, adesão
 Usuários do Lichess que são a mesma pessoa (ex.: troca de nick). Mapeados manualmente; o Ranking trata todos os aliases de uma pessoa como um único jogador.
 _Avoid_: conta, perfil
 
-**Elegibilidade a Prêmio**:
-A condição de um jogador poder receber premiação de um Recorte: ter Participação suficiente no Recorte, além de constar no Ranking.
-_Avoid_: classificação para prêmio, habilitado
+**Elegibilidade ao Pódio**:
+A condição de um jogador poder figurar no pódio de um Recorte: ter Participação suficiente no Recorte, além de constar no Ranking.
+_Avoid_: habilitado, classificado
 
 **Melhores N**:
 A regra de agregação do Ranking: contam apenas os N melhores Resultados do jogador no período, com N proporcional ao número de Torneios Válidos do Recorte.

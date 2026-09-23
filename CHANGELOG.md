@@ -29,6 +29,17 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 - Ambiente reprodutível em Docker, com `Dockerfile`, `docker-compose.yml` e alvos `make` para `build`, `check`, `collect`, `test` e `shell`.
 - Suíte de testes do validador de configuração.
 - Licença MIT e Código de Conduta.
+- Identidade visual do site: a logo dos Cavaleiros do Centro, tema claro/escuro em tons de pergaminho, cabeçalho fixo com navegação e layout responsivo (a tabela do Ranking vira cartões no celular).
+- Gráficos em SVG, pré-renderizados sem JavaScript: a evolução do score e da posição no perfil do jogador, e a pontuação dos primeiros colocados na página do Torneio.
+- Identificação da Temporada ou do Recorte em destaque no topo, com as datas em português (ex.: "1 a 30 de setembro de 2026", "todo o ano de 2026").
+- A lista de Torneios traz uma coluna com link para a arena no Lichess, e o rodapé informa que os dados são extraídos do Lichess.
+
+### Alterado
+
+- A tabela de Torneios e a de Resultados do jogador passam a abrir pelo mais recente.
+- O Ranking ganha o selo "Campeão" na linha do campeão, cabeçalhos mais claros (Pontos, Contam, Descartados, 1ºs), dica em cada coluna e uma linha de ajuda.
+- A explicação de "Melhores N" passa a usar os números do período (ex.: "9 melhores de 11"), com uma barrinha de proporção.
+- A "Elegibilidade a Prêmio" do glossário passa a se chamar "Elegibilidade ao Pódio", e a linguagem do site deixa de falar em premiação (`CONTEXT.md`, `README.md`, ADRs).
 
 ### Corrigido
 
