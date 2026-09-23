@@ -38,3 +38,4 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 
 - Nenhuma versão foi publicada ainda: tudo o que está listado acima está em desenvolvimento.
 - A Temporada 2026 apura o ano inteiro (2026-01-01 a 2026-12-31). Três torneios antigos que não casavam com as regras entram por `include` (`KRHH63Yz`, `KPfmJoD9`, `6ehIpwWG`), sem afrouxar as regras para os torneios futuros (ver [ADR-0004](docs/adr/0004-temporada-com-janela-explicita.md)).
+- O site está no ar em <https://matheuslao.github.io/ccc-arena-results/>, e o workflow semanal passa a mantê-lo atualizado sozinho.

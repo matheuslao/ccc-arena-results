@@ -1,6 +1,6 @@
 # Arena dos Cavaleiros — Resultados
 
-Sistematiza o acompanhamento da **Arena dos Cavaleiros**, o torneio semanal (domingo, 19h) da comunidade **Cavaleiros do Centro** no Lichess: coleta o resultado de cada edição, arquiva e deriva o Ranking da Temporada e dos Recortes (mês e semestre), numa página pública.
+Sistematiza o acompanhamento da **Arena dos Cavaleiros**, o torneio semanal (domingo, 19h) da comunidade **Cavaleiros do Centro** no Lichess: coleta o resultado de cada edição, arquiva e deriva o Ranking da Temporada e dos Recortes (mês e semestre), numa [página pública](https://matheuslao.github.io/ccc-arena-results/).
 
 ## Por que existe
 
@@ -61,7 +61,7 @@ docker compose run --rm test                      # pytest
 
 ## Automação
 
-Um workflow do GitHub Actions roda todo domingo à noite (20:30 em `America/Sao_Paulo`), logo após a arena, e também por disparo manual (`workflow_dispatch`). Ele coleta os Torneios Válidos, regenera a página e a publica no GitHub Pages; o arquivo em `archive/` é commitado quando muda, e nada é commitado quando não há torneio novo.
+Um workflow do GitHub Actions roda todo domingo à noite (20:30 em `America/Sao_Paulo`), logo após a arena, e também por disparo manual (`workflow_dispatch`). Ele coleta os Torneios Válidos, regenera a página e a publica no GitHub Pages, em <https://matheuslao.github.io/ccc-arena-results/>; o arquivo em `archive/` é commitado quando muda, e nada é commitado quando não há torneio novo.
 
 Para ligar isso uma vez no repositório:
 
@@ -88,6 +88,9 @@ Todos esses valores são **configuração, não código** — veja [`config/`](c
 config/                 as regras, como dado
 src/ccc_arena_results/  o motor (CLI)
 tests/                  a suíte de testes
+archive/                o arquivo canônico (dados versionados)
+.github/workflows/      a coleta e a publicação semanais
+site/                   a página gerada (fora do git)
 docs/adr/               decisões de arquitetura
 ```
 
