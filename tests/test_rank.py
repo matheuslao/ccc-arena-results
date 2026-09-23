@@ -130,6 +130,26 @@ def test_melhores_n_e_desempates(config) -> None:
     assert "T5" not in {entry.tournament_id for row in ranking.rows for entry in row.breakdown}
 
 
+def test_total_vence_os_desempates(config) -> None:
+    scenario = _scenario_config(config)
+    tournaments = (
+        _tournament("T1", 6, [("Primeiro", 1, 5), ("Volume", 2, 4)]),
+        _tournament("T2", 13, [("Rival", 1, 8), ("Volume", 2, 7)]),
+    )
+
+    ranking = build(scenario, tournaments, scope_for(scenario), now=NOW)
+
+    # Volume soma mais (7) que Primeiro (5), mesmo sem nenhum primeiro lugar.
+    # O total é o critério primário; os desempates não o substituem.
+    assert [row.person for row in ranking.rows] == ["Rival", "Volume", "Primeiro"]
+    assert (ranking.rows[1].person, ranking.rows[1].total, ranking.rows[1].first_places) == (
+        "Volume",
+        7,
+        0,
+    )
+    assert ranking.rows[2].first_places == 1
+
+
 def test_campeao_exige_elegivel(config) -> None:
     scenario = _scenario_config(config)
 

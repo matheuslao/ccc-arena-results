@@ -33,6 +33,7 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 ### Corrigido
 
 - O `editionPattern` padrão passou a ignorar caixa, para reconhecer os nomes reais das edições antigas ("Ed", "ed", "Edição") e não só os novos.
+- O Ranking ignorava o total ao ordenar: usava só os critérios de desempate, o que colocava quem somou mais pontos atrás de quem somou menos. Agora o total é o critério primário e os desempates só desempatam — inclusive na escolha do campeão.
 
 ### Notas
 

@@ -232,11 +232,19 @@ def _row(
     )
 
 
-def _order_key(row: RankingRow, config: Config) -> tuple[Any, ...]:
-    criteria = tuple(
-        -getattr(row, _TIE_ATTRIBUTES[name]) for name in config.ranking.tie_break
+def _rank_key(row: RankingRow, config: Config) -> tuple[int, ...]:
+    """O que decide a posição: o total e, no empate, os critérios de desempate.
+
+    O Ranking soma os melhores N; o total é o critério primário. Os desempates
+    só desempatam — nunca substituem o total.
+    """
+    return (row.total,) + tuple(
+        getattr(row, _TIE_ATTRIBUTES[name]) for name in config.ranking.tie_break
     )
-    return criteria + (row.person,)
+
+
+def _order_key(row: RankingRow, config: Config) -> tuple[Any, ...]:
+    return tuple(-value for value in _rank_key(row, config)) + (row.person,)
 
 
 def _assign_ranks(rows: list[RankingRow], config: Config) -> list[RankingRow]:
@@ -244,9 +252,7 @@ def _assign_ranks(rows: list[RankingRow], config: Config) -> list[RankingRow]:
     previous: tuple[int, ...] | None = None
     current_rank = 0
     for position, row in enumerate(rows, start=1):
-        criteria = tuple(
-            getattr(row, _TIE_ATTRIBUTES[name]) for name in config.ranking.tie_break
-        )
+        criteria = _rank_key(row, config)
         if criteria != previous:
             current_rank = position
         ranked.append(replace(row, rank=current_rank))
