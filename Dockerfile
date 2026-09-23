@@ -12,6 +12,7 @@ COPY LICENSE ./
 COPY src ./src
 COPY config ./config
 COPY tests ./tests
+COPY .github ./.github
 
 RUN pip install --no-cache-dir -e ".[dev]"
 

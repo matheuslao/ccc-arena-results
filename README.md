@@ -31,7 +31,7 @@ O Lichess é a nascente; **este repositório é a fonte da verdade** (ver [ADR-0
 | Site — Ranking da Temporada (`ccc-arena site`) | pronto |
 | Site — Torneios e Jogadores | pronto |
 | Site — Recortes (mês e semestre) | pronto |
-| Automação semanal | planejado |
+| Automação semanal e publicação | pronto |
 
 ## Como rodar
 
@@ -58,6 +58,17 @@ docker compose run --rm cli ccc-arena rank --month 2026-09   # Ranking de um Rec
 docker compose run --rm cli ccc-arena site        # gera a página estática em ./site
 docker compose run --rm test                      # pytest
 ```
+
+## Automação
+
+Um workflow do GitHub Actions roda todo domingo à noite (20:30 em `America/Sao_Paulo`), logo após a arena, e também por disparo manual (`workflow_dispatch`). Ele coleta os Torneios Válidos, regenera a página e a publica no GitHub Pages; o arquivo em `archive/` é commitado quando muda, e nada é commitado quando não há torneio novo.
+
+Para ligar isso uma vez no repositório:
+
+1. **Settings → Pages → Source: GitHub Actions** — a publicação é feita pelo workflow, não por branch.
+2. **Settings → Actions → General → Workflow permissions:** permitir leitura e escrita (o workflow precisa de `contents: write` para commitar o arquivo).
+
+Uma queda do Lichess não derruba a página: a coleta é tentada, mas o site é regerado do arquivo já versionado.
 
 ## As regras do Ranking
 

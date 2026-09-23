@@ -1,0 +1,70 @@
+name: Coleta semanal e publicação
+
+# Domingo 20:30 em America/Sao_Paulo (UTC-3) = 23:30 UTC, logo após a arena
+# das 19h. O agendamento do GitHub é sempre em UTC e pode atrasar alguns minutos.
+on:
+  schedule:
+    - cron: "30 23 * * 0"
+  workflow_dispatch:
+
+# contents: escrever o arquivo canônico; pages/id-token: publicar a página.
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Uma execução de cada vez: um disparo manual não atropela o agendado.
+concurrency:
+  group: coleta
+  cancel-in-progress: false
+
+jobs:
+  coletar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Instala o pacote
+        run: pip install -e .
+
+      # Uma queda do Lichess não pode derrubar a página: a coleta é tentada, mas
+      # o site é regerado a partir do arquivo já versionado e continua no ar.
+      - name: Coleta os Torneios Válidos
+        continue-on-error: true
+        run: ccc-arena collect
+
+      - name: Gera a página a partir do arquivo
+        run: ccc-arena site
+
+      # Sem torneio novo o arquivo não muda, e aí não há commit.
+      - name: Commita o arquivo, se mudou
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add archive
+          if git diff --cached --quiet; then
+            echo "Sem mudanças no arquivo."
+          else
+            git commit -m "Coleta: atualiza o arquivo da Temporada"
+            git push
+          fi
+
+      - name: Prepara a página para publicação
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  publicar:
+    needs: coletar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Publica a página
+        id: deploy
+        uses: actions/deploy-pages@v4
