@@ -1,17 +1,6 @@
 {
-  "generatedAt": "2026-09-23T00:22:57.521038Z",
+  "generatedAt": "2026-09-27T23:00:35.281817Z",
   "entries": [
-    {
-      "kind": "near-miss",
-      "tournamentId": "7jbpAKca",
-      "name": "Arena dos Cavaleiros 17a ed. Arena",
-      "failedChecks": [
-        "finished",
-        "players",
-        "games"
-      ],
-      "detail": "torneio não finalizado; menos de 2 jogadores; sem partidas"
-    },
     {
       "kind": "outside-season",
       "tournamentId": "IXh40MfO",
