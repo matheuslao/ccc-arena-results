@@ -33,6 +33,7 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 - Gráficos em SVG, pré-renderizados sem JavaScript: a evolução do score e da posição no perfil do jogador, e a pontuação dos primeiros colocados na página do Torneio.
 - Identificação da Temporada ou do Recorte em destaque no topo, com as datas em português (ex.: "1 a 30 de setembro de 2026", "todo o ano de 2026").
 - A lista de Torneios traz uma coluna com link para a arena no Lichess, e o rodapé informa que os dados são extraídos do Lichess.
+- Tabela do Ranking dinâmica, por melhoria progressiva (JS puro, sem framework e sem build): busca por jogador, ordenação por qualquer coluna, filtros (só elegíveis e presença mínima), paginação e, no celular, cartões compactos controlados pelos mesmos filtros. Sem JavaScript, a página continua completa como antes.
 
 ### Alterado
 

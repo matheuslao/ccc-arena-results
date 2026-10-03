@@ -57,6 +57,7 @@ TOURNAMENTS_FILE = "torneios.html"
 TOURNAMENTS_JSON = "torneios.json"
 PLAYERS_JSON = "jogadores.json"
 STYLE_FILE = "assets/style.css"
+APP_JS_FILE = "assets/app.js"
 LOGO_FILE = "assets/logo.png"
 TOURNAMENT_PAGES_DIR = "torneio"
 PLAYER_PAGES_DIR = "jogador"
@@ -207,6 +208,7 @@ def build(
             )
         )
     written.append(_write(output_dir / STYLE_FILE, STYLE))
+    written.append(_write(output_dir / APP_JS_FILE, APP))
     written.append(_write_bytes(output_dir / LOGO_FILE, _LOGO_SRC.read_bytes()))
     return Site(output_dir=output_dir, ranking=ranking, written=tuple(written))
 
@@ -462,16 +464,20 @@ def _podium(ranking: Ranking, config: Config) -> str:
 
 def _table(ranking: Ranking, links: Links) -> str:
     header = (
-        '<tr><th title="Posição no Ranking">#</th>'
-        "<th>Jogador</th>"
-        '<th title="Soma dos Resultados que contam">Pontos</th>'
-        '<th title="Quantos Resultados do jogador entram na soma">Contam</th>'
-        '<th title="Resultados deixados de fora (os piores, além dos N melhores)">'
+        '<tr><th data-sort="rank" title="Posição no Ranking">#</th>'
+        '<th data-sort="person">Jogador</th>'
+        '<th data-sort="total" title="Soma dos Resultados que contam">Pontos</th>'
+        '<th data-sort="counted" title="Quantos Resultados do jogador entram na soma">'
+        "Contam</th>"
+        '<th data-sort="discarded" '
+        'title="Resultados deixados de fora (os piores, além dos N melhores)">'
         "Descartados</th>"
-        '<th title="Torneios jogados ÷ torneios do período">Presença</th>'
-        '<th title="Primeiros lugares (torneios vencidos)">1ºs</th>'
-        '<th title="Melhor Resultado individual no período">Melhor</th>'
-        '<th title="Tem presença suficiente para concorrer ao pódio">Elegível</th></tr>'
+        '<th data-sort="participation" title="Torneios jogados ÷ torneios do período">'
+        "Presença</th>"
+        '<th data-sort="first" title="Primeiros lugares (torneios vencidos)">1ºs</th>'
+        '<th data-sort="best" title="Melhor Resultado individual no período">Melhor</th>'
+        '<th data-sort="eligible" title="Tem presença suficiente para concorrer ao pódio">'
+        "Elegível</th></tr>"
     )
     champion = ranking.champion
     rows = "".join(_table_row(row, links, champion) for row in ranking.rows)
@@ -481,7 +487,7 @@ def _table(ranking: Ranking, links: Links) -> str:
         "Presença = torneios jogados ÷ torneios do período.</p>"
     )
     return (
-        '<section class="ranking-sec"><h2>Ranking</h2>'
+        '<section class="ranking-sec" data-ranking><h2>Ranking</h2>'
         + help_text
         + _table_wrap(header, rows, table_class="ranking")
         + "</section>"
@@ -511,8 +517,16 @@ def _table_row(row: RankingRow, links: Links, champion: RankingRow | None = None
         else ""
     )
     medal = f" rank-{row.rank}" if row.rank <= 3 else ""
+    data = (
+        f'data-rank="{row.rank}" data-person="{escape(row.person)}" '
+        f'data-total="{row.total}" data-counted="{row.counted}" '
+        f'data-played="{row.played}" data-discarded="{row.played - row.counted}" '
+        f'data-participation="{row.participation:.4f}" data-first="{row.first_places}" '
+        f'data-best="{row.best_single_score}" data-eligible="{1 if row.eligible else 0}"'
+    )
     return (
-        f'<tr><td class="rank{medal}" data-label="#">{row.rank}</td>'
+        f"<tr {data}>"
+        f'<td class="rank{medal}" data-label="#">{row.rank}</td>'
         f'<td class="person" data-label="Jogador">'
         f'<a href="{links.player(row.person)}">{escape(row.person)}</a>{aliases}{crown}'
         f'<details><summary>Resultados</summary><ul class="breakdown">{breakdown}</ul></details></td>'
@@ -881,6 +895,7 @@ _LAYOUT = Template(
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>$title</title>
+<script>document.documentElement.classList.add("js");</script>
 <link rel="stylesheet" href="${base}assets/style.css">
 <link rel="icon" href="${base}assets/logo.png">
 </head>
@@ -889,6 +904,7 @@ $top
 <main class="wrap">
 $body
 </main>
+<script defer src="${base}assets/app.js"></script>
 </body>
 </html>
 """
@@ -999,12 +1015,17 @@ h2 { font-family: Georgia, "Iowan Old Style", serif; font-size: 1.25rem; margin:
 .podium-note { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.85rem; }
 
 /* Tabelas */
+[hidden] { display: none !important; }
 .table-help { margin: 0 0 0.6rem; color: var(--muted); font-size: 0.82rem; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
 table { width: 100%; border-collapse: collapse; }
 th, td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
 th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 700; }
 th[title] { cursor: help; }
+th[data-sort] { cursor: pointer; user-select: none; }
+th[data-sort]:hover { color: var(--ink); }
+th[aria-sort="ascending"]::after { content: " \\25B2"; font-size: 0.7em; }
+th[aria-sort="descending"]::after { content: " \\25BC"; font-size: 0.7em; }
 tbody tr:last-child td { border-bottom: 0; }
 tbody tr:hover { background: rgba(217, 162, 46, 0.08); }
 th:nth-child(1), td:nth-child(1), th:nth-child(2), td:nth-child(2) { text-align: left; }
@@ -1028,6 +1049,47 @@ summary:hover { color: var(--ink); }
 .breakdown .discarded { text-decoration: line-through; opacity: 0.6; }
 .breakdown .discarded::before { content: "\\2717 "; }
 
+/* Controles da tabela do Ranking (melhoria progressiva; só existem com JS) */
+.ranking-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin: 0 0 0.8rem; }
+.ranking-toolbar label { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.85rem; }
+.ranking-toolbar input[type="search"], .ranking-toolbar select {
+  font: inherit; padding: 0.35rem 0.55rem; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--card); color: var(--ink);
+}
+.ranking-toolbar input[type="search"] { min-width: 12rem; }
+.ranking-toolbar input[type="search"]:focus-visible, .ranking-toolbar select:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Paginador */
+.ranking-pager { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin: 0.8rem 0 0; color: var(--muted); font-size: 0.9rem; }
+.ranking-pager button {
+  font: inherit; padding: 0.35rem 0.85rem; border: 1px solid var(--line);
+  border-radius: 999px; background: var(--card); color: var(--ink); cursor: pointer;
+}
+.ranking-pager button:hover:not(:disabled) { border-color: var(--gold); }
+.ranking-pager button:disabled { opacity: 0.5; cursor: default; }
+
+/* Cartões do Ranking no celular (renderizados pelo JS) */
+.ranking-cards { display: grid; gap: 0.5rem; }
+.rcard { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 0.55rem 0.75rem; box-shadow: var(--shadow); }
+.rcard-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.35rem 0.5rem; }
+.rcard-rank { min-width: 1.5rem; font-weight: 700; color: var(--muted); }
+.rcard-rank.rank-1 { color: var(--gold-ink); }
+.rcard-rank.rank-2 { color: var(--silver); }
+.rcard-rank.rank-3 { color: var(--bronze); }
+.rcard-name { flex: 1 1 auto; font-weight: 700; }
+.rcard-first { color: var(--muted); font-size: 0.78rem; }
+.rcard-points { font-weight: 700; }
+.rcard-more { margin-top: 0.3rem; }
+.rcard-more > summary { cursor: pointer; color: var(--muted); font-size: 0.8rem; }
+.rcard-more > summary:hover { color: var(--ink); }
+.rcard-fields { margin: 0.4rem 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.1rem 1rem; }
+.rcard-fields > div { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; border-bottom: 1px dotted var(--line); }
+.rcard-fields dt { color: var(--muted); font-size: 0.78rem; }
+.rcard-fields dd { margin: 0; text-align: right; }
+.rcard-breakdown { margin-top: 0.5rem; }
+.rcard-caption { display: block; color: var(--muted); font-size: 0.78rem; margin-bottom: 0.2rem; }
+
 /* Recortes */
 .recortes ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0; }
 .recortes a { display: inline-flex; align-items: baseline; gap: 0.55rem; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 0.4rem 0.85rem; box-shadow: var(--shadow); }
@@ -1048,17 +1110,358 @@ summary:hover { color: var(--ink); }
 .bar-track { fill: var(--line); opacity: 0.5; }
 .bar-label, .bar-value { fill: var(--ink); font-weight: 700; }
 
-/* Celular: a tabela do Ranking vira uma lista de cartões */
+/* Celular sem JS: a tabela do Ranking vira uma lista de cartões.
+   Com JS, o app.js assume e renderiza os cartões (.ranking-cards). */
 @media (max-width: 720px) {
-  .table-wrap { border: 0; background: transparent; box-shadow: none; overflow: visible; }
-  table.ranking thead { display: none; }
-  table.ranking, table.ranking tbody, table.ranking tr, table.ranking td { display: block; width: 100%; }
-  table.ranking tr { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 0.6rem; padding: 0.4rem 0; box-shadow: var(--shadow); }
-  table.ranking tr:hover { background: var(--card); }
-  table.ranking td { border: 0; padding: 0.2rem 0.85rem; text-align: right; white-space: normal; }
-  table.ranking td::before { content: attr(data-label); float: left; color: var(--muted); font-size: 0.8rem; }
-  table.ranking td.rank { font-size: 1.05rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; margin-bottom: 0.3rem; }
-  table.ranking td.person { text-align: left; }
-  table.ranking td.person::before { display: none; }
+  html:not(.js) .table-wrap { border: 0; background: transparent; box-shadow: none; overflow: visible; }
+  html:not(.js) table.ranking thead { display: none; }
+  html:not(.js) table.ranking,
+  html:not(.js) table.ranking tbody,
+  html:not(.js) table.ranking tr,
+  html:not(.js) table.ranking td { display: block; width: 100%; }
+  html:not(.js) table.ranking tr { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); margin-bottom: 0.6rem; padding: 0.4rem 0; box-shadow: var(--shadow); }
+  html:not(.js) table.ranking tr:hover { background: var(--card); }
+  html:not(.js) table.ranking td { border: 0; padding: 0.2rem 0.85rem; text-align: right; white-space: normal; }
+  html:not(.js) table.ranking td::before { content: attr(data-label); float: left; color: var(--muted); font-size: 0.8rem; }
+  html:not(.js) table.ranking td.rank { font-size: 1.05rem; border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; margin-bottom: 0.3rem; }
+  html:not(.js) table.ranking td.person { text-align: left; }
+  html:not(.js) table.ranking td.person::before { display: none; }
 }
+"""
+
+
+APP = r"""// Melhoria progressiva da tabela do Ranking: busca, filtros, ordenação,
+// paginação e uma view de cartões no celular. JS puro, sem framework e sem
+// build. Sem JavaScript, a página permanece completa — o HTML já vem
+// renderizado pelo servidor. O script não recalcula regra de negócio: só
+// reordena, filtra e pagina o que já está no DOM.
+(function () {
+  "use strict";
+
+  var section = document.querySelector("[data-ranking]");
+  if (!section) return;
+
+  var table = section.querySelector("table.ranking");
+  var wrap = section.querySelector(".table-wrap");
+  var tbody = table ? table.querySelector("tbody") : null;
+  if (!table || !wrap || !tbody) return;
+
+  var rows = Array.prototype.slice.call(tbody.querySelectorAll("tr"));
+  if (!rows.length) return;
+
+  function numberAttr(el, name) {
+    var value = parseFloat(el.getAttribute("data-" + name));
+    return isNaN(value) ? 0 : value;
+  }
+
+  function fold(text) {
+    return (text || "")
+      .toString()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  }
+
+  var items = rows.map(function (row, index) {
+    var person = row.getAttribute("data-person") || "";
+    return {
+      el: row,
+      index: index,
+      rank: numberAttr(row, "rank"),
+      person: person,
+      key: fold(person),
+      total: numberAttr(row, "total"),
+      counted: numberAttr(row, "counted"),
+      played: numberAttr(row, "played"),
+      discarded: numberAttr(row, "discarded"),
+      participation: numberAttr(row, "participation"),
+      first: numberAttr(row, "first"),
+      best: numberAttr(row, "best"),
+      eligible: row.getAttribute("data-eligible") === "1"
+    };
+  });
+
+  var SORTS = {
+    rank: { label: "Posição", dir: 1, kind: "num" },
+    person: { label: "Jogador", dir: 1, kind: "text" },
+    total: { label: "Pontos", dir: -1, kind: "num" },
+    participation: { label: "Presença", dir: -1, kind: "num" },
+    first: { label: "1ºs", dir: -1, kind: "num" },
+    best: { label: "Melhor", dir: -1, kind: "num" },
+    counted: { label: "Contam", dir: -1, kind: "num" },
+    discarded: { label: "Descartados", dir: -1, kind: "num" },
+    eligible: { label: "Elegível", dir: -1, kind: "num" }
+  };
+
+  var state = {
+    query: "",
+    eligibleOnly: false,
+    minParticipation: 0,
+    sort: "total",
+    dir: SORTS.total.dir,
+    page: 1,
+    pageSize: 25
+  };
+
+  var mq = window.matchMedia("(max-width: 720px)");
+
+  var cards = document.createElement("div");
+  cards.className = "ranking-cards";
+  cards.hidden = true;
+  wrap.parentNode.insertBefore(cards, wrap.nextSibling);
+
+  var toolbar = document.createElement("div");
+  toolbar.className = "ranking-toolbar";
+  toolbar.innerHTML =
+    '<label><span class="sr-only">Buscar jogador</span>' +
+    '<input type="search" class="rt-search" placeholder="Buscar jogador…"></label>' +
+    '<label><input type="checkbox" class="rt-eligible"> Só elegíveis</label>' +
+    '<label>Presença mínima ' +
+    '<select class="rt-minpart"><option value="0">todas</option>' +
+    '<option value="0.25">25%</option><option value="0.5">50%</option>' +
+    '<option value="0.75">75%</option><option value="1">100%</option></select></label>' +
+    '<label>Ordenar por <select class="rt-sort"></select></label>' +
+    '<label>Por página ' +
+    '<select class="rt-size"><option value="10">10</option>' +
+    '<option value="25">25</option><option value="50">50</option>' +
+    '<option value="0">todos</option></select></label>';
+  section.insertBefore(toolbar, wrap);
+
+  var pager = document.createElement("div");
+  pager.className = "ranking-pager";
+  pager.innerHTML =
+    '<button type="button" class="rt-prev">\u2039 Anterior</button>' +
+    '<span class="rt-info"></span>' +
+    '<button type="button" class="rt-next">Próxima \u203a</button>';
+  wrap.parentNode.insertBefore(pager, cards.nextSibling);
+
+  var search = toolbar.querySelector(".rt-search");
+  var eligible = toolbar.querySelector(".rt-eligible");
+  var minpart = toolbar.querySelector(".rt-minpart");
+  var sortSel = toolbar.querySelector(".rt-sort");
+  var sizeSel = toolbar.querySelector(".rt-size");
+  var prev = pager.querySelector(".rt-prev");
+  var next = pager.querySelector(".rt-next");
+  var info = pager.querySelector(".rt-info");
+
+  Object.keys(SORTS).forEach(function (key) {
+    var option = document.createElement("option");
+    option.value = key;
+    option.textContent = SORTS[key].label;
+    sortSel.appendChild(option);
+  });
+
+  function filtered() {
+    var query = fold(state.query);
+    var out = items.filter(function (item) {
+      if (query && item.key.indexOf(query) === -1) return false;
+      if (state.eligibleOnly && !item.eligible) return false;
+      if (item.participation + 1e-9 < state.minParticipation) return false;
+      return true;
+    });
+    var spec = SORTS[state.sort];
+    out.sort(function (a, b) {
+      var result = spec.kind === "text"
+        ? (a.key < b.key ? -1 : a.key > b.key ? 1 : 0)
+        : a[state.sort] - b[state.sort];
+      if (result === 0) result = a.index - b.index;
+      return result * state.dir;
+    });
+    return out;
+  }
+
+  function paginate(list) {
+    if (!state.pageSize) return list;
+    var pages = Math.max(1, Math.ceil(list.length / state.pageSize));
+    if (state.page > pages) state.page = pages;
+    if (state.page < 1) state.page = 1;
+    var start = (state.page - 1) * state.pageSize;
+    return list.slice(start, start + state.pageSize);
+  }
+
+  function renderTable(pageItems) {
+    var visible = {};
+    pageItems.forEach(function (item) { visible[item.index] = true; });
+    items.forEach(function (item) {
+      if (visible[item.index]) item.el.removeAttribute("hidden");
+      else item.el.setAttribute("hidden", "");
+    });
+    pageItems.forEach(function (item) { tbody.appendChild(item.el); });
+  }
+
+  function buildCard(item) {
+    var card = document.createElement("article");
+    card.className = "rcard";
+
+    var head = document.createElement("div");
+    head.className = "rcard-head";
+
+    var rankCell = item.el.querySelector("td.rank");
+    if (rankCell) {
+      var rank = document.createElement("span");
+      rank.className = "rcard-rank " + rankCell.className;
+      rank.textContent = "#" + rankCell.textContent;
+      head.appendChild(rank);
+    }
+
+    var personCell = item.el.querySelector("td.person");
+    if (personCell) {
+      var name = document.createElement("span");
+      name.className = "rcard-name";
+      var clone = personCell.cloneNode(true);
+      var details = clone.querySelector("details");
+      if (details) details.parentNode.removeChild(details);
+      name.innerHTML = clone.innerHTML;
+      head.appendChild(name);
+    }
+
+    var firstCell = item.el.querySelector('td[data-label="1ºs"]');
+    if (firstCell && parseFloat(firstCell.textContent) > 0) {
+      var first = document.createElement("span");
+      first.className = "rcard-first";
+      first.textContent = firstCell.textContent + "×1º";
+      head.appendChild(first);
+    }
+
+    var totalCell = item.el.querySelector("td.total");
+    if (totalCell) {
+      var points = document.createElement("span");
+      points.className = "rcard-points";
+      points.innerHTML = totalCell.innerHTML;
+      head.appendChild(points);
+    }
+
+    var more = document.createElement("details");
+    more.className = "rcard-more";
+    var summary = document.createElement("summary");
+    summary.textContent = "Detalhes";
+    more.appendChild(summary);
+
+    var fields = document.createElement("dl");
+    fields.className = "rcard-fields";
+    Array.prototype.forEach.call(item.el.children, function (cell) {
+      var label = cell.getAttribute("data-label");
+      if (!label || cell.classList.contains("person") || cell.classList.contains("rank") ||
+          cell.classList.contains("total") || label === "1ºs") {
+        return;
+      }
+      var field = document.createElement("div");
+      var dt = document.createElement("dt");
+      dt.textContent = label;
+      var dd = document.createElement("dd");
+      dd.className = cell.className;
+      dd.innerHTML = cell.innerHTML;
+      field.appendChild(dt);
+      field.appendChild(dd);
+      fields.appendChild(field);
+    });
+    more.appendChild(fields);
+
+    if (personCell) {
+      var breakdown = personCell.querySelector(".breakdown");
+      if (breakdown) {
+        var box = document.createElement("div");
+        box.className = "rcard-breakdown";
+        var caption = document.createElement("span");
+        caption.className = "rcard-caption";
+        caption.textContent = "Resultados";
+        box.appendChild(caption);
+        box.appendChild(breakdown.cloneNode(true));
+        more.appendChild(box);
+      }
+    }
+
+    card.appendChild(head);
+    card.appendChild(more);
+    return card;
+  }
+
+  function renderCards(pageItems) {
+    cards.textContent = "";
+    pageItems.forEach(function (item) { cards.appendChild(buildCard(item)); });
+  }
+
+  function updateHeaders() {
+    Array.prototype.forEach.call(table.querySelectorAll("th[data-sort]"), function (th) {
+      if (th.getAttribute("data-sort") === state.sort) {
+        th.setAttribute("aria-sort", state.dir === 1 ? "ascending" : "descending");
+      } else {
+        th.removeAttribute("aria-sort");
+      }
+    });
+    sortSel.value = state.sort;
+    sizeSel.value = String(state.pageSize);
+  }
+
+  function render() {
+    var list = filtered();
+    var pageItems = paginate(list);
+    var cardsMode = mq.matches;
+    wrap.hidden = cardsMode;
+    cards.hidden = !cardsMode;
+    if (cardsMode) renderCards(pageItems);
+    else renderTable(pageItems);
+
+    var total = list.length;
+    var size = state.pageSize || total;
+    var pages = size ? Math.max(1, Math.ceil(total / size)) : 1;
+    var from = total ? (state.page - 1) * size + 1 : 0;
+    var to = size ? Math.min(total, from + size - 1) : total;
+    info.textContent = total
+      ? "Mostrando " + from + "\u2013" + to + " de " + total
+      : "Nenhum jogador encontrado";
+    prev.disabled = state.page <= 1;
+    next.disabled = state.page >= pages;
+    pager.hidden = total === 0 || pages <= 1;
+    updateHeaders();
+  }
+
+  search.addEventListener("input", function () {
+    state.query = search.value;
+    state.page = 1;
+    render();
+  });
+  eligible.addEventListener("change", function () {
+    state.eligibleOnly = eligible.checked;
+    state.page = 1;
+    render();
+  });
+  minpart.addEventListener("change", function () {
+    state.minParticipation = parseFloat(minpart.value) || 0;
+    state.page = 1;
+    render();
+  });
+  sortSel.addEventListener("change", function () {
+    state.sort = sortSel.value;
+    state.dir = SORTS[state.sort].dir;
+    render();
+  });
+  sizeSel.addEventListener("change", function () {
+    state.pageSize = parseInt(sizeSel.value, 10) || 0;
+    state.page = 1;
+    render();
+  });
+  prev.addEventListener("click", function () {
+    state.page -= 1;
+    render();
+  });
+  next.addEventListener("click", function () {
+    state.page += 1;
+    render();
+  });
+  Array.prototype.forEach.call(table.querySelectorAll("th[data-sort]"), function (th) {
+    th.addEventListener("click", function () {
+      var key = th.getAttribute("data-sort");
+      if (state.sort === key) state.dir = -state.dir;
+      else { state.sort = key; state.dir = SORTS[key].dir; }
+      render();
+    });
+  });
+
+  function onViewportChange() { render(); }
+  if (mq.addEventListener) mq.addEventListener("change", onViewportChange);
+  else if (mq.addListener) mq.addListener(onViewportChange);
+
+  render();
+})();
 """

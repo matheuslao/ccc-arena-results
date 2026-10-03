@@ -60,6 +60,7 @@ def test_site_gera_html_e_json(tmp_path, config, client) -> None:
     assert (output / INDEX_FILE).is_file()
     assert (output / RANKING_FILE).is_file()
     assert (output / "assets" / "style.css").is_file()
+    assert (output / "assets" / "app.js").is_file()
 
     html = (output / INDEX_FILE).read_text(encoding="utf-8")
     assert "Arena dos Cavaleiros" in html
@@ -487,6 +488,43 @@ def test_cli_site_recusa_temporada_desconhecida(tmp_path, capsys) -> None:
 
     assert code == 1
     assert "Temporada desconhecida" in capsys.readouterr().err
+
+
+def test_ranking_tem_ganchos_de_melhoria_progressiva(config) -> None:
+    scenario = _scenario(config)
+
+    html = render_ranking_page(
+        build(scenario, _tournaments(), scope_for(scenario), now=NOW), scenario
+    )
+
+    assert 'class="ranking-sec" data-ranking' in html
+    assert 'data-sort="total"' in html
+    assert 'data-person="A"' in html
+    assert 'data-total="24"' in html
+    assert 'data-eligible="1"' in html
+
+
+def test_layout_carrega_o_app_js(config) -> None:
+    scenario = _scenario(config)
+
+    html = render_ranking_page(
+        build(scenario, _tournaments(), scope_for(scenario), now=NOW), scenario
+    )
+
+    assert 'classList.add("js")' in html
+    assert 'src="assets/app.js"' in html
+
+
+def test_app_js_e_local_e_nao_toca_a_rede(tmp_path, config, client) -> None:
+    tournaments = _collected(tmp_path, config, client)
+    output = tmp_path / "site"
+
+    build_site(config, tournaments, output, now=NOW)
+
+    script = (output / "assets" / "app.js").read_text(encoding="utf-8")
+    assert "data-ranking" in script
+    assert "fetch(" not in script
+    assert "XMLHttpRequest" not in script
 
 
 def _scenario(config: Config, aliases: list[tuple[str, list[str]]] | None = None) -> Config:
