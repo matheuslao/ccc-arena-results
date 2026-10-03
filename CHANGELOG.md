@@ -34,9 +34,11 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 - Identificação da Temporada ou do Recorte em destaque no topo, com as datas em português (ex.: "1 a 30 de setembro de 2026", "todo o ano de 2026").
 - A lista de Torneios traz uma coluna com link para a arena no Lichess, e o rodapé informa que os dados são extraídos do Lichess.
 - Tabela do Ranking dinâmica, por melhoria progressiva (JS puro, sem framework e sem build): busca por jogador, ordenação por qualquer coluna, filtros (só elegíveis e presença mínima), paginação e, no celular, cartões compactos controlados pelos mesmos filtros. Sem JavaScript, a página continua completa como antes.
+- Página de Recortes (`recortes.html`), reunindo os atalhos de mês e semestre em grupos, e um terceiro item no menu superior: **Ranking · Torneios · Recortes**.
 
 ### Alterado
 
+- Os atalhos de Recortes saíram do rodapé da página da Temporada e passaram para a página de Recortes, acessível pelo menu.
 - A tabela de Torneios e a de Resultados do jogador passam a abrir pelo mais recente.
 - O Ranking ganha o selo "Campeão" na linha do campeão, cabeçalhos mais claros (Pontos, Contam, Descartados, 1ºs), dica em cada coluna e uma linha de ajuda.
 - A explicação de "Melhores N" passa a usar os números do período (ex.: "9 melhores de 11"), com uma barrinha de proporção.

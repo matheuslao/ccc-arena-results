@@ -26,6 +26,7 @@ from ccc_arena_results.season import scope_for
 from ccc_arena_results.site import (
     INDEX_FILE,
     RANKING_FILE,
+    RECORTES_FILE,
     build as build_site,
     render_ranking_page,
 )
@@ -59,6 +60,7 @@ def test_site_gera_html_e_json(tmp_path, config, client) -> None:
 
     assert (output / INDEX_FILE).is_file()
     assert (output / RANKING_FILE).is_file()
+    assert (output / RECORTES_FILE).is_file()
     assert (output / "assets" / "style.css").is_file()
     assert (output / "assets" / "app.js").is_file()
 
@@ -437,13 +439,22 @@ def test_navegacao_entre_temporada_e_recortes(config, tmp_path) -> None:
     build_site(_wide_scenario(config), _recorte_tournaments(), output, now=NOW)
 
     season = (output / "index.html").read_text(encoding="utf-8")
+    recortes = (output / RECORTES_FILE).read_text(encoding="utf-8")
     recorte = (output / "recorte" / "2026-09.html").read_text(encoding="utf-8")
 
-    assert 'href="recorte/2026-09.html"' in season
-    assert 'href="recorte/2026-H2.html"' in season
-    assert "Setembro de 2026" in season
+    # O menu leva à página de Recortes, que reúne os atalhos por mês e semestre.
+    assert 'href="recortes.html"' in season
+    # Os atalhos saíram do rodapé da página da Temporada.
+    assert 'href="recorte/' not in season
+    assert 'href="recorte/2026-09.html"' in recortes
+    assert 'href="recorte/2026-H2.html"' in recortes
+    assert "Setembro de 2026" in recortes
+    assert "Meses" in recortes
+    assert "Semestres" in recortes
+
     assert 'href="../index.html"' in recorte
     assert 'href="../torneios.html"' in recorte
+    assert 'href="../recortes.html" aria-current="page"' in recorte
 
 
 def test_cli_site(tmp_path, monkeypatch, capsys) -> None:

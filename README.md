@@ -31,6 +31,7 @@ O Lichess é a nascente; **este repositório é a fonte da verdade** (ver [ADR-0
 | Site — Ranking da Temporada (`ccc-arena site`) | pronto |
 | Site — Torneios e Jogadores | pronto |
 | Site — Recortes (mês e semestre) | pronto |
+| Site — Página de Recortes no menu (Ranking · Torneios · Recortes) | pronto |
 | Site — Tabela do Ranking dinâmica (busca, ordenação, filtros, paginação) | pronto |
 | Automação semanal e publicação | pronto |
 

@@ -47,6 +47,7 @@ __all__ = [
     "build",
     "render_player_page",
     "render_ranking_page",
+    "render_recortes_page",
     "render_tournament_page",
     "render_tournaments_page",
 ]
@@ -56,6 +57,7 @@ RANKING_FILE = "ranking.json"
 TOURNAMENTS_FILE = "torneios.html"
 TOURNAMENTS_JSON = "torneios.json"
 PLAYERS_JSON = "jogadores.json"
+RECORTES_FILE = "recortes.html"
 STYLE_FILE = "assets/style.css"
 APP_JS_FILE = "assets/app.js"
 LOGO_FILE = "assets/logo.png"
@@ -109,6 +111,9 @@ class Links:
     def tournaments(self) -> str:
         return self.url(TOURNAMENTS_FILE)
 
+    def recortes(self) -> str:
+        return self.url(RECORTES_FILE)
+
     def tournament(self, arena_id: str) -> str:
         return self.url(f"{TOURNAMENT_PAGES_DIR}/{arena_id}.html")
 
@@ -157,9 +162,7 @@ def build(
     written = [
         _write(
             output_dir / INDEX_FILE,
-            render_ranking_page(
-                ranking, config, Links("", slugs), recortes, section="ranking"
-            ),
+            render_ranking_page(ranking, config, Links("", slugs), section="ranking"),
         ),
         _write(output_dir / RANKING_FILE, _json(ranking.to_payload())),
         _write(
@@ -173,6 +176,10 @@ def build(
         _write(
             output_dir / PLAYERS_JSON,
             _json(_players_payload(players, resolver, moment)),
+        ),
+        _write(
+            output_dir / RECORTES_FILE,
+            render_recortes_page(recortes, Links("", slugs), section="recortes"),
         ),
     ]
     for tournament in selected:
@@ -197,7 +204,7 @@ def build(
             _write(
                 output_dir / RECORTE_PAGES_DIR / f"{recorte.value}.html",
                 render_ranking_page(
-                    recorte_ranking, config, Links("../", slugs), section="ranking"
+                    recorte_ranking, config, Links("../", slugs), section="recortes"
                 ),
             )
         )
@@ -217,7 +224,6 @@ def render_ranking_page(
     ranking: Ranking,
     config: Config,
     links: Links = Links(),
-    recortes: Sequence[Scope] = (),
     *,
     section: str | None = None,
 ) -> str:
@@ -228,13 +234,44 @@ def render_ranking_page(
             _rules(config, ranking),
             _podium(ranking, config),
             _table(ranking, links),
-            _recortes(recortes, links),
             _footer(ranking, links),
         )
     )
     return _layout(
         title=_title(ranking), top=_top(links, section), body=body, base=links.base
     )
+
+
+def render_recortes_page(
+    recortes: Sequence[Scope],
+    links: Links = Links(),
+    *,
+    section: str | None = "recortes",
+) -> str:
+    """O HTML da página que reúne os Recortes (mês e semestre) da Temporada."""
+    months = [scope for scope in recortes if scope.kind == "month"]
+    semesters = [scope for scope in recortes if scope.kind == "semester"]
+    if recortes:
+        subtitle = f"{len(recortes)} recorte(s) com ao menos um Torneio Válido"
+        content = _recorte_group("Meses", months, links) + _recorte_group(
+            "Semestres", semesters, links
+        )
+    else:
+        subtitle = "Sem recortes"
+        content = (
+            '<section class="recortes"><p>Nenhum Recorte com Torneio Válido '
+            "nesta Temporada.</p></section>"
+        )
+    body = "\n".join(
+        (
+            _simple_hero(
+                eyebrow="Arena dos Cavaleiros", title="Recortes", subtitle=subtitle
+            ),
+            content,
+            _footer_links(links),
+        )
+    )
+    return _layout(title="Recortes", top=_top(links, section), body=body, base=links.base)
 
 
 def render_tournaments_page(
@@ -351,6 +388,7 @@ def _top(links: Links, section: str | None) -> str:
         '<nav class="nav">'
         f'<a href="{links.ranking()}"{current("ranking")}>Ranking</a>'
         f'<a href="{links.tournaments()}"{current("torneios")}>Torneios</a>'
+        f'<a href="{links.recortes()}"{current("recortes")}>Recortes</a>'
         "</nav></div></header>"
     )
 
@@ -591,15 +629,16 @@ def _result_row(
     )
 
 
-def _recortes(recortes: Sequence[Scope], links: Links) -> str:
-    if not recortes:
+def _recorte_group(title: str, scopes: Sequence[Scope], links: Links) -> str:
+    """Um grupo de Recortes (Meses ou Semestres) como lista de atalhos."""
+    if not scopes:
         return ""
     items = "".join(
         f'<li><a href="{links.recorte(scope.value)}">{escape(_scope_name(scope))}'
         f'<span class="aliases">{escape(_long_range(scope.starts_at, scope.ends_at))}</span></a></li>'
-        for scope in recortes
+        for scope in scopes
     )
-    return f'<section class="recortes"><h2>Recortes</h2><ul>{items}</ul></section>'
+    return f'<section class="recortes"><h2>{escape(title)}</h2><ul>{items}</ul></section>'
 
 
 def _scope_name(scope: Scope) -> str:
@@ -979,6 +1018,10 @@ a:focus-visible, summary:focus-visible { outline: 2px solid var(--gold); outline
 .nav a { padding: 0.35rem 0.75rem; border-radius: 999px; color: var(--muted); font-weight: 600; font-size: 0.92rem; }
 .nav a:hover { background: var(--card); color: var(--ink); text-decoration: none; }
 .nav a[aria-current="page"] { background: var(--gold); color: #1b1811; }
+@media (max-width: 560px) {
+  .brand span { display: none; }
+  .nav a { padding: 0.35rem 0.6rem; font-size: 0.85rem; }
+}
 
 /* Herói */
 .hero { padding: 2.2rem 0 0.5rem; }
