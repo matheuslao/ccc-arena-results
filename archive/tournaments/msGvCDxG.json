@@ -1,0 +1,116 @@
+{
+  "id": "msGvCDxG",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros 18a ed. Arena",
+  "edition": 18,
+  "startsAt": "2026-10-04T22:00:00Z",
+  "finishesAt": "2026-10-04T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 2
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "matheuslao",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 8,
+  "games": 8,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-10-05T02:16:12.063937Z",
+  "standings": [
+    {
+      "username": "BabaYaga79",
+      "rank": 1,
+      "score": 12,
+      "rating": 1700,
+      "performance": 2042,
+      "games": 5,
+      "title": null,
+      "sheet": "44220"
+    },
+    {
+      "username": "magal100",
+      "rank": 2,
+      "score": 5,
+      "rating": 1773,
+      "performance": 1650,
+      "games": 5,
+      "title": null,
+      "sheet": "02012"
+    },
+    {
+      "username": "Vorcaro_Master",
+      "rank": 3,
+      "score": 3,
+      "rating": 1756,
+      "performance": 1670,
+      "games": 3,
+      "title": null,
+      "sheet": "021"
+    },
+    {
+      "username": "urieljoabe",
+      "rank": 4,
+      "score": 0,
+      "rating": 1794,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "Marlonwq",
+      "rank": 5,
+      "score": 0,
+      "rating": 1768,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "FelipEnPassant",
+      "rank": 6,
+      "score": 0,
+      "rating": 1236,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "Neysid",
+      "rank": 7,
+      "score": 0,
+      "rating": 1570,
+      "performance": 1217,
+      "games": 3,
+      "title": null,
+      "sheet": "000"
+    },
+    {
+      "username": "matheuslao",
+      "rank": 8,
+      "score": 0,
+      "rating": 1113,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    }
+  ]
+}

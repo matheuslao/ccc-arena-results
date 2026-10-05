@@ -1,17 +1,6 @@
 {
-  "generatedAt": "2026-10-03T00:06:43.516013Z",
+  "generatedAt": "2026-10-05T02:16:12.063937Z",
   "entries": [
-    {
-      "kind": "near-miss",
-      "tournamentId": "msGvCDxG",
-      "name": "Arena dos Cavaleiros 18a ed. Arena",
-      "failedChecks": [
-        "finished",
-        "players",
-        "games"
-      ],
-      "detail": "torneio não finalizado; menos de 2 jogadores; sem partidas"
-    },
     {
       "kind": "outside-season",
       "tournamentId": "IXh40MfO",
