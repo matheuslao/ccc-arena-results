@@ -1,6 +1,16 @@
 {
-  "generatedAt": "2026-10-05T02:16:12.063937Z",
+  "generatedAt": "2026-10-11T23:03:33.836799Z",
   "entries": [
+    {
+      "kind": "near-miss",
+      "tournamentId": "P9ZnwFIX",
+      "name": "Viagem no mundo do xadrez J.G Arena",
+      "failedChecks": [
+        "name",
+        "minutes"
+      ],
+      "detail": "nome fora do padrão '^Arena dos Cavaleiros'; duração diferente de 60 minutos"
+    },
     {
       "kind": "outside-season",
       "tournamentId": "IXh40MfO",
