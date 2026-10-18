@@ -1,0 +1,176 @@
+{
+  "id": "hjcxtUL3",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros 20a ed. Arena",
+  "edition": 20,
+  "startsAt": "2026-10-18T22:00:00Z",
+  "finishesAt": "2026-10-18T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 2
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "matheuslao",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 14,
+  "games": 29,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-10-18T23:01:08.123406Z",
+  "standings": [
+    {
+      "username": "tucanrojo23",
+      "rank": 1,
+      "score": 16,
+      "rating": 1912,
+      "performance": 1856,
+      "games": 6,
+      "title": null,
+      "sheet": "044422"
+    },
+    {
+      "username": "kleberbios",
+      "rank": 2,
+      "score": 15,
+      "rating": 1919,
+      "performance": 1963,
+      "games": 6,
+      "title": null,
+      "sheet": "204432"
+    },
+    {
+      "username": "jocsjunior",
+      "rank": 3,
+      "score": 14,
+      "rating": 1963,
+      "performance": 2060,
+      "games": 5,
+      "title": null,
+      "sheet": "54230"
+    },
+    {
+      "username": "RIKOVISK",
+      "rank": 4,
+      "score": 8,
+      "rating": 1272,
+      "performance": 1749,
+      "games": 6,
+      "title": null,
+      "sheet": "004220"
+    },
+    {
+      "username": "Geraldosilva",
+      "rank": 5,
+      "score": 6,
+      "rating": 1972,
+      "performance": 1727,
+      "games": 6,
+      "title": null,
+      "sheet": "200022"
+    },
+    {
+      "username": "mateusbaiano",
+      "rank": 6,
+      "score": 6,
+      "rating": 1589,
+      "performance": 1580,
+      "games": 5,
+      "title": null,
+      "sheet": "02202"
+    },
+    {
+      "username": "joacijc",
+      "rank": 7,
+      "score": 5,
+      "rating": 1659,
+      "performance": 1480,
+      "games": 5,
+      "title": null,
+      "sheet": "03002"
+    },
+    {
+      "username": "eduardobelens",
+      "rank": 8,
+      "score": 4,
+      "rating": 1411,
+      "performance": 1467,
+      "games": 4,
+      "title": null,
+      "sheet": "2020"
+    },
+    {
+      "username": "biamontenegro2016",
+      "rank": 9,
+      "score": 4,
+      "rating": 1267,
+      "performance": 1347,
+      "games": 7,
+      "title": null,
+      "sheet": "2020000"
+    },
+    {
+      "username": "danielbrigida",
+      "rank": 10,
+      "score": 0,
+      "rating": 1742,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "Aprendiz_do_Chess",
+      "rank": 11,
+      "score": 0,
+      "rating": 2037,
+      "performance": 1448,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    },
+    {
+      "username": "Zeferino001",
+      "rank": 12,
+      "score": 0,
+      "rating": 1232,
+      "performance": 1288,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "vifranca",
+      "rank": 13,
+      "score": 0,
+      "rating": 973,
+      "performance": 822,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "ManuMontenegro",
+      "rank": 14,
+      "score": 0,
+      "rating": 857,
+      "performance": 789,
+      "games": 3,
+      "title": null,
+      "sheet": "000"
+    }
+  ]
+}
