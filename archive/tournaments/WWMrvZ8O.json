@@ -1,0 +1,146 @@
+{
+  "id": "WWMrvZ8O",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros 21a ed. Arena",
+  "edition": 21,
+  "startsAt": "2026-10-25T22:00:00Z",
+  "finishesAt": "2026-10-25T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 2
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "matheuslao",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 11,
+  "games": 13,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-10-25T23:04:19.203481Z",
+  "standings": [
+    {
+      "username": "Geraldosilva",
+      "rank": 1,
+      "score": 16,
+      "rating": 1947,
+      "performance": 1994,
+      "games": 5,
+      "title": null,
+      "sheet": "44422"
+    },
+    {
+      "username": "kleberbios",
+      "rank": 2,
+      "score": 15,
+      "rating": 1953,
+      "performance": 1865,
+      "games": 4,
+      "title": null,
+      "sheet": "4533"
+    },
+    {
+      "username": "emaheu",
+      "rank": 3,
+      "score": 5,
+      "rating": 1842,
+      "performance": 1611,
+      "games": 5,
+      "title": null,
+      "sheet": "00230"
+    },
+    {
+      "username": "tucanrojo23",
+      "rank": 4,
+      "score": 3,
+      "rating": 1907,
+      "performance": 1443,
+      "games": 2,
+      "title": null,
+      "sheet": "03"
+    },
+    {
+      "username": "Kaiolow",
+      "rank": 5,
+      "score": 2,
+      "rating": 1045,
+      "performance": 1638,
+      "games": 4,
+      "title": null,
+      "sheet": "0200"
+    },
+    {
+      "username": "urieljoabe",
+      "rank": 6,
+      "score": 0,
+      "rating": 1693,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "vifranca",
+      "rank": 7,
+      "score": 0,
+      "rating": 972,
+      "performance": 1447,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    },
+    {
+      "username": "Neysid",
+      "rank": 8,
+      "score": 0,
+      "rating": 1594,
+      "performance": 1447,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    },
+    {
+      "username": "John_Dolf",
+      "rank": 9,
+      "score": 0,
+      "rating": 947,
+      "performance": 1425,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "matheuslao",
+      "rank": 10,
+      "score": 0,
+      "rating": 1170,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "magal100",
+      "rank": 11,
+      "score": 0,
+      "rating": 1805,
+      "performance": 878,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    }
+  ]
+}
