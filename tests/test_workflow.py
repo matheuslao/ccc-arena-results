@@ -22,14 +22,16 @@ def test_dispara_agendado_e_por_demanda() -> None:
 
 
 def test_o_cron_cai_domingo_a_noite_em_sao_paulo() -> None:
-    match = re.search(r'cron:\s*"([^"]+)"', TEXT)
-    assert match is not None
-    assert match.group(1) == "30 23 * * 0"
+    crons = re.findall(r'cron:\s*"([^"]+)"', TEXT)
+    assert crons == ["5 23 * * 0", "15 23 * * 0"]
 
-    # O cron é UTC: 23:30 de domingo é 20:30 em São Paulo (UTC-3).
-    sunday = datetime(2026, 9, 20, 23, 30, tzinfo=timezone.utc)
-    local = sunday.astimezone(ZoneInfo("America/Sao_Paulo"))
-    assert (local.weekday(), local.hour, local.minute) == (6, 20, 30)
+    # O cron é UTC: 23:05 e 23:15 de domingo são 20:05 e 20:15 em São Paulo.
+    first_utc = datetime(2026, 9, 20, 23, 5, tzinfo=timezone.utc)
+    second_utc = datetime(2026, 9, 20, 23, 15, tzinfo=timezone.utc)
+    first = first_utc.astimezone(ZoneInfo("America/Sao_Paulo"))
+    second = second_utc.astimezone(ZoneInfo("America/Sao_Paulo"))
+    assert (first.weekday(), first.hour, first.minute) == (6, 20, 5)
+    assert (second.weekday(), second.hour, second.minute) == (6, 20, 15)
 
 
 def test_coleta_gera_a_pagina_e_commita_o_arquivo() -> None:

@@ -43,6 +43,7 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 - O Ranking ganha o selo "Campeão" na linha do campeão, cabeçalhos mais claros (Pontos, Contam, Descartados, 1ºs), dica em cada coluna e uma linha de ajuda.
 - A explicação de "Melhores N" passa a usar os números do período (ex.: "9 melhores de 11"), com uma barrinha de proporção.
 - A "Elegibilidade a Prêmio" do glossário passa a se chamar "Elegibilidade ao Pódio", e a linguagem do site deixa de falar em premiação (`CONTEXT.md`, `README.md`, ADRs).
+- O workflow semanal passou a rodar às 20:05 de domingo (`America/Sao_Paulo`), cinco minutos depois do fim da arena, com uma segunda tentativa às 20:15: se a primeira execução pegar a arena ainda não marcada como encerrada, a checagem "finished" a descarta e a execução seguinte a coleta.
 
 ### Corrigido
 

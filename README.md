@@ -63,7 +63,7 @@ docker compose run --rm test                      # pytest
 
 ## Automação
 
-Um workflow do GitHub Actions roda todo domingo à noite (20:30 em `America/Sao_Paulo`), logo após a arena, e também por disparo manual (`workflow_dispatch`). Ele coleta os Torneios Válidos, regenera a página e a publica no GitHub Pages, em <https://matheuslao.github.io/ccc-arena-results/>; o arquivo em `archive/` é commitado quando muda, e nada é commitado quando não há torneio novo.
+Um workflow do GitHub Actions roda todo domingo à noite (20:05 em `America/Sao_Paulo`, com uma segunda tentativa às 20:15), cinco minutos depois do fim da arena, e também por disparo manual (`workflow_dispatch`). Ele coleta os Torneios Válidos, regenera a página e a publica no GitHub Pages, em <https://matheuslao.github.io/ccc-arena-results/>; o arquivo em `archive/` é commitado quando muda, e nada é commitado quando não há torneio novo.
 
 Para ligar isso uma vez no repositório:
 
