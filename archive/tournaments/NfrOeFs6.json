@@ -1,0 +1,196 @@
+{
+  "id": "NfrOeFs6",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros 23a ed. Arena",
+  "edition": 23,
+  "startsAt": "2026-11-08T22:00:00Z",
+  "finishesAt": "2026-11-08T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 2
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "vifranca",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 16,
+  "games": 29,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-11-09T00:29:00.319597Z",
+  "standings": [
+    {
+      "username": "FranSparky",
+      "rank": 1,
+      "score": 13,
+      "rating": 2086,
+      "performance": 2221,
+      "games": 5,
+      "title": null,
+      "sheet": "53212"
+    },
+    {
+      "username": "Geraldosilva",
+      "rank": 2,
+      "score": 12,
+      "rating": 1924,
+      "performance": 1955,
+      "games": 5,
+      "title": null,
+      "sheet": "04422"
+    },
+    {
+      "username": "jocsjunior",
+      "rank": 3,
+      "score": 10,
+      "rating": 1914,
+      "performance": 1727,
+      "games": 7,
+      "title": null,
+      "sheet": "0202312"
+    },
+    {
+      "username": "joacijc",
+      "rank": 4,
+      "score": 8,
+      "rating": 1683,
+      "performance": 1891,
+      "games": 4,
+      "title": null,
+      "sheet": "2222"
+    },
+    {
+      "username": "vivoangelo",
+      "rank": 5,
+      "score": 6,
+      "rating": 1546,
+      "performance": 1764,
+      "games": 4,
+      "title": null,
+      "sheet": "2202"
+    },
+    {
+      "username": "urieljoabe",
+      "rank": 6,
+      "score": 4,
+      "rating": 1713,
+      "performance": 1699,
+      "games": 3,
+      "title": null,
+      "sheet": "022"
+    },
+    {
+      "username": "magal100",
+      "rank": 7,
+      "score": 4,
+      "rating": 1724,
+      "performance": 1407,
+      "games": 6,
+      "title": null,
+      "sheet": "020020"
+    },
+    {
+      "username": "Neysid",
+      "rank": 8,
+      "score": 3,
+      "rating": 1624,
+      "performance": 1956,
+      "games": 2,
+      "title": null,
+      "sheet": "12"
+    },
+    {
+      "username": "Itapua50",
+      "rank": 9,
+      "score": 2,
+      "rating": 1848,
+      "performance": 1883,
+      "games": 2,
+      "title": null,
+      "sheet": "02"
+    },
+    {
+      "username": "eduardobelens",
+      "rank": 10,
+      "score": 2,
+      "rating": 1505,
+      "performance": 1631,
+      "games": 3,
+      "title": null,
+      "sheet": "002"
+    },
+    {
+      "username": "felipemago13",
+      "rank": 11,
+      "score": 2,
+      "rating": 1822,
+      "performance": 1539,
+      "games": 2,
+      "title": null,
+      "sheet": "20"
+    },
+    {
+      "username": "vifranca",
+      "rank": 12,
+      "score": 2,
+      "rating": 984,
+      "performance": 1335,
+      "games": 5,
+      "title": null,
+      "sheet": "00200"
+    },
+    {
+      "username": "danielbrigida",
+      "rank": 13,
+      "score": 0,
+      "rating": 1778,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "Suzartt",
+      "rank": 14,
+      "score": 0,
+      "rating": 1742,
+      "performance": 1328,
+      "games": 2,
+      "title": null,
+      "sheet": "00"
+    },
+    {
+      "username": "BebelAmaro",
+      "rank": 15,
+      "score": 0,
+      "rating": 1151,
+      "performance": 1209,
+      "games": 7,
+      "title": null,
+      "sheet": "0000000"
+    },
+    {
+      "username": "Lordathropos",
+      "rank": 16,
+      "score": 0,
+      "rating": 888,
+      "performance": 467,
+      "games": 1,
+      "title": null,
+      "sheet": "0"
+    }
+  ]
+}
