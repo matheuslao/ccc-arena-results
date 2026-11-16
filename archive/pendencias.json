@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T23:03:33.836799Z",
+  "generatedAt": "2026-11-16T02:36:51.638383Z",
   "entries": [
     {
       "kind": "near-miss",
@@ -31,6 +31,13 @@
       "name": "Arena dos Cavaleiros - 06ª Ed Arena",
       "startsAt": "2025-11-16T22:00:00Z",
       "detail": "Torneio Válido fora de qualquer Temporada configurada"
+    },
+    {
+      "kind": "edition-anomaly",
+      "tournamentId": "U1lPpWgb",
+      "name": "Arena dos Cavaleiros 24ed. Arena",
+      "edition": 24,
+      "detail": "número 24 do nome colide com o torneio DdVvjgIe"
     }
   ]
 }

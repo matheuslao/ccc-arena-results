@@ -1,0 +1,196 @@
+{
+  "id": "DdVvjgIe",
+  "source": "lichess",
+  "name": "Arena dos Cavaleiros 24ed. Arena",
+  "edition": 24,
+  "startsAt": "2026-11-15T22:00:00Z",
+  "finishesAt": "2026-11-15T23:00:00Z",
+  "minutes": 60,
+  "clock": {
+    "initial": 300,
+    "increment": 2
+  },
+  "perf": "blitz",
+  "variant": "standard",
+  "rated": true,
+  "createdBy": "vifranca",
+  "teamMember": "cavaleiros-do-centro",
+  "nbPlayers": 16,
+  "games": 33,
+  "validation": {
+    "checks": [
+      "system",
+      "name",
+      "variant",
+      "team",
+      "minutes",
+      "finished",
+      "players",
+      "games"
+    ],
+    "override": null
+  },
+  "fetchedAt": "2026-11-16T02:36:51.638383Z",
+  "standings": [
+    {
+      "username": "jocsjunior",
+      "rank": 1,
+      "score": 16,
+      "rating": 1935,
+      "performance": 2345,
+      "games": 5,
+      "title": null,
+      "sheet": "44422"
+    },
+    {
+      "username": "joacijc",
+      "rank": 2,
+      "score": 12,
+      "rating": 1728,
+      "performance": 1955,
+      "games": 5,
+      "title": null,
+      "sheet": "04422"
+    },
+    {
+      "username": "magal100",
+      "rank": 3,
+      "score": 10,
+      "rating": 1716,
+      "performance": 1658,
+      "games": 6,
+      "title": null,
+      "sheet": "422020"
+    },
+    {
+      "username": "vivoangelo",
+      "rank": 4,
+      "score": 10,
+      "rating": 1543,
+      "performance": 1453,
+      "games": 7,
+      "title": null,
+      "sheet": "2004220"
+    },
+    {
+      "username": "Geraldosilva",
+      "rank": 5,
+      "score": 6,
+      "rating": 1933,
+      "performance": 1775,
+      "games": 5,
+      "title": null,
+      "sheet": "22002"
+    },
+    {
+      "username": "YakSantos",
+      "rank": 6,
+      "score": 6,
+      "rating": 1791,
+      "performance": 1739,
+      "games": 5,
+      "title": null,
+      "sheet": "20202"
+    },
+    {
+      "username": "Neysid",
+      "rank": 7,
+      "score": 6,
+      "rating": 1603,
+      "performance": 1655,
+      "games": 3,
+      "title": null,
+      "sheet": "222"
+    },
+    {
+      "username": "Juni0r_97",
+      "rank": 8,
+      "score": 5,
+      "rating": 1600,
+      "performance": 1617,
+      "games": 5,
+      "title": null,
+      "sheet": "10202"
+    },
+    {
+      "username": "joabeuriel",
+      "rank": 9,
+      "score": 4,
+      "rating": 1854,
+      "performance": 1586,
+      "games": 5,
+      "title": null,
+      "sheet": "20020"
+    },
+    {
+      "username": "biamontenegro2016",
+      "rank": 10,
+      "score": 4,
+      "rating": 1264,
+      "performance": 1305,
+      "games": 7,
+      "title": null,
+      "sheet": "0020020"
+    },
+    {
+      "username": "felipemago13",
+      "rank": 11,
+      "score": 2,
+      "rating": 1810,
+      "performance": 1900,
+      "games": 2,
+      "title": null,
+      "sheet": "02"
+    },
+    {
+      "username": "Eduardo-Lucad",
+      "rank": 12,
+      "score": 0,
+      "rating": 1713,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    },
+    {
+      "username": "eduardobelens",
+      "rank": 13,
+      "score": 0,
+      "rating": 1465,
+      "performance": 1211,
+      "games": 3,
+      "title": null,
+      "sheet": "000"
+    },
+    {
+      "username": "RIKOVISK",
+      "rank": 14,
+      "score": 0,
+      "rating": 1275,
+      "performance": 1118,
+      "games": 4,
+      "title": null,
+      "sheet": "0000"
+    },
+    {
+      "username": "ManuMontenegro",
+      "rank": 15,
+      "score": 0,
+      "rating": 809,
+      "performance": 1020,
+      "games": 4,
+      "title": null,
+      "sheet": "0000"
+    },
+    {
+      "username": "vifranca",
+      "rank": 16,
+      "score": 0,
+      "rating": 1009,
+      "performance": null,
+      "games": 0,
+      "title": null,
+      "sheet": ""
+    }
+  ]
+}
