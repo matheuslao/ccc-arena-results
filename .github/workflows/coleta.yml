@@ -2,12 +2,21 @@ name: Coleta semanal e publicação
 
 # Domingo 20:05 em America/Sao_Paulo (UTC-3) = 23:05 UTC: a arena das 19h dura
 # 60 minutos, então sobra uma folga de 5 minutos. O agendamento do GitHub é
-# sempre em UTC e pode atrasar alguns minutos.
+# sempre em UTC.
 #
 # 20:15 (23:15 UTC) é a segunda tentativa. Se a primeira pegar a arena antes de
 # o Lichess marcá-la como encerrada, ela não é arquivada — a checagem "finished"
 # da regra de Torneio Válido a descarta e a arena vai para as pendências; a
 # execução seguinte a coleta.
+#
+# O cron dispara toda semana, mas o GitHub entrega o gatilho atrasado: medido
+# em out–nov/2026, toda execução agendada começou ~2h30 a ~3h30 depois do
+# horário — domingo 23:00 UTC é janela de pico do Actions, e a documentação do
+# GitHub avisa que o schedule atrasa sob carga alta e pode até perder
+# disparos. O agendado é, portanto, a rede de segurança que garante a coleta
+# no domingo, não um relógio pontual. Para coletar logo após a arena, dispare
+# manualmente (workflow_dispatch): o workflow é idempotente e o grupo de
+# concorrência serializa manual com agendado.
 on:
   schedule:
     - cron: "5 23 * * 0"
