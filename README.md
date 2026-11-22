@@ -65,6 +65,8 @@ docker compose run --rm test                      # pytest
 
 Um workflow do GitHub Actions roda todo domingo à noite (20:05 em `America/Sao_Paulo`, com uma segunda tentativa às 20:15), cinco minutos depois do fim da arena, e também por disparo manual (`workflow_dispatch`). Ele coleta os Torneios Válidos, regenera a página e a publica no GitHub Pages, em <https://matheuslao.github.io/ccc-arena-results/>; o arquivo em `archive/` é commitado quando muda, e nada é commitado quando não há torneio novo.
 
+Só um detalhe: o disparo **agendado** não é pontual. O GitHub entrega o gatilho do `schedule` atrasado nas janelas de pico — medido em out–nov/2026, as execuções começavam ~2h30 a ~3h30 depois do horário, ainda no domingo ([comportamento documentado](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule)). Para coletar logo após a arena (~20h10), dispare o workflow manualmente na aba Actions; o agendado é a rede de segurança que mantém a página atualizada sem ninguém por perto e, como só commita quando o arquivo muda, os dois nunca conflitam.
+
 Para ligar isso uma vez no repositório:
 
 1. **Settings → Pages → Source: GitHub Actions** — a publicação é feita pelo workflow, não por branch.

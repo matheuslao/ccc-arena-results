@@ -44,6 +44,7 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 - A explicação de "Melhores N" passa a usar os números do período (ex.: "9 melhores de 11"), com uma barrinha de proporção.
 - A "Elegibilidade a Prêmio" do glossário passa a se chamar "Elegibilidade ao Pódio", e a linguagem do site deixa de falar em premiação (`CONTEXT.md`, `README.md`, ADRs).
 - O workflow semanal passou a rodar às 20:05 de domingo (`America/Sao_Paulo`), cinco minutos depois do fim da arena, com uma segunda tentativa às 20:15: se a primeira execução pegar a arena ainda não marcada como encerrada, a checagem "finished" a descarta e a execução seguinte a coleta.
+- O workflow e o README passam a registrar o atraso medido do `schedule` do GitHub Actions (execuções agendadas começando ~2h30 a ~3h30 depois do horário na janela de pico de domingo à noite, UTC): o agendado é a rede de segurança que garante a coleta dominical, e o disparo manual é o caminho para coletar logo após a arena.
 
 ### Corrigido
 
