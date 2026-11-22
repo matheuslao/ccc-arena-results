@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T02:42:31.282059Z",
+  "generatedAt": "2026-11-22T12:31:53.668390Z",
   "entries": [
     {
       "kind": "near-miss",
@@ -10,6 +10,17 @@
         "minutes"
       ],
       "detail": "nome fora do padrão '^Arena dos Cavaleiros'; duração diferente de 60 minutos"
+    },
+    {
+      "kind": "near-miss",
+      "tournamentId": "Y5ogruZS",
+      "name": "Arena dos Cavaleiros 25a ed. Arena",
+      "failedChecks": [
+        "finished",
+        "players",
+        "games"
+      ],
+      "detail": "torneio não finalizado; menos de 2 jogadores; sem partidas"
     },
     {
       "kind": "outside-season",
