@@ -45,7 +45,7 @@ def test_a_configuracao_do_repositorio_e_valida() -> None:
     assert config.rules.team == "cavaleiros-do-centro"
     assert config.rules.minutes == 60
     assert config.rules.include == ["KRHH63Yz", "KPfmJoD9", "6ehIpwWG"]
-    assert config.rules.exclude == []
+    assert config.rules.exclude == ["U1lPpWgb"]
     assert config.ranking.best_n.fraction == 0.75
     assert config.ranking.eligibility.min_participation_fraction == 0.5
     assert config.ranking.min_tournaments_for_champion == 3
