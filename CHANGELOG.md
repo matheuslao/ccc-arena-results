@@ -51,6 +51,7 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o 
 
 - O `editionPattern` padrão passou a ignorar caixa, para reconhecer os nomes reais das edições antigas ("Ed", "ed", "Edição") e não só os novos.
 - O Ranking ignorava o total ao ordenar: usava só os critérios de desempate, o que colocava quem somou mais pontos atrás de quem somou menos. Agora o total é o critério primário e os desempates só desempatam — inclusive na escolha do campeão.
+- A arena `U1lPpWgb` ("Arena dos Cavaleiros 24ed.", 15/11/2026), criada por engano com 4 inscritos e apenas 1 partida, tinha passado em todas as checagens e sido arquivada como Torneio Válido. Ela entra em `exclude` na configuração — assim uma recoleta não desfaz a correção — e sai do arquivo canônico; o Ranking, os Recortes e o site voltam a ignorá-la.
 
 ### Notas
 
